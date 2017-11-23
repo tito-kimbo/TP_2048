@@ -1,9 +1,9 @@
-package tp.pr1;
+package tp.pr2.logic;
 
-import tp.pr1.Position;
-import tp.pr1.MoveResults;
-import tp.pr1.Cell;
-import tp.pr1.util.MyStringUtils;
+import tp.pr2.logic.Position;
+import tp.pr2.logic.MoveResults;
+import tp.pr2.logic.Cell;
+import tp.pr2.logic.util.MyStringUtils;
 
 /**
 *	Represents a Board of Cells and has the main movement methods.

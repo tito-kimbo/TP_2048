@@ -1,4 +1,4 @@
-package tp.pr1;
+package tp.pr2.logic;
 
 /** 
 *	Enum indicating the four possible directions: up, down, right and left.

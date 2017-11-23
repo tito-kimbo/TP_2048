@@ -1,9 +1,9 @@
 package tp.pr2.logic.multigames;
 
-import tp.pr1.Board;
-import tp.pr1.Direction;
-import tp.pr1.MoveResults;
-import tp.pr1.Position;
+import tp.pr2.logic.Board;
+import tp.pr2.logic.Direction;
+import tp.pr2.logic.MoveResults;
+import tp.pr2.logic.Position;
 import java.util.Random;
 
 /**

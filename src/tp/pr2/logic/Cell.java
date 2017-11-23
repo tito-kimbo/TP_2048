@@ -1,4 +1,6 @@
-package tp.pr1;
+package tp.pr2.logic;
+
+import tp.pr2.logic.Cell;
 
 /**
  *	Represents a cell of the board, with a Position and a value.

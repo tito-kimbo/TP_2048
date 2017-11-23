@@ -1,4 +1,4 @@
-package tp.pr1;
+package tp.pr2;
 
 import tp.pr2.control.Controller;
 
