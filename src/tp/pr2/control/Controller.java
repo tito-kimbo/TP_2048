@@ -1,8 +1,9 @@
-package tp.pr1;
+package tp.pr2.control;
 
 import java.util.Scanner;
 import java.util.Random;
-import tp.pr1.Game;
+import tp.pr1.Direction;
+import tp.pr2.logic.multigames.Game;
 
 
 /**

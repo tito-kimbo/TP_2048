@@ -1,8 +1,8 @@
 package tp.pr1;
 
-import tp.pr1.Controller;
+import tp.pr2.control.Controller;
 
-/**
+/**move 
 *	Entry point of the game. Creates a controller with the specified parameters and runs the game.
 */
 public class Game2048 
