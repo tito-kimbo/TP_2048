@@ -17,11 +17,17 @@ public class MoveCommand extends Command
 		super(commandInfo, moveHelp);
 	}
 	
+	/**
+	 * Executes the "move" commands, given the parameters are correct
+	 */
 	public void execute(Game game, Controller controller)
 	{
 		//
 	}
 	
+	/**
+	 * Parses the "move" command.
+	 */
 	public Command parse(String[] commandWords, Controller controller)
 	{
 		return null;
