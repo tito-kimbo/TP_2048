@@ -9,9 +9,12 @@ import tp.pr2.logic.multigames.Game;
 
 public class MoveCommand extends Command
 {
-	public MoveCommand(String commandInfo, String helpInfo)
+	private static final String moveHelp = "Execute a move in one of the directions: up, down, left, right.";
+	private static final String commandInfo = "move up right down left";
+	
+	public MoveCommand()
 	{
-		super(commandInfo, helpInfo);
+		super(commandInfo, moveHelp);
 	}
 	
 	public void execute(Game game, Controller controller)

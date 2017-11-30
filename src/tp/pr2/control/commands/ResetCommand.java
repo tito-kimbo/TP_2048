@@ -9,9 +9,12 @@ import tp.pr2.logic.multigames.Game;
 
 public class ResetCommand extends NoParamsCommand
 {
-	public ResetCommand(String commandInfo, String helpInfo)
+	private static final String resetHelp = "Start a new game";
+	private static final String commandInfo = "reset";
+	
+	public ResetCommand()
 	{
-		super(commandInfo, helpInfo);
+		super(resetHelp, commandInfo);
 	}
 	
 	public void execute(Game game, Controller controller)

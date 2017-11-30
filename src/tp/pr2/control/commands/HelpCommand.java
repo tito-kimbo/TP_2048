@@ -9,9 +9,12 @@ import tp.pr2.logic.multigames.Game;
 
 public class HelpCommand extends NoParamsCommand
 {
-	public HelpCommand(String commandInfo, String helpInfo)
+	private static final String helpHelp = "Print this help message.";
+	private static final String commandInfo = "help";
+	
+	public HelpCommand()
 	{
-		super(commandInfo, helpInfo);
+		super(commandInfo, helpHelp);
 	}
 	
 	public void execute(Game game, Controller controller)
