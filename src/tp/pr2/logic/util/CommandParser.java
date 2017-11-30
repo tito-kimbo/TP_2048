@@ -1,6 +1,11 @@
 package tp.pr2.logic.util;
 
-import tp.pr2.control.commands.*;
+import tp.pr2.control.commands.Command;
+import tp.pr2.control.commands.HelpCommand;
+import tp.pr2.control.commands.ResetCommand;
+import tp.pr2.control.commands.NoParamsCommand;
+import tp.pr2.control.commands.ExitCommand;
+import tp.pr2.control.commands.MoveCommand;
 import tp.pr2.control.Controller;
 
 /**
@@ -27,9 +32,9 @@ public class CommandParser {
 	}
 
 	/**
-	* Searches the available commands and returns the helo text of the matching Command
+	* Searches the available commands and returns the help text of the matching Command
 	*/
-	public static String commandHelp() {
+	public static String commandHelp(String[] commandWords, Controller controller) {
 		String help = "";
 		Command result;
 		for (Command com : availableCommands) {
