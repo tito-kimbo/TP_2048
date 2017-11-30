@@ -11,7 +11,7 @@ public abstract class Command
 {
 	private String helpText;
 	private String commandText;
-	protected final String commandName;
+	private final String commandName; //Modified to maintain code integrity
 
 	/**
 	 * Constructor for the class
@@ -41,5 +41,13 @@ public abstract class Command
 	public String helpText()
 	{
 		return " " + commandText + ": " + helpText;
+	}
+	
+	/**
+	 * Returns the name of the command.
+	 */
+	public String getCommandName()
+	{
+		return commandName;
 	}
 }

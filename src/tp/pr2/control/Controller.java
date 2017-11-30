@@ -16,10 +16,13 @@ import tp.pr2.logic.multigames.Game;
 **/
 public class Controller 
 {
+	private final int objective = 2048;
+	
+	private long seed;
+	private boolean print;
+	
 	private Game game;
 	private Scanner in;
-	private long seed;
-	private final int objective = 2048;
 	
 	/**
 	*	Constructor called from Game2048. Creates a Random object with the specified seed and initializes the Game oject
@@ -28,6 +31,7 @@ public class Controller
 	{
 		Random r;
 		
+		print = true;
 		this.seed = seed;
 		in = new Scanner(System.in);
 		r = new Random(seed);
@@ -35,6 +39,14 @@ public class Controller
 		game = new Game(size, initCells, r);
 		game.reset(seed);
 		
+	}
+	
+	/**
+	 * Indicates the program that the board should not be printed on the current iteration
+	 */
+	public void SetNoPrintGameState(boolean b)
+	{
+		print = b;
 	}
 	
 	/**
