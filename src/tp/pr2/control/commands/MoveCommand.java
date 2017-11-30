@@ -23,7 +23,7 @@ public class MoveCommand extends Command
 	}
 	
 	public Command parse(String[] commandWords, Controller controller)
-	{
+	{	
 		return null;
 	}
 }

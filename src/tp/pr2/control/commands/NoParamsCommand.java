@@ -16,8 +16,7 @@ public abstract class NoParamsCommand extends Command
 	public Command parse(String[] commandWords, Controller controller)
 	{
 		Command c = null;
-		
-		if(commandWords[0] == commandName)
+		if(commandWords[0].equals(commandName))
 		{
 			c = this;
 			//controller.setNoPrintGameState()
