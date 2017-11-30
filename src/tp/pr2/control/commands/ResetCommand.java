@@ -14,7 +14,7 @@ public class ResetCommand extends NoParamsCommand
 	
 	public ResetCommand()
 	{
-		super(resetHelp, commandInfo);
+		super(commandInfo, resetHelp);
 	}
 	
 	public void execute(Game game, Controller controller)

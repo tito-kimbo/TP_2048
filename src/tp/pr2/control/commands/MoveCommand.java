@@ -18,7 +18,7 @@ public class MoveCommand extends Command
 	public MoveCommand()
 	{
 		super(commandInfo, moveHelp);
-		d = null;
+		direction = null;
 	}
 	
 	/**
@@ -44,6 +44,7 @@ public class MoveCommand extends Command
 			}
 		}
 		
+		//NO BIEN HECHO
 		return null;
 	}
 	

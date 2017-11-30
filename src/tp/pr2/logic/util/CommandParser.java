@@ -23,10 +23,10 @@ public class CommandParser {
 	* Searches the available commands and returns an instance of the matching Command
 	*/
 	public static Command parseCommand(String[] commandWords, Controller controller) {
-		Command result;
+		Command result = null, aux = null;
 		for (Command com : availableCommands) {
-			result = com.parse(commandWords, controller);
-			if(com != null) result = com;
+			aux = com.parse(commandWords, controller);
+			if(aux != null) result = aux;
 		}
 		return result;
 	}
@@ -36,7 +36,7 @@ public class CommandParser {
 	*/
 	public static String commandHelp(String[] commandWords, Controller controller) {
 		String help = "";
-		Command result;
+		Command result = null;
 		for (Command com : availableCommands) {
 			result = com.parse(commandWords, controller);
 			if(com != null) result = com;
