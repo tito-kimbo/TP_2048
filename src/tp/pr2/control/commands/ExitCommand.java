@@ -13,9 +13,9 @@ public class ExitCommand extends NoParamsCommand
 	private static final String exitHelp = "Terminate the program";
 	private static final String commandInfo = "exit";
 	
-	public ExitCommand(String commandInfo, String helpInfo)
+	public ExitCommand()
 	{
-		super(commandInfo, helpInfo);
+		super(commandInfo, exitHelp);
 	}
 	
 	public void execute(Game game, Controller controller)
