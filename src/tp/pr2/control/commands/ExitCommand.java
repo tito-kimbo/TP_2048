@@ -17,9 +17,13 @@ public class ExitCommand extends NoParamsCommand
 	{
 		super(commandInfo, exitHelp);
 	}
-	
+
+	/**
+	 * Exits the game
+	 */
 	public void execute(Game game, Controller controller)
 	{
-		
+		controller.exit();
+		controller.setNoPrintGameState(false);
 	}
 }

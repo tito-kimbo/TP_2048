@@ -16,9 +16,17 @@ public class HelpCommand extends NoParamsCommand
 	{
 		super(commandInfo, helpHelp);
 	}
-	
+
+	/**
+	 * Prints the name and help text of the available commands
+	 */
 	public void execute(Game game, Controller controller)
 	{
+		for(Command cmd : controller.getAvailableCommands()) {
+			System.out.println(cmd.helpText());
+		}
 		
+		//Do not print board after executing this command
+		controller.setNoPrintGameState(false);
 	}
 }
