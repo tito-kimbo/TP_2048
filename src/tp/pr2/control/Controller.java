@@ -7,7 +7,6 @@ import tp.pr2.logic.util.*;
 
 import java.util.Random;
 
-import tp.pr2.logic.Direction;
 import tp.pr2.logic.multigames.Game;
 
 
@@ -101,7 +100,7 @@ public class Controller
 	}
 
 	/**
-	 * Accessor method for seed.
+	 * Returns the PRNG seed introduced at the start of the game.
 	 */
 	public long getSeed() {
 		return seed;

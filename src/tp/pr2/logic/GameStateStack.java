@@ -14,7 +14,7 @@ public class GameStateStack
 	private int size;
 	private int lastIndex;
 	//lastIndex stores the last occupied index. Each push increments it, returning
-	//returning to 0 after CAPACITY-1. This eliminates the necessity to shift the
+	//to 0 after CAPACITY-1. This eliminates the necessity to shift the
 	//whole stack every time a push is called at full size.
 	
 	/**
@@ -42,7 +42,7 @@ public class GameStateStack
 	}
 
 	/**
-	 * Stores the given state in the stack, unless it is full.
+	 * Stores the given state in the stack.
 	 */
        	public void push(GameState state)
 	{

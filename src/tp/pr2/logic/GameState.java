@@ -24,7 +24,7 @@ public class GameState
 	}
 
 	/**
-	 * Returns a Board with the stored values.
+	 * Returns a matrix with the stored values.
 	 */
 	public int[][] getBoardState()
 	{
@@ -48,7 +48,7 @@ public class GameState
 	}
 
 	/**
-	 * Stores the given Board as an int matrix.
+	 * Stores the given int matrix.
 	 */
 	public void setBoardState(int[][] aState)
 	{

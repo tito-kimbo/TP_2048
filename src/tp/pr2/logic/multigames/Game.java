@@ -21,7 +21,7 @@ public class Game
 	private int _maxToken;
 	
 	private GameStateStack _mainStack;
-	//Stores up to 20 previous state
+	//Stores up to 20 previous states
 	
 	private GameStateStack _undoneStack;
 	//Stores up to 20 "posterior" states (after executing the undo command)
@@ -143,6 +143,9 @@ public class Game
 		}
 	}
 
+	/**
+	 * Loads the previous saved state and saves the current one (for redo).
+	 */
 	public boolean undo()
 	{
 		GameState state;
@@ -157,6 +160,9 @@ public class Game
 		return result;
 	}
 
+	/**
+	 * Loads the next saved state and stores the current one (for undo).
+	 */
 	public boolean redo()
 	{
 		GameState state;
