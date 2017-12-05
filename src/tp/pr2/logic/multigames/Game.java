@@ -4,6 +4,8 @@ import tp.pr2.logic.Board;
 import tp.pr2.logic.Direction;
 import tp.pr2.logic.MoveResults;
 import tp.pr2.logic.Position;
+import tp.pr2.logic.GameState;
+import tp.pr2.logic.GameStateStack;
 import java.util.Random;
 
 /**
@@ -16,7 +18,13 @@ public class Game
 	private int _size;
 	private int _initCells;
 	private int _score;  
-	private int _maxToken; 
+	private int _maxToken;
+	
+	private GameStateStack _mainStack;
+	//Stores up to 20 previous state
+	
+	private GameStateStack _undoneStack;
+	//Stores up to 20 "posterior" states (after executing the undo command)
 
 	/**
 	*	Constructor called from Controller. Instantiates the board.
@@ -27,6 +35,8 @@ public class Game
 		_initCells = initCells;
 		_myRandom = myRandom;
 		_board = new Board(size);
+		_mainStack = new GameStateStack();
+		_undoneStack = new GameStateStack();
 	}
 
 	/**
@@ -35,9 +45,11 @@ public class Game
 	*/
 	public void move(Direction dir)
 	{
+		GameState currentState = this.getState();
 		MoveResults results = _board.executeMove(dir);
 		
-		//If there was a move, updates the data
+		//If there was a move, updates the data, saves the previous state and clears
+		//the undone stack (you can't redo after moving)
 		if(results.getMoved()) 
 		{
 			_score += results.getPoints();
@@ -48,6 +60,9 @@ public class Game
 			}	
 			
 			newCell();
+
+			_mainStack.push(currentState);
+			_undoneStack = new GameStateStack();
 		}
 	}
 	
@@ -61,6 +76,8 @@ public class Game
 		_maxToken = 0;
 		_board = new Board(_size);
 		_myRandom.setSeed(seed);
+		_mainStack = new GameStateStack();
+		_undoneStack = new GameStateStack();
 
 		for(int i = 0; (i < _initCells && i < _size*_size); ++i) 
 		{
@@ -72,7 +89,8 @@ public class Game
 	*	Creates a new cell in a random empty position. The cell has a value of 2
 	*	with probability 90% or 4 with probability 10%.
 	*/
-	public void newCell() {
+	public void newCell()
+	{
 
 		Position pos = new Position(0,0);
 		int counter  = _myRandom.nextInt(_board.getEmptyCells())+1;
@@ -125,6 +143,34 @@ public class Game
 		}
 	}
 
+	public boolean undo()
+	{
+		GameState state;
+		boolean result;
+		if(!_mainStack.isEmpty()) {
+			state = _mainStack.pop();
+			_undoneStack.push(this.getState());
+			this.setState(state);
+			result = true;
+		}
+		else result = false;
+		return result;
+	}
+
+	public boolean redo()
+	{
+		GameState state;
+		boolean result;
+		if(!_undoneStack.isEmpty()) {
+			state = _undoneStack.pop();
+			_mainStack.push(this.getState());
+			this.setState(state);
+			result = true;
+		}
+		else result = false;
+		return result;
+	}
+
 	/**
 	*	Returns the maximum token in the board.
 	*/
@@ -139,6 +185,25 @@ public class Game
 	public int getScore() 
 	{
 		return _score;
+	}
+
+	/**
+	 * Stores the game state into a GameState object.
+	 */
+	public GameState getState()
+	{
+		GameState state = new GameState(_board.getState(), _score, _maxToken);
+		return state;
+	}
+
+	/**
+	 * Loads the GameState into the game. 
+	 */
+	public void setState(GameState aState)
+	{
+		_board.setState(aState.getBoardState());
+		_score = aState.getScore();
+		_maxToken = aState.getHighest();
 	}
 
 	/**

@@ -1,11 +1,6 @@
 package tp.pr2.logic.util;
 
-import tp.pr2.control.commands.Command;
-import tp.pr2.control.commands.HelpCommand;
-import tp.pr2.control.commands.ResetCommand;
-import tp.pr2.control.commands.NoParamsCommand;
-import tp.pr2.control.commands.ExitCommand;
-import tp.pr2.control.commands.MoveCommand;
+import tp.pr2.control.commands.*;
 import tp.pr2.control.Controller;
 
 /**
@@ -17,14 +12,14 @@ public class CommandParser {
 	/**
 	* List of available commands.
 	*/
-	private static Command[] availableCommands = { new HelpCommand(), new ResetCommand(), new ExitCommand(), new MoveCommand() };
+	private static Command[] availableCommands = { new HelpCommand(), new ResetCommand(), new ExitCommand(), new MoveCommand(), new UndoCommand(), new RedoCommand()};
 	
 	/**
 	* Searches the available commands and returns an instance of the matching Command
 	*/
 	public static Command parseCommand(String[] commandWords, Controller controller) {
 		Command result = null, aux = null;
-		for (Command com : controller.getAvailableCommands()) {
+		for (Command com : availableCommands) {
 			aux = com.parse(commandWords, controller);
 			if(aux != null) result = aux;
 		}
@@ -37,7 +32,7 @@ public class CommandParser {
 	public static String commandHelp(String[] commandWords, Controller controller) {
 		String help = "";
 		Command result = null, aux = null;
-		for (Command com : controller.getAvailableCommands()) {
+		for (Command com : availableCommands) {
 			aux = com.parse(commandWords, controller);
 			if(aux != null) result = aux;
 		}
