@@ -24,14 +24,6 @@ public class Controller
 	
 	private Game game;
 	private Scanner in;
-
-	//availableCommands is used in both CommandParser and HelpCommand. In order to not have
-	//two duplicate arrays for the same purpose, I have put it here.
-
-	/**
-	* List of available commands.
-	*/
-	private static Command[] availableCommands = { new HelpCommand(), new ResetCommand(), new ExitCommand(), new MoveCommand() };
 	
 	/**
 	*	Constructor called from Game2048. Creates a Random object with the specified seed and initializes the Game oject.
@@ -96,13 +88,6 @@ public class Controller
 		//the game is stuck, or the command exit is introduced
 
 		System.out.println("Game Over");
-	}
-
-	/**
-	 * Accesor method for availableCommands.
-	 */
-	public Command[] getAvailableCommands() {
-		return availableCommands;
 	}
 
 	/**

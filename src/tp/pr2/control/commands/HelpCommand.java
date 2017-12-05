@@ -22,7 +22,7 @@ public class HelpCommand extends NoParamsCommand
 	 */
 	public void execute(Game game, Controller controller)
 	{
-		for(Command cmd : controller.getAvailableCommands()) {
+		for(Command cmd : commandParser.getAvailableCommands()) {
 			System.out.println(cmd.helpText());
 		}
 		

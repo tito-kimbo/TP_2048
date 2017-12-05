@@ -14,7 +14,10 @@ import tp.pr2.control.Controller;
 
 public class CommandParser {
 
-	//availableCommands ahora está en Controller
+	/**
+	* List of available commands.
+	*/
+	private static Command[] availableCommands = { new HelpCommand(), new ResetCommand(), new ExitCommand(), new MoveCommand() };
 	
 	/**
 	* Searches the available commands and returns an instance of the matching Command
@@ -42,5 +45,12 @@ public class CommandParser {
 			help = result.helpText();
 		}
 		return help;
+	}
+
+	/**
+	 * Accesor method for availableCommands.
+	 */
+	public static Command[] getAvailableCommands() {
+		return availableCommands;
 	}
 }
