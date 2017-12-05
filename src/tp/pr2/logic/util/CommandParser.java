@@ -14,17 +14,14 @@ import tp.pr2.control.Controller;
 
 public class CommandParser {
 
-	/**
-	* List of available commands
-	*/
-	private static Command[] availableCommands = { new HelpCommand(), new ResetCommand(), new ExitCommand(), new MoveCommand() };
-
+	//availableCommands ahora está en Controller
+	
 	/**
 	* Searches the available commands and returns an instance of the matching Command
 	*/
 	public static Command parseCommand(String[] commandWords, Controller controller) {
 		Command result = null, aux = null;
-		for (Command com : availableCommands) {
+		for (Command com : controller.getAvailableCommands()) {
 			aux = com.parse(commandWords, controller);
 			if(aux != null) result = aux;
 		}
@@ -36,10 +33,10 @@ public class CommandParser {
 	*/
 	public static String commandHelp(String[] commandWords, Controller controller) {
 		String help = "";
-		Command result = null;
-		for (Command com : availableCommands) {
-			result = com.parse(commandWords, controller);
-			if(com != null) result = com;
+		Command result = null, aux = null;
+		for (Command com : controller.getAvailableCommands()) {
+			aux = com.parse(commandWords, controller);
+			if(aux != null) result = aux;
 		}
 		if(result != null) {
 			help = result.helpText();
