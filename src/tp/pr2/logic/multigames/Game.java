@@ -25,6 +25,8 @@ public class Game
 	
 	private GameStateStack _undoneStack;
 	//Stores up to 20 "posterior" states (after executing the undo command)
+	
+	private GameRules currentRules;
 
 	/**
 	*	Constructor called from Controller. Instantiates the board.
