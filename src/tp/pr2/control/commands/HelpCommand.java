@@ -2,6 +2,7 @@ package tp.pr2.control.commands;
 
 import tp.pr2.control.Controller;
 import tp.pr2.logic.multigames.Game;
+import tp.pr2.logic.util.CommandParser;
 
 /**
  * Contains the information of the command help
@@ -16,9 +17,17 @@ public class HelpCommand extends NoParamsCommand
 	{
 		super(commandInfo, helpHelp);
 	}
-	
+
+	/**
+	 * Prints the name and help text of the available commands
+	 */
 	public void execute(Game game, Controller controller)
 	{
-		//For each command in a commandArray prints -> CommandName: CommandHelp
+		for(Command cmd : CommandParser.getAvailableCommands()) {
+			System.out.println(cmd.helpText());
+		}
+		
+		//Do not print board after executing this command
+		controller.setNoPrintGameState(false);
 	}
 }

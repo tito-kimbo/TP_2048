@@ -50,6 +50,17 @@ public class Board
 	}
 
 	/**
+	 * Loads the given state into the board.
+	 */
+	public void setState(int[][] aState)
+	{
+		_board = new Cell[aState.length][aState.length];
+		for(int i = 0; i < _boardSize; i++)
+			for(int j = 0; j < _boardSize; j++)
+				_board[i][j] = new Cell(aState[i][j]);
+	}
+
+	/**
 	*	Returns the Cell at a given Poisition.
 	*/
 	public int getCell(Position pos) 
@@ -71,6 +82,18 @@ public class Board
 	public int getBoardSize() 
 	{
 		return _boardSize;
+	}
+
+	/**
+	 * Returns a representation of the board as a matrix of integers.
+	 */
+	public int[][] getState()
+	{
+		int[][] state = new int[_boardSize][_boardSize];
+		for(int i = 0; i < _boardSize; i++)
+			for(int j = 0; j < _boardSize; j++)
+				state[i][j] = _board[i][j].getVal();
+		return state;
 	}
 
 	/**

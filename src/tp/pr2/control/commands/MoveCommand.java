@@ -11,7 +11,7 @@ import tp.pr2.logic.Direction;
 public class MoveCommand extends Command
 {
 	private static final String moveHelp = "Execute a move in one of the directions: up, down, left, right.";
-	private static final String commandInfo = "move up right down left";
+	private static final String commandInfo = "move";
 	
 	private Direction direction;
 	
@@ -26,7 +26,14 @@ public class MoveCommand extends Command
 	 */
 	public void execute(Game game, Controller controller)
 	{
-		//
+		if(direction != null) {
+			game.move(direction);
+			controller.setNoPrintGameState(true);
+		}
+		else {
+			controller.setNoPrintGameState(false);
+			System.out.println("Not a valid direction!");
+		}
 	}
 	
 	/**
@@ -34,39 +41,23 @@ public class MoveCommand extends Command
 	 */
 	public Command parse(String[] commandWords, Controller controller)
 	{
-		Command c;
-		boolean isDir = false;
+		Command ret = null;
+	        Direction dir = null;
 		
-		if(commandWords.length > 1)
-		{
-			for(Direction d : Direction.values())
-			{
-				if(d.toString().equals(commandWords[1]))
+		if(commandWords[0].equals("move")) {
+			ret = this;
+			if(commandWords.length > 1)
 				{
-						isDir = true;
+					for(Direction d : Direction.values())
+						{
+							if(d.toString().equals(commandWords[1]))
+								dir = d;
+						}
 				}
-			}
-			
-			if(isDir)
-			{
-				c = this;
-			}
-			else
-			{
-				c = null;
-			}
-		}
-		else
-		{
-			c = null;
-		}
 		
-		return c;
-	}
-	
-	public void setDirection(Direction d)
-	{
-		direction = d;
+			this.direction = dir;
+		}
+		return ret;
 	}
 	
 	public Direction getDirection()
