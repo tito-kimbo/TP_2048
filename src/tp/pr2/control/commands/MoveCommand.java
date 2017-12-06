@@ -34,18 +34,34 @@ public class MoveCommand extends Command
 	 */
 	public Command parse(String[] commandWords, Controller controller)
 	{
+		Command c;
 		boolean isDir = false;
 		
 		if(commandWords.length > 1)
 		{
 			for(Direction d : Direction.values())
 			{
-				if(d.toString().equals(commandWords[1]));
+				if(d.toString().equals(commandWords[1]))
+				{
+						isDir = true;
+				}
+			}
+			
+			if(isDir)
+			{
+				c = this;
+			}
+			else
+			{
+				c = null;
 			}
 		}
+		else
+		{
+			c = null;
+		}
 		
-		//NO BIEN HECHO
-		return null;
+		return c;
 	}
 	
 	public void setDirection(Direction d)

@@ -19,6 +19,6 @@ public class HelpCommand extends NoParamsCommand
 	
 	public void execute(Game game, Controller controller)
 	{
-		
+		//For each command in a commandArray prints -> CommandName: CommandHelp
 	}
 }

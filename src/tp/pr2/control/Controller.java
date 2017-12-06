@@ -19,7 +19,7 @@ public class Controller
 	private final int objective = 2048;
 	
 	private long seed;
-	private boolean print;
+	private boolean print, exit;
 	
 	private Game game;
 	private Scanner in;
@@ -32,6 +32,7 @@ public class Controller
 		Random r;
 		
 		print = true;
+		exit = false;
 		this.seed = seed;
 		in = new Scanner(System.in);
 		r = new Random(seed);
@@ -49,6 +50,12 @@ public class Controller
 		print = b;
 	}
 	
+	public void setExit(boolean b)
+	{
+		exit = b;
+	}
+	
+	
 	/**
 	*	Main loop of the program. Reads input, writes output and checks if the game is over
 	**/
@@ -56,7 +63,7 @@ public class Controller
 	{
 		Command cmd = null;
 		String[] cmdWords;
-		boolean stuck, exit = false;
+		boolean stuck;
 		
 		System.out.println(game);
 		System.out.println("Type help for a list of commands");

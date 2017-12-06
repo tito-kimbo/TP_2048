@@ -19,6 +19,6 @@ public class ResetCommand extends NoParamsCommand
 	
 	public void execute(Game game, Controller controller)
 	{
-		
+		//game.reset(game.getRandom() --SEED--);
 	}
 }

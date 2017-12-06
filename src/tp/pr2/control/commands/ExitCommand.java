@@ -20,6 +20,6 @@ public class ExitCommand extends NoParamsCommand
 	
 	public void execute(Game game, Controller controller)
 	{
-		
+		controller.setExit(true);
 	}
 }

@@ -141,6 +141,11 @@ public class Game
 		return _score;
 	}
 
+	public Random getRandom()
+	{
+		return _myRandom;
+	}
+	
 	/**
 	*	Checks if the game is stuck (there are no possible moves).
 	*/
