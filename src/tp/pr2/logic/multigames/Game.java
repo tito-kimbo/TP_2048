@@ -27,6 +27,7 @@ public class Game
 	//Stores up to 20 "posterior" states (after executing the undo command)
 	
 	private GameRules currentRules;
+	//Sets the rules for the current game
 
 	/**
 	*	Constructor called from Controller. Instantiates the board.
