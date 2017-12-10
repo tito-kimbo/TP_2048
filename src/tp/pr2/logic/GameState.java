@@ -1,9 +1,5 @@
 package tp.pr2.logic;
 
-import tp.pr2.logic.Board;
-import tp.pr2.logic.Position;
-import tp.pr2.logic.Cell;
-
 /**
  * Stores a Board as a matrix of integers, a score and a maximum token.
  */

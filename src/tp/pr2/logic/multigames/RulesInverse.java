@@ -37,7 +37,26 @@ public class RulesInverse implements GameRules
 	public int getWinValue(Board board)
 	{
 		//LOWEST (ABOVE 0)
-		return 0; //???????????????????????????????????????????????????????
+		
+		int min = 2048, aux = 2048;
+		Position pos = new Position();
+		
+		for(int i = 0; i < board.getBoardSize(); i++)
+		{
+			pos.setRow(i);
+			for(int j = 0; j < board.getBoardSize(); j++)
+			{
+				aux = board.getCell(pos);
+				pos.setCol(j);
+				
+				if(aux < min)
+				{
+					min = aux;
+				}
+			}
+		}
+		
+		return min;
 	}
 	
 	public boolean win(Board board)

@@ -42,8 +42,25 @@ public class Rules2048 implements GameRules
 	public int getWinValue(Board board)
 	{
 		//HIGHEST
+		int max = 2, aux = 2;
+		Position pos = new Position();
 		
-		return 0;
+		for(int i = 0; i < board.getBoardSize(); i++)
+		{
+			pos.setRow(i);
+			for(int j = 0; j < board.getBoardSize(); j++)
+			{
+				aux = board.getCell(pos);
+				pos.setCol(j);
+				
+				if(aux > max)
+				{
+					max = aux;
+				}
+			}
+		}
+		
+		return max;
 	}
 	
 	public boolean win(Board board)

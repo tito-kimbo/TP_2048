@@ -39,7 +39,25 @@ public class RulesFib implements GameRules
 	public int getWinValue(Board board)
 	{
 		//HIGHEST
-		return 0; //???????????????????????????????????????????????????????
+		int max = 1, aux = 1;
+		Position pos = new Position();
+		
+		for(int i = 0; i < board.getBoardSize(); i++)
+		{
+			pos.setRow(i);
+			for(int j = 0; j < board.getBoardSize(); j++)
+			{
+				aux = board.getCell(pos);
+				pos.setCol(j);
+				
+				if(aux > max)
+				{
+					max = aux;
+				}
+			}
+		}
+		
+		return max;
 	}
 	
 	public boolean win(Board board)

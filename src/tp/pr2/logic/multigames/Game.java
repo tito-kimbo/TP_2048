@@ -3,7 +3,6 @@ package tp.pr2.logic.multigames;
 import tp.pr2.logic.Board;
 import tp.pr2.logic.Direction;
 import tp.pr2.logic.MoveResults;
-import tp.pr2.logic.Position;
 import tp.pr2.logic.GameState;
 import tp.pr2.logic.GameStateStack;
 import java.util.Random;
@@ -15,6 +14,7 @@ public class Game
 {
 	private Board _board;
 	private Random _myRandom;
+	
 	private int _size;
 	private int _initCells;
 	private int _score;  
@@ -26,7 +26,7 @@ public class Game
 	private GameStateStack _undoneStack;
 	//Stores up to 20 "posterior" states (after executing the undo command)
 	
-	private GameRules currentRules;
+	private GameRules _currentRules;
 	//Sets the rules for the current game
 
 	/**
@@ -37,9 +37,11 @@ public class Game
 		_size = size;
 		_initCells = initCells;
 		_myRandom = myRandom;
-		_board = new Board(size);
 		_mainStack = new GameStateStack();
 		_undoneStack = new GameStateStack();
+		
+		_currentRules = new Rules2048(); //DEFAULT?
+		_board = _currentRules.createBoard(_size);
 	}
 
 	/**
@@ -62,7 +64,8 @@ public class Game
 				_maxToken = results.getMaxToken();
 			}	
 			
-			newCell();
+			//newCell();
+			_currentRules.addNewCell(_board, _myRandom);
 
 			_mainStack.push(currentState);
 			_undoneStack = new GameStateStack();
@@ -77,21 +80,24 @@ public class Game
 
 		_score = 0;
 		_maxToken = 0;
-		_board = new Board(_size);
 		_myRandom.setSeed(seed);
+		
 		_mainStack = new GameStateStack();
 		_undoneStack = new GameStateStack();
-
-		for(int i = 0; (i < _initCells && i < _size*_size); ++i) 
+		
+		_board = _currentRules.createBoard(_size);
+		_currentRules.initBoard(_board, _initCells, _myRandom);
+		/*for(int i = 0; (i < _initCells && i < _size*_size); ++i) 
 		{
 			newCell();
-		}
+		}*/
 	}
 			
 	/**
 	*	Creates a new cell in a random empty position. The cell has a value of 2
 	*	with probability 90% or 4 with probability 10%.
 	*/
+/*
 	public void newCell()
 	{
 
@@ -145,7 +151,8 @@ public class Game
 			_board.setEmptyCells(_board.getEmptyCells()-1);
 		}
 	}
-
+*/
+	
 	/**
 	 * Loads the previous saved state and saves the current one (for redo).
 	 */
