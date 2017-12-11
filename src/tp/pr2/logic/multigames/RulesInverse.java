@@ -27,9 +27,15 @@ public class RulesInverse implements GameRules
 	
 	public int merge(Cell self, Cell other)
 	{
-		int val;
+		int val = 0;
 		
-		val = 4*(2048/self.getVal());
+		if(self.getVal() == other.getVal())
+		{
+			val = 4*(2048/self.getVal());
+
+			self.setVal(self.getVal()/2);
+			other.setVal(0);
+		}
 		
 		return val;
 	}

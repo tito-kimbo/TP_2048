@@ -5,6 +5,7 @@ import java.util.Random;
 import tp.pr2.logic.Board;
 import tp.pr2.logic.Cell;
 import tp.pr2.logic.Position;
+import tp.pr2.util.MyMathsUtil;
 
 public class RulesFib implements GameRules
 {
@@ -29,9 +30,23 @@ public class RulesFib implements GameRules
 	{
 		//Careful -> 1 and 1 should merge to 2
 		//else simply check with MyMathUtils
-		int val;
+		int val = 0, selfVal = self.getVal(), otherVal = other.getVal();
+		int selfNextFib, otherNextFib;
 		
-		val = self.getVal() + other.getVal();
+		selfNextFib = MyMathsUtil.nextFib(selfVal);
+		otherNextFib = MyMathsUtil.nextFib(otherVal);
+		
+		//CHECK FORMAT
+		if( 
+			(selfVal == otherVal && selfVal == 1) || 
+			(otherVal == selfNextFib ||
+			(selfVal == otherNextFib)) 
+		  )
+		{
+			val = self.getVal() + other.getVal(); //CORRECTO?
+			self.setVal( MyMathsUtil.nextFib(MyMathsUtil.max(selfVal, otherVal)) );
+			other.setVal(0);
+		}
 		
 		return val;
 	}

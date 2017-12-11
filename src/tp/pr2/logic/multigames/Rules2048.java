@@ -30,10 +30,16 @@ public class Rules2048 implements GameRules
 	
 	public int merge(Cell self, Cell other)
 	{
-		//We will suppose the cells can be merged (?)
-		int val;
+		//We will suppose the cells are neighbors
+		int val = 0;
 		
-		val = 2*self.getVal();
+		if(self.getVal() == other.getVal())
+		{
+			val = 2*self.getVal();
+			//NOW WE MERGE
+			self.setVal(2*self.getVal());
+			other.setVal(0);
+		}
 		
 		
 		return val;

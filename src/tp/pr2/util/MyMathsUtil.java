@@ -9,4 +9,18 @@ public class MyMathsUtil
 	{
 		return (int)Math.round(phi*previous);
 	}
+	
+	public static int max(int a, int b)
+	{
+		int aux;
+		if(a > b)
+		{
+			aux = a;
+		}
+		else
+		{
+			aux = b;
+		}
+		return aux;
+	}
 }
