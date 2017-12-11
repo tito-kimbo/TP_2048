@@ -13,7 +13,7 @@ public class RulesInverse implements GameRules
 	public void addNewCellAt(Board board, Position pos, Random rand)
 	{
 		//Creates 2048 with 90% probability and 1024 with 10%
-		int val = rand.nextInt() % 10;
+		int val = rand.nextInt(10);
 		if(val == 0)
 		{
 			val = 1024;
@@ -28,7 +28,7 @@ public class RulesInverse implements GameRules
 	public int merge(Cell self, Cell other)
 	{
 		int val = 0;
-		
+
 		if(self.getVal() == other.getVal())
 		{
 			val = 4*(2048/self.getVal());

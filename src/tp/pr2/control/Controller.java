@@ -8,15 +8,14 @@ import tp.pr2.logic.util.*;
 import java.util.Random;
 
 import tp.pr2.logic.multigames.Game;
+import tp.pr2.logic.multigames.GameRules;
 
 
 /**
 *	Interface between the user and the game. Interprets the user input.
 **/
 public class Controller 
-{
-	private final int objective = 2048;
-	
+{;	
 	private long seed;
 
 	private boolean print;
@@ -28,18 +27,15 @@ public class Controller
 	/**
 	*	Constructor called from Game2048. Creates a Random object with the specified seed and initializes the Game oject.
 	**/
-	public Controller(int size, int initCells, long seed)
+	public Controller(GameRules rules, int size, int initCells, long seed)
 	{
-		Random r;
 		
 		print = true;
 		exit = false;
 		this.seed = seed;
 		in = new Scanner(System.in);
-		r = new Random(seed);
-		
-		game = new Game(size, initCells, r);
-		game.reset(seed);
+	      		
+		game = new Game(rules, size, initCells, seed);
 		
 	}
 	
@@ -90,7 +86,7 @@ public class Controller
 				if(print) System.out.println(game);
 			}
 			
-		} while(game.getMaxToken() < objective && !stuck && !exit);
+		} while(!game.win() && !stuck && !exit);
 		//The game loop keeps going until the objective (2048) is reached,
 		//the game is stuck, or the command exit is introduced
 
@@ -112,5 +108,20 @@ public class Controller
 	 */
 	public long getSeed() {
 		return seed;
+	}
+
+	/**
+	 * Provides access to the scanner.
+	 */
+	public Scanner getScanner() {
+		//Needed by PlayCommand to read input
+		return this.in;
+	}
+
+	public void setGame(GameRules rules, int size, int initCells, long seed) {
+		game = new Game(rules, size, initCells, seed);
+		this.seed = seed;
+
+		game.reset();
 	}
 };

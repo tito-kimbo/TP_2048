@@ -61,14 +61,13 @@ public interface GameRules
 		counter = rand.nextInt(board.getEmptyCells())+1;;
 		
 		i = 0;
-		j = 0;
 		size = board.getBoardSize();
 		while(i < size && counter > 0)
 		{
-			
+			pos.setRow(i);
+			j = 0;
 			while(j < size && counter > 0)
 			{
-				pos.setRow(i);
 				pos.setCol(j);
 				
 				if(board.isEmptyCell(pos)) 

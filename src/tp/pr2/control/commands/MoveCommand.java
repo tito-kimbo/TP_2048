@@ -10,7 +10,7 @@ import tp.pr2.logic.Direction;
 
 public class MoveCommand extends Command
 {
-	private static final String moveHelp = "Execute a move in one of the directions: up, down, left, right.";
+	private static final String moveHelp = "Move <direction>: Execute a move in one of the directions: up, down, left, right.";
 	private static final String commandInfo = "move";
 	
 	private Direction direction;

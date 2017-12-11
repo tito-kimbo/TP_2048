@@ -40,7 +40,7 @@ public abstract class Command
 	 */
 	public String helpText()
 	{
-		return " " + commandText + ": " + helpText;
+		return helpText;
 	}
 	
 	/**

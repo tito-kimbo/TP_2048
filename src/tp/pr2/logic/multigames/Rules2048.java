@@ -16,7 +16,7 @@ public class Rules2048 implements GameRules
 	public void addNewCellAt(Board board, Position pos, Random rand)
 	{
 		//GENERATES RANDOMLY 2 or 4 WITH 90%,10% RESPECTIVELY
-		int val = rand.nextInt() % 10;
+		int val = rand.nextInt(10);
 		if(val == 0)
 		{
 			val = 4;

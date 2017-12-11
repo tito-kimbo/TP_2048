@@ -12,7 +12,7 @@ public class CommandParser {
 	/**
 	* List of available commands.
 	*/
-	private static Command[] availableCommands = { new HelpCommand(), new ResetCommand(), new ExitCommand(), new MoveCommand(), new UndoCommand(), new RedoCommand()};
+	private static Command[] availableCommands = { new HelpCommand(), new ResetCommand(), new ExitCommand(), new MoveCommand(), new UndoCommand(), new RedoCommand(), new PlayCommand()};
 	
 	/**
 	* Searches the available commands and returns an instance of the matching Command

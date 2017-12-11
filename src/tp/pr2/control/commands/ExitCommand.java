@@ -10,7 +10,7 @@ import tp.pr2.logic.multigames.Game;
 
 public class ExitCommand extends NoParamsCommand
 {
-	private static final String exitHelp = "Terminate the program";
+	private static final String exitHelp = "Exit: Terminate the program";
 	private static final String commandInfo = "exit";
 	
 	public ExitCommand()

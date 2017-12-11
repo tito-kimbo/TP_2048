@@ -14,7 +14,7 @@ public class RulesFib implements GameRules
 	public void addNewCellAt(Board board, Position pos, Random rand)
 	{
 		//Creates 1 with 90% probability and 2 with 10%
-		int val = rand.nextInt() % 10;
+		int val = rand.nextInt(10);
 		if(val == 0)
 		{
 			val = 2;

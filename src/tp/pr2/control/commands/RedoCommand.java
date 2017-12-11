@@ -8,7 +8,7 @@ import tp.pr2.logic.multigames.Game;
  */
 public class RedoCommand extends NoParamsCommand
 {
-	private static final String redoHelp = "Redoes the last undone move";
+	private static final String redoHelp = "Redo: Redoes the last undone move";
 	private static final String commandInfo = "redo";
 	
 	public RedoCommand()

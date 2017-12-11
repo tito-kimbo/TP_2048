@@ -1,6 +1,7 @@
 package tp.pr2;
 
 import tp.pr2.control.Controller;
+import tp.pr2.logic.multigames.Rules2048;
 
 /**move 
 *	Entry point of the game. Creates a controller with the specified parameters and runs the game.
@@ -8,6 +9,7 @@ import tp.pr2.control.Controller;
 public class Game2048 
 {
 
+	private static final Rules2048 rules = new Rules2048();
 	private static final int DEFAULT_SIZE = 4;
 	private static final int DEFAULT_INIT_CELLS = 2;
 	private static final long DEFAULT_SEED = 123946871;
@@ -20,20 +22,29 @@ public class Game2048
 		int size, initCells;
 		long seed;
 
-		if(args.length < 3) 
-		{
-				size = DEFAULT_SIZE;
-				initCells = DEFAULT_INIT_CELLS;
-				seed = DEFAULT_SEED;		
+		switch(args.length) {
+		case 0: {
+			size = DEFAULT_SIZE;
+			initCells = DEFAULT_INIT_CELLS;
+			seed = DEFAULT_SEED;
+		} break;
+		case 1: {
+			size = Integer.parseInt(args[0]);
+			initCells = DEFAULT_INIT_CELLS;
+			seed = DEFAULT_SEED;
+		} break;
+		case 2: {
+			size = Integer.parseInt(args[0]);
+			initCells = Integer.parseInt(args[1]);
+			seed = DEFAULT_SEED;
+		} break;
+		default: {
+			size = Integer.parseInt(args[0]);
+			initCells = Integer.parseInt(args[1]);
+			seed = Long.parseLong(args[2]);
 		}
-		else 
-		{
-			size = Integer.valueOf(args[0]);
-			initCells = Integer.valueOf(args[1]);
-			seed = Long.valueOf(args[2]);
 		}
-	      
-		Controller controller = new Controller(size, initCells, seed);			  		
+		Controller controller = new Controller(rules, size, initCells, seed);			  		
 		controller.run();
     }
 };

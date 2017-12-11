@@ -9,7 +9,7 @@ import tp.pr2.logic.multigames.Game;
  */
 public class UndoCommand extends NoParamsCommand
 {
-	private static final String undoHelp = "Undoes the last move, up to 20 moves";
+	private static final String undoHelp = "Undo: Undoes the last move, up to 20 moves";
 	private static final String commandInfo = "undo";
 	
 	public UndoCommand()

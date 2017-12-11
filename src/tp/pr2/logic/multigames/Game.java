@@ -17,9 +17,10 @@ public class Game
 	
 	private int _size;
 	private int _initCells;
-	private int _score;  
+	private int _score;
 	private int _maxToken;
-	
+	private long _seed;
+
 	private GameStateStack _mainStack;
 	//Stores up to 20 previous states
 	
@@ -32,16 +33,15 @@ public class Game
 	/**
 	*	Constructor called from Controller. Instantiates the board.
 	*/
-	public Game(int size, int initCells, Random myRandom)
+	public Game(GameRules rules, int size, int initCells, long seed)
 	{
 		_size = size;
 		_initCells = initCells;
-		_myRandom = myRandom;
-		_mainStack = new GameStateStack();
-		_undoneStack = new GameStateStack();
+		_seed = seed;
+		_myRandom = new Random(seed);
+		_currentRules = rules;
 		
-		_currentRules = new Rules2048(); //DEFAULT?
-		_board = _currentRules.createBoard(_size);
+		reset();
 	}
 
 	/**
@@ -75,16 +75,16 @@ public class Game
 	/**
 	*	Resets the game to its initial state.
 	*/
-	public void reset(long seed)
+	public void reset()
 	{
 
 		_score = 0;
 		_maxToken = 0;
-		_myRandom.setSeed(seed);
+		_myRandom.setSeed(_seed);
 		
 		_mainStack = new GameStateStack();
 		_undoneStack = new GameStateStack();
-		
+
 		_board = _currentRules.createBoard(_size);
 		_currentRules.initBoard(_board, _initCells, _myRandom);
 		/*for(int i = 0; (i < _initCells && i < _size*_size); ++i) 
@@ -233,6 +233,13 @@ public class Game
 	public boolean isStuck() 
 	{
 		return _board.isStuck();
+	}
+
+	/**
+	 * Checks if the player has won the game.
+	 */
+	public boolean win() {
+		return _currentRules.win(_board);
 	}
 	
 	/**

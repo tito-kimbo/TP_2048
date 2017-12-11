@@ -10,7 +10,7 @@ import tp.pr2.logic.util.CommandParser;
 
 public class HelpCommand extends NoParamsCommand
 {
-	private static final String helpHelp = "Print this help message.";
+	private static final String helpHelp = "Help: Print this help message.";
 	private static final String commandInfo = "help";
 	
 	public HelpCommand()

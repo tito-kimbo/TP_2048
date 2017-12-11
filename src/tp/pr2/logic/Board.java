@@ -46,6 +46,9 @@ public class Board
 	*/
 	public void setCell(Position pos, int value)
 	{
+		if(_board[pos.getRow()][pos.getCol()].isEmpty() && value != 0)
+			_emptyCells--;
+		
 		_board[pos.getRow()][ pos.getCol()].setVal(value);
 	}
 
@@ -176,7 +179,7 @@ public class Board
 					
 					if(!merged && aux1 < _boardSize-1)
 					{
-						merged = _board[i][aux1+1].doMerge(_board[i][aux1]);
+						merged = ;
 						
 						if(merged)
 						{
