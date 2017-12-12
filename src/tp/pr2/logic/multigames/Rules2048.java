@@ -26,6 +26,7 @@ public class Rules2048 implements GameRules
 			val = 2;
 		}		
 		board.setCell(pos,  val);
+		board.setEmptyCells(board.getEmptyCells()-1);
 	}
 	
 	public int merge(Cell self, Cell other)
@@ -33,7 +34,7 @@ public class Rules2048 implements GameRules
 		//We will suppose the cells are neighbors
 		int val = 0;
 		
-		if(self.getVal() == other.getVal())
+		if(!self.isEmpty() && self.getVal() == other.getVal())
 		{
 			val = 2*self.getVal();
 			//NOW WE MERGE
@@ -56,7 +57,7 @@ public class Rules2048 implements GameRules
 			pos.setRow(i);
 			for(int j = 0; j < board.getBoardSize(); j++)
 			{
-				aux = board.getCell(pos);
+				aux = board.getCell(pos).getVal();
 				pos.setCol(j);
 				
 				if(aux > max)

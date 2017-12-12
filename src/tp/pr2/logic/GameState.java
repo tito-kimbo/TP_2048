@@ -7,16 +7,16 @@ public class GameState
 {
 	private int[][] boardState;
 	private int score;
-	private int highest;
+	private int winValue;
 
 	/**
 	 * Constructor for the class.
 	 */
-	public GameState(int[][] board, int score, int token)
+	public GameState(int[][] board, int score, int winValue)
 	{
 		this.boardState = board;
 		this.score = score;
-		highest = token;
+		this.winValue = winValue;
 	}
 
 	/**
@@ -36,11 +36,11 @@ public class GameState
 	}
 
 	/**
-	 * Returns the stored maximum token
+	 * Returns the win value.
 	 */
-	public int getHighest()
+	public int getWinValue()
 	{
-		return highest;
+		return winValue;
 	}
 
 	/**
@@ -60,10 +60,10 @@ public class GameState
 	}
 
 	/**
-	 * Stores the maximum token of the game.
+	 * Stores the win value.
 	 */
-	public void setHighest(int token)
+	public void setWinValue(int value)
 	{
-		highest = token;
+		winValue = value;
 	}
 }

@@ -24,6 +24,7 @@ public class RulesFib implements GameRules
 			val = 1;
 		}		
 		board.setCell(pos,  val);
+		board.setEmptyCells(board.getEmptyCells()-1);
 	}
 	
 	public int merge(Cell self, Cell other)
@@ -37,14 +38,16 @@ public class RulesFib implements GameRules
 		otherNextFib = MyMathsUtil.nextFib(otherVal);
 		
 		//CHECK FORMAT
-		if( 
+		if(
+		        (!self.isEmpty()) && 
 			(selfVal == otherVal && selfVal == 1) || 
 			(otherVal == selfNextFib ||
 			(selfVal == otherNextFib)) 
 		  )
 		{
+	        
 			val = self.getVal() + other.getVal(); //CORRECTO?
-			self.setVal( MyMathsUtil.nextFib(MyMathsUtil.max(selfVal, otherVal)) );
+			self.setVal(val);
 			other.setVal(0);
 		}
 		
@@ -62,7 +65,7 @@ public class RulesFib implements GameRules
 			pos.setRow(i);
 			for(int j = 0; j < board.getBoardSize(); j++)
 			{
-				aux = board.getCell(pos);
+				aux = board.getCell(pos).getVal();
 				pos.setCol(j);
 				
 				if(aux > max)

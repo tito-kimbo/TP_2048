@@ -5,6 +5,7 @@ import tp.pr2.logic.Direction;
 import tp.pr2.logic.MoveResults;
 import tp.pr2.logic.GameState;
 import tp.pr2.logic.GameStateStack;
+import tp.pr2.logic.Cell;
 import java.util.Random;
 
 /**
@@ -18,7 +19,7 @@ public class Game
 	private int _size;
 	private int _initCells;
 	private int _score;
-	private int _maxToken;
+	private int _winValue;
 	private long _seed;
 
 	private GameStateStack _mainStack;
@@ -45,32 +46,27 @@ public class Game
 	}
 
 	/**
-	*	Executes a move in the given direction, updates the score and maximum token and
-	*	creates a new Cell.
+	*	Updates the relevant information after a successful move.
 	*/
-	public void move(Direction dir)
+	public void updateAfterMove(MoveResults results, GameState lastState)
 	{
-		GameState currentState = this.getState();
-		MoveResults results = _board.executeMove(dir);
 		
 		//If there was a move, updates the data, saves the previous state and clears
 		//the undone stack (you can't redo after moving)
 		if(results.getMoved()) 
 		{
 			_score += results.getPoints();
-			
-			if(_maxToken < results.getMaxToken())
-			{
-				_maxToken = results.getMaxToken();
-			}	
-			
+						
 			//newCell();
 			_currentRules.addNewCell(_board, _myRandom);
 
-			_mainStack.push(currentState);
+			_winValue = _currentRules.getWinValue(_board);
+			_mainStack.push(lastState);
 			_undoneStack = new GameStateStack();
 		}
 	}
+
+	
 	
 	/**
 	*	Resets the game to its initial state.
@@ -79,7 +75,6 @@ public class Game
 	{
 
 		_score = 0;
-		_maxToken = 0;
 		_myRandom.setSeed(_seed);
 		
 		_mainStack = new GameStateStack();
@@ -87,6 +82,8 @@ public class Game
 
 		_board = _currentRules.createBoard(_size);
 		_currentRules.initBoard(_board, _initCells, _myRandom);
+
+		_winValue = _currentRules.getWinValue(_board);
 		/*for(int i = 0; (i < _initCells && i < _size*_size); ++i) 
 		{
 			newCell();
@@ -188,14 +185,6 @@ public class Game
 	}
 
 	/**
-	*	Returns the maximum token in the board.
-	*/
-	public int getMaxToken() 
-	{
-		return _maxToken;
-	}
-
-	/**
 	*	Returns the current score.
 	*/
 	public int getScore() 
@@ -203,6 +192,9 @@ public class Game
 		return _score;
 	}
 
+	/**
+	 * Returns the PRNG.
+	 */
 	public Random getRandom()
 	{
 		return _myRandom;
@@ -213,8 +205,22 @@ public class Game
 	 */
 	public GameState getState()
 	{
-		GameState state = new GameState(_board.getState(), _score, _maxToken);
+		GameState state = new GameState(_board.getState(), _score, _winValue);
 		return state;
+	}
+
+	/**
+	 * Returns the Board.
+	 */
+	public Board getBoard() {
+		return _board;
+	}
+
+	/**
+	 * Returns the current GameRules.
+	 */
+	public GameRules getRules() {
+		return _currentRules;
 	}
 
 	/**
@@ -224,7 +230,7 @@ public class Game
 	{
 		_board.setState(aState.getBoardState());
 		_score = aState.getScore();
-		_maxToken = aState.getHighest();
+		_winValue = aState.getWinValue();
 	}
 
 	/**
@@ -232,7 +238,7 @@ public class Game
 	*/
 	public boolean isStuck() 
 	{
-		return _board.isStuck();
+		return _currentRules.lose(_board);
 	}
 
 	/**
@@ -241,6 +247,13 @@ public class Game
 	public boolean win() {
 		return _currentRules.win(_board);
 	}
+
+	/**
+	 * Merges the second Cell into the first one and returns the resulting score.
+	 */
+	public int merge(Cell c1, Cell c2) {
+		return _currentRules.merge(c1, c2);
+	}
 	
 	/**
 	*	Returns a string representation of the game.
@@ -248,7 +261,7 @@ public class Game
 	public String toString()
 	{
 		String margin = "   ";
-   		String gameString = String.format("%1$s highest: %2$-5d %1$s score: %3$-5d%n", margin, _maxToken, _score);
+   		String gameString = String.format("%1$s best value: %2$-5d %1$s score: %3$-5d%n", margin, _winValue, _score);
 		
 		return gameString + _board.toString();
 	}

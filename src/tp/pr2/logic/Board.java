@@ -46,9 +46,6 @@ public class Board
 	*/
 	public void setCell(Position pos, int value)
 	{
-		if(_board[pos.getRow()][pos.getCol()].isEmpty() && value != 0)
-			_emptyCells--;
-		
 		_board[pos.getRow()][ pos.getCol()].setVal(value);
 	}
 
@@ -66,9 +63,9 @@ public class Board
 	/**
 	*	Returns the Cell at a given Poisition.
 	*/
-	public int getCell(Position pos) 
+	public Cell getCell(Position pos) 
 	{
-		return _board[pos.getRow()][pos.getCol()].getVal();
+		return _board[pos.getRow()][pos.getCol()];
 	}
 
 	/**
@@ -144,10 +141,10 @@ public class Board
 			}
 		}
 	}
-	
+	/*
 	/**
 	*	Moves every possible Cell to the right, saving the results in a given MoveResults.
-	*/
+	
 	public void move_right(MoveResults m)
 	{
 		int aux1;
@@ -179,7 +176,7 @@ public class Board
 					
 					if(!merged && aux1 < _boardSize-1)
 					{
-						merged = ;
+						merged = _board[i][aux1+1].doMerge(_board[i][aux1]);
 						
 						if(merged)
 						{
@@ -205,7 +202,7 @@ public class Board
 	
 	/**
 	*	Moves every possible Cell to the right, saving the results in a given MoveResults.
-	*/
+	
 	public void move_left(MoveResults m)
 	{
 		reflect();
@@ -215,7 +212,7 @@ public class Board
 	
 	/**
 	*	Moves every possible Cell upwards, saving the results in a given MoveResult.
-	*/
+	
 	public void move_up(MoveResults m)
 	{
 		transpose();
@@ -225,7 +222,7 @@ public class Board
 	
 	/**
 	*	Moves every possible Cell downwards, saving the results in a given MoveResult.
-	*/
+	
 	public void move_down(MoveResults m)
 	{
 		transpose();
@@ -235,7 +232,7 @@ public class Board
 	
 	/**
 	*	Moves the Board in the given Direction.
-	*/
+	
 	public MoveResults executeMove(Direction dir)
 	{
 		MoveResults m = new MoveResults();
@@ -263,7 +260,7 @@ public class Board
 		
 		return m;
 	}
-	
+	*/
 	/**
 	*	Returns whether there exist possible movements.
 	*/

@@ -23,13 +23,14 @@ public class RulesInverse implements GameRules
 			val = 2048;
 		}		
 		board.setCell(pos,  val);
+		board.setEmptyCells(board.getEmptyCells()-1);
 	}
 	
 	public int merge(Cell self, Cell other)
 	{
 		int val = 0;
 
-		if(self.getVal() == other.getVal())
+		if(!self.isEmpty() && self.getVal() == other.getVal())
 		{
 			val = 4*(2048/self.getVal());
 
@@ -52,10 +53,10 @@ public class RulesInverse implements GameRules
 			pos.setRow(i);
 			for(int j = 0; j < board.getBoardSize(); j++)
 			{
-				aux = board.getCell(pos);
 				pos.setCol(j);
+				aux = board.getCell(pos).getVal();
 				
-				if(aux < min)
+				if(aux > 0 && aux < min)
 				{
 					min = aux;
 				}
