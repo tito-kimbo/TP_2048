@@ -5,8 +5,6 @@ import java.util.Scanner;
 import tp.pr2.control.commands.*;
 import tp.pr2.logic.util.*;
 
-import java.util.Random;
-
 import tp.pr2.logic.multigames.Game;
 import tp.pr2.logic.multigames.GameRules;
 

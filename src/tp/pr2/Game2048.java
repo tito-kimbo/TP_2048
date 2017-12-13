@@ -19,32 +19,37 @@ public class Game2048
 	*/
     public static void main(String[] args)
 	{
-		int size, initCells;
-		long seed;
+		int size = DEFAULT_SIZE, initCells  = DEFAULT_INIT_CELLS;
+		long seed = DEFAULT_SEED;
 
 		switch(args.length) {
-		case 0: {
-			size = DEFAULT_SIZE;
-			initCells = DEFAULT_INIT_CELLS;
-			seed = DEFAULT_SEED;
-		} break;
-		case 1: {
+		case 0: {} break;
+		case 1: 
+		{			
 			size = Integer.parseInt(args[0]);
-			initCells = DEFAULT_INIT_CELLS;
-			seed = DEFAULT_SEED;
 		} break;
 		case 2: {
 			size = Integer.parseInt(args[0]);
 			initCells = Integer.parseInt(args[1]);
-			seed = DEFAULT_SEED;
 		} break;
-		default: {
+		case 3: {
 			size = Integer.parseInt(args[0]);
 			initCells = Integer.parseInt(args[1]);
 			seed = Long.parseLong(args[2]);
+		} break;
+		default:
+		{
+			System.out.println("Too many arguments");
 		}
 		}
-		Controller controller = new Controller(rules, size, initCells, seed);			  		
-		controller.run();
+		
+		if(args.length <= 3) 
+		{
+			if(size == 0) { size = DEFAULT_SIZE; }
+			if(initCells <= 0) { initCells = DEFAULT_INIT_CELLS; }
+			
+			Controller controller = new Controller(rules, size, initCells, seed);			  		
+			controller.run();
+		}
     }
 };

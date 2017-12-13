@@ -1,7 +1,6 @@
 package tp.pr2.logic.multigames;
 
 import tp.pr2.logic.Board;
-import tp.pr2.logic.Direction;
 import tp.pr2.logic.MoveResults;
 import tp.pr2.logic.GameState;
 import tp.pr2.logic.GameStateStack;
@@ -84,72 +83,8 @@ public class Game
 		_currentRules.initBoard(_board, _initCells, _myRandom);
 
 		_winValue = _currentRules.getWinValue(_board);
-		/*for(int i = 0; (i < _initCells && i < _size*_size); ++i) 
-		{
-			newCell();
-		}*/
 	}
-			
-	/**
-	*	Creates a new cell in a random empty position. The cell has a value of 2
-	*	with probability 90% or 4 with probability 10%.
-	*/
-/*
-	public void newCell()
-	{
 
-		Position pos = new Position(0,0);
-		int counter  = _myRandom.nextInt(_board.getEmptyCells())+1;
-		int valor = 0, i=0, j;
-
-		//Searches the board for the (counter) empty position
-		while(i < _size && counter > 0) 
-		{
-			j = 0;
-			
-			while(j < _size && counter > 0) 
-			{
-				pos.setRow(i);
-				pos.setCol(j);
-				
-				if(_board.isEmptyCell(pos)) 
-				{
-					if(counter > 0)	
-					{
-						counter--;		
-					}				
-				}
-				
-				j++;
-			}
-			
-			i++;
-		}
-
-		//Generates a 2 with probability 0.9, or a 4 with probability 0.1
-		if(counter == 0)
-		{
-			if(_myRandom.nextInt(10) < 9) 
-			{
-				_board.setCell(pos, 2);
-				valor = 2;
-			}
-			else 
-			{
-				_board.setCell(pos, 4);
-				valor = 4;
-			}
-			
-			if(_maxToken < valor)
-			{
-				_maxToken = valor;
-			}				
-
-			_board.setEmptyCells(_board.getEmptyCells()-1);
-		}
-	}
-*/
-	
 	/**
 	 * Loads the previous saved state and saves the current one (for redo).
 	 */

@@ -7,7 +7,6 @@ import tp.pr2.logic.Position;
 import tp.pr2.logic.MoveResults;
 import tp.pr2.logic.Board;
 import tp.pr2.logic.GameState;
-import tp.pr2.logic.Cell;
 
 /**
  * Contains the information of the command Move
@@ -82,16 +81,13 @@ public class MoveCommand extends Command
 		Command ret = null;
 	        Direction dir = null;
 		
-		if(commandWords[0].equals("move")) {
+		if(commandWords.length == 2 && commandWords[0].equals("move")) {
 			ret = this;
-			if(commandWords.length > 1)
-				{
-					for(Direction d : Direction.values())
-						{
-							if(d.toString().equals(commandWords[1]))
-								dir = d;
-						}
-				}
+			for(Direction d : Direction.values())
+			{
+				if(d.toString().equals(commandWords[1]))
+					dir = d;
+			}
 		
 			this.direction = dir;
 		}

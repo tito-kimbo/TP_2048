@@ -15,7 +15,11 @@ public class PlayCommand extends Command
 	private static final int DEFAULT_SIZE = 4, DEFAULT_CELLS = 2;
 
 	private static final String playHelp = "Play <game>: Change play mode to one of the following: original, fibonacci and inverse.", commandInfo = "play";
-
+	private static final String askForSize = "Please enter the size of the board: ";
+	private static final String askForCells = "Please enter the number of initial cells: ";
+	private static final String askForSeed = "Please enter the initial seed: ";
+	
+	
 	private GameType type = null;
 
 	private int size, cells;
@@ -31,40 +35,63 @@ public class PlayCommand extends Command
 	}
 
 	public void execute(Game game, Controller controller) {
-		if(type != null) {
+		if(type != null) 
+		{
 			Scanner in = controller.getScanner();
-			String line = "";
-			System.out.print("Please enter the size of the board: ");
-			line = in.nextLine();
-			if(!line.equals("")) size = Integer.parseInt(line);
-			else {
-				size = DEFAULT_SIZE;
-				System.out.println("Using the default size of the board: " + DEFAULT_SIZE);
+			String line = ""; //For safety
+			
+			size = 0;
+			cells = 0;
+			
+			while(size <= 0)
+			{
+				System.out.print(askForSize);
+				line = in.nextLine();
+				
+				if(!line.equals(""))
+				{
+					size = Integer.parseInt(line);
+				}
+				else
+				{
+					size = DEFAULT_SIZE;
+					System.out.println("Using the default size of the board: " + DEFAULT_SIZE);
+				}
+			}
+			
+			while(cells <= 0)
+			{
+				System.out.print(askForCells);
+				line = in.nextLine();
+				
+				if(!line.equals("")) 
+				{
+				cells = Integer.parseInt(line);
+				}
+				else 
+				{
+					cells = DEFAULT_CELLS;
+					System.out.println("Using the default number of initial cells: " + DEFAULT_CELLS);
+				}
 			}
 
-			line = "";
-			System.out.print("Please enter the number of initial cells: ");
+			System.out.print(askForSeed);
 			line = in.nextLine();
-			if(!line.equals("")) cells = Integer.parseInt(line);
-			else {
-				cells = DEFAULT_CELLS;
-				System.out.println("Using the default number of initial cells: " + DEFAULT_CELLS);
+			if(!line.equals("")) 
+			{
+				seed = Long.parseLong(line);
 			}
-
-			line = "";
-			System.out.print("Please enter the size of the board: ");
-			line = in.nextLine();
-			if(!line.equals("")) seed = Long.parseLong(line);
-			else {
+			else 
+			{
 				seed = controller.getSeed();
 				System.out.println("Using the default seed for the PRNG: " + seed);
 			}
 		
 			controller.setGame(type.toRules(), size, cells, seed);
-
 			controller.setNoPrintGameState(true);
 		}
-		else {
+		else 
+		{
 			System.out.println("Not a valid game type!");
 			controller.setNoPrintGameState(false);
 		}
@@ -73,17 +100,18 @@ public class PlayCommand extends Command
 	/**
 	 * Parses the play command
 	 */
-	public Command parse(String [] commandWords, Controller controller) {
+	public Command parse(String [] commandWords, Controller controller) 
+	{
 
 		Command com = null;
 		GameType gameType = null;
-		if(commandWords[0].equals("play")) {
+		if(commandWords.length == 2 && commandWords[0].equals("play")) 
+		{
 			com = this;
 
-			if(commandWords.length == 2) {
-				for (GameType t : GameType.values()) {
-					if(commandWords[1].equals(t.toString())) gameType = t;
-				}
+			for (GameType t : GameType.values()) 
+			{
+				if(commandWords[1].equals(t.toString())) gameType = t;
 			}
 		}
 

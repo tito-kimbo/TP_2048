@@ -1,7 +1,6 @@
 package tp.pr2.logic;
 
 import tp.pr2.logic.Position;
-import tp.pr2.logic.MoveResults;
 import tp.pr2.logic.Cell;
 import tp.pr2.logic.util.MyStringUtils;
 
@@ -141,126 +140,7 @@ public class Board
 			}
 		}
 	}
-	/*
-	/**
-	*	Moves every possible Cell to the right, saving the results in a given MoveResults.
 	
-	public void move_right(MoveResults m)
-	{
-		int aux1;
-		Cell aux;
-		boolean merged;
-		
-		for(int i = 0; i < _boardSize; i++)
-		{
-			aux1 = _boardSize-1;
-			merged = false;		
-			
-			for(int j = _boardSize-1; j >= 0; j--)
-			{
-				
-				//Moves the cell in position (i,j) to the cell in position (i, aux1)
-				//Note that either j == aux1 or (i, aux1) is empty, so that two nonempty cells will never be swapped
-				
-				if( !( _board[i][j].isEmpty()) )
-				{
-					if(aux1 != j)
-					{						
-						aux = _board[i][j];
-						_board[i][j] = _board[i][aux1];
-						_board[i][aux1] = aux;
-					        m.setMoved(true);
-					}
-
-					//If the cell in (i, aux1) has already been merged, do not merge again
-					
-					if(!merged && aux1 < _boardSize-1)
-					{
-						merged = _board[i][aux1+1].doMerge(_board[i][aux1]);
-						
-						if(merged)
-						{
-							m.setPoints(m.getPoints() + _board[i][aux1+1].getVal());
-							m.setMoved(true);
-							
-							if(_board[i][aux1+1].getVal() > m.getMaxToken())
-							{
-								m.setMaxToken(_board[i][aux1+1].getVal());
-							}
-							
-							_emptyCells++;
-							aux1++;
-						}
-					}
-					else merged = false;
-					
-					aux1--;
-				}
-			}
-		}
-	}
-	
-	/**
-	*	Moves every possible Cell to the right, saving the results in a given MoveResults.
-	
-	public void move_left(MoveResults m)
-	{
-		reflect();
-		move_right(m);
-		reflect();
-	}
-	
-	/**
-	*	Moves every possible Cell upwards, saving the results in a given MoveResult.
-	
-	public void move_up(MoveResults m)
-	{
-		transpose();
-		move_left(m);
-		transpose();
-	}
-	
-	/**
-	*	Moves every possible Cell downwards, saving the results in a given MoveResult.
-	
-	public void move_down(MoveResults m)
-	{
-		transpose();
-		move_right(m);
-		transpose();
-	}
-	
-	/**
-	*	Moves the Board in the given Direction.
-	
-	public MoveResults executeMove(Direction dir)
-	{
-		MoveResults m = new MoveResults();
-		
-		switch(dir)
-		{
-			case RIGHT:
-			{
-				move_right(m);
-			}break;
-			case LEFT:
-			{
-				move_left(m);
-			}break;
-			case UP:
-			{
-				move_up(m);
-			}break;
-			case DOWN:
-			{
-				move_down(m);
-			}break;
-		}
-		
-		
-		return m;
-	}
-	*/
 	/**
 	*	Returns whether there exist possible movements.
 	*/
