@@ -101,33 +101,36 @@ public interface GameRules
 		//ESSENTIALLY DOES THE WORK OF THE CURRENT BOARD CODE
 		Position pos = new Position();
 		int counter, i, j, size; 
-		
-		counter = rand.nextInt(board.getEmptyCells())+1;;
-		
-		i = 0;
-		size = board.getBoardSize();
-		while(i < size && counter > 0)
-		{
-			pos.setRow(i);
-			j = 0;
-			while(j < size && counter > 0)
+
+		if(board.getEmptyCells() > 0)
+		{	
+			counter = rand.nextInt(board.getEmptyCells())+1;;
+			
+			i = 0;
+			size = board.getBoardSize();
+			while(i < size && counter > 0)
 			{
-				pos.setCol(j);
-				
-				if(board.isEmptyCell(pos)) 
+				pos.setRow(i);
+				j = 0;
+				while(j < size && counter > 0)
 				{
-					if(counter > 0)	//IS THIS CHECK REALLY NECESSARY (PROB NOT)
+					pos.setCol(j);
+					
+					if(board.isEmptyCell(pos)) 
 					{
-						counter--;		
-					}				
+						if(counter > 0)	//IS THIS CHECK REALLY NECESSARY (PROB NOT)
+						{
+							counter--;		
+						}				
+					}
+					
+					j++;
 				}
-				
-				j++;
+				i++;
 			}
-			i++;
+			
+			addNewCellAt(board, pos, rand);
 		}
-		
-		addNewCellAt(board, pos, rand);
 		
 	}
 	
