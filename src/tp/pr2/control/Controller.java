@@ -74,10 +74,12 @@ public class Controller
 				System.out.print("Command > ");
 				cmdWords = in.nextLine().toLowerCase().split("\\s+");
 				cmd = CommandParser.parseCommand(cmdWords, this);
-				if(cmd == null) {
+				if(cmd == null) 
+				{
 					System.out.println("Not a valid command!");
 				}
-				else {
+				else 
+				{
 					cmd.execute(game, this);
 				}
 				
@@ -94,7 +96,8 @@ public class Controller
 	/**
 	 * Changes the exit value to true. The main loop will stop after this iteration.
 	 */
-	public void exit() {
+	public void exit() 
+	{
 		//This function is only called by ExitCommand.execute(), which is
 		//in turn called from the main loop of this class. The loop checks
 		//exit just after calling execute(), stopping the game.
@@ -104,19 +107,22 @@ public class Controller
 	/**
 	 * Returns the PRNG seed introduced at the start of the game.
 	 */
-	public long getSeed() {
+	public long getSeed() 
+	{
 		return seed;
 	}
 
 	/**
 	 * Provides access to the scanner.
 	 */
-	public Scanner getScanner() {
+	public Scanner getScanner() 
+	{
 		//Needed by PlayCommand to read input
 		return this.in;
 	}
 
-	public void setGame(GameRules rules, int size, int initCells, long seed) {
+	public void setGame(GameRules rules, int size, int initCells, long seed) 
+	{
 		game = new Game(rules, size, initCells, seed);
 		this.seed = seed;
 

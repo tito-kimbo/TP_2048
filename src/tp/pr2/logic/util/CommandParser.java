@@ -15,7 +15,7 @@ public class CommandParser {
 	private static Command[] availableCommands = { new HelpCommand(), new ResetCommand(), new ExitCommand(), new MoveCommand(), new UndoCommand(), new RedoCommand(), new PlayCommand()};
 	
 	/**
-	* Searches the available commands and returns an instance of the matching Command
+	* Searches the available commands and returns an instance of the matching Command.
 	*/
 	public static Command parseCommand(String[] commandWords, Controller controller) {
 		Command result = null, aux = null;
@@ -27,7 +27,7 @@ public class CommandParser {
 	}
 
 	/**
-	* Searches the available commands and returns the help text of the matching Command
+	* Searches the available commands and returns the help text of the matching Command.
 	*/
 	public static String commandHelp(String[] commandWords, Controller controller) {
 		String help = "";

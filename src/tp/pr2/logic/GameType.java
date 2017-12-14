@@ -33,13 +33,15 @@ public enum GameType
 				s = "inverse";
 			} break;
 		}
+		
 		return s;
 	}
 
 	/**
 	 * Returns the rules associated with this game.
 	 */
-	public GameRules toRules() {
+	public GameRules toRules() 
+	{
 		GameRules rules = null;
 		
 		switch(this)
@@ -59,6 +61,8 @@ public enum GameType
 				rules = new RulesInverse();
 			} break;
 		}
+		
 		return rules;
 	}
+	
 };

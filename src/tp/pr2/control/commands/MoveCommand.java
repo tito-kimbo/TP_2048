@@ -9,9 +9,8 @@ import tp.pr2.logic.Board;
 import tp.pr2.logic.GameState;
 
 /**
- * Contains the information of the command Move
+ * Contains the information and implementation of the command Move.
  */
-
 public class MoveCommand extends Command
 {
 	private static final String moveHelp = "Move <direction>: Execute a move in one of the directions: up, down, left, right.";
@@ -19,6 +18,11 @@ public class MoveCommand extends Command
 	
 	private Direction direction;
 	
+	/**
+	 * Calls the constructor of the superclass to create a command
+	 * with the info corresponding to the move command. Also initializes non-static 
+	 * variables.
+	 */
 	public MoveCommand()
 	{
 		super(commandInfo, moveHelp);
@@ -26,16 +30,18 @@ public class MoveCommand extends Command
 	}
 	
 	/**
-	 * Executes the "move" commands, given the parameters are correct
+	 * Executes the "move" commands, given the parameters are correct.
 	 */
 	public void execute(Game game, Controller controller)
 	{
-		if(direction != null) {
+		if(direction != null) 
+		{
 			
 			MoveResults results = new MoveResults();
 			GameState currentState = game.getState();
 			Board b = game.getBoard();
-			switch(direction) {
+			switch(direction) 
+			{
 			case RIGHT:
 				{
 					move_right(game, results);
@@ -67,7 +73,8 @@ public class MoveCommand extends Command
 			
 			controller.setNoPrintGameState(true);
 		}
-		else {
+		else 
+		{
 			controller.setNoPrintGameState(false);
 			System.out.println("Not a valid direction!");
 		}
@@ -81,7 +88,8 @@ public class MoveCommand extends Command
 		Command ret = null;
 	        Direction dir = null;
 		
-		if(commandWords.length == 2 && commandWords[0].equals("move")) {
+		if(commandWords.length == 2 && commandWords[0].equals("move")) 
+		{
 			ret = this;
 			for(Direction d : Direction.values())
 			{

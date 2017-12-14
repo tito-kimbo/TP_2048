@@ -140,43 +140,6 @@ public class Board
 			}
 		}
 	}
-	
-	/**
-	*	Returns whether there exist possible movements.
-	*/
-	public boolean isStuck() 
-	{
-		boolean stuck = true;
-		int i = 0, j;
-
-		if(_emptyCells == 0) 
-		{
-			while(stuck && i < _boardSize) 
-			{
-				j = 0;
-				
-				while(stuck && j < _boardSize) 
-				{
-					//Checks for a non-empty element to the right or below (if applicable ~ not out of bounds) for each cell in the board
-					if( (j+1 < _boardSize && _board[i][j].getVal() == _board[i][j+1].getVal()) || (i+1 < _boardSize && _board[i][j].getVal() == _board[i+1][j].getVal()))
-					{
-							stuck = false;
-					}
-					
-					j++;
-				}
-				
-				i++;
-			}
-		}
-		else
-		{
-			stuck = false;
-		}	
-		
-		return stuck;
-	}
-
 
 	/**
 	*	Returns the Board as a String.

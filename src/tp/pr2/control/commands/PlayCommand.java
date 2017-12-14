@@ -19,22 +19,26 @@ public class PlayCommand extends Command
 	private static final String askForCells = "Please enter the number of initial cells: ";
 	private static final String askForSeed = "Please enter the initial seed: ";
 	
-	
 	private GameType type = null;
 
 	private int size, cells;
 	private long seed;
 
 	/**
-	 * Changes the game type, prompting the user for initial parameters.
+	 * Calls the constructor of the superclass to create a command
+	 * with the info corresponding to the play command. Also initializes non-static variables.
 	 */
 	public PlayCommand()
 	{
 		super(commandInfo, playHelp);
 		type = null;
 	}
-
-	public void execute(Game game, Controller controller) {
+	
+	/**
+	 * Changes the current game based on the user-given parameters.
+	 */
+	public void execute(Game game, Controller controller) 
+	{
 		if(type != null) 
 		{
 			Scanner in = controller.getScanner();
@@ -98,7 +102,7 @@ public class PlayCommand extends Command
 	}
 
 	/**
-	 * Parses the play command
+	 * Parses the play command, taking into account.
 	 */
 	public Command parse(String [] commandWords, Controller controller) 
 	{
@@ -118,5 +122,5 @@ public class PlayCommand extends Command
 		type = gameType;
 		return com;
 	}
-
+	
 };
