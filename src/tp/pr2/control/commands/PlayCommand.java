@@ -54,10 +54,12 @@ public class PlayCommand extends Command
 				
 				if(!line.equals(""))
 				{
-					if(line.matches("[0123456789]+")) {
+					if(line.matches("[0123456789]+")) 
+					{
 						size = Integer.parseInt(line);
 					}
-					else {
+					else 
+					{
 						System.out.println("Please introduce a single positive integer");
 					}
 
@@ -76,10 +78,12 @@ public class PlayCommand extends Command
 				
 				if(!line.equals("")) 
 				{
-					if(line.matches("[0123456789]+")) {
+					if(line.matches("[0123456789]+")) 
+					{
 						cells = Integer.parseInt(line);
 					}
-					else {
+					else 
+					{
 						System.out.println("Please introduce a single positive integer");
 					}
 			
@@ -95,12 +99,14 @@ public class PlayCommand extends Command
 			line = in.nextLine();
 			if(!line.equals("")) 
 			{
-				if(line.matches("-*[0123456789]+")) {
+				if(line.matches("-*[0123456789]+")) 
+				{
 						seed = Long.parseLong(line);
-					}
-					else {
+				}
+				else 
+				{
 						System.out.println("Please introduce a single integer");
-					}			
+				}			
 			}
 			else 
 			{
