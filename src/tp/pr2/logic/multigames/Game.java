@@ -8,7 +8,7 @@ import tp.pr2.logic.Cell;
 import java.util.Random;
 
 /**
-*	Stores the current state of the game.
+*	Stores the current state of the game and contains useful methods for its management.
 */
 public class Game
 {
@@ -179,14 +179,16 @@ public class Game
 	/**
 	 * Checks if the player has won the game.
 	 */
-	public boolean win() {
+	public boolean win() 
+	{
 		return _currentRules.win(_board);
 	}
 
 	/**
 	 * Merges the second Cell into the first one and returns the resulting score.
 	 */
-	public int merge(Cell c1, Cell c2) {
+	public int merge(Cell c1, Cell c2) 
+	{
 		return _currentRules.merge(c1, c2);
 	}
 	

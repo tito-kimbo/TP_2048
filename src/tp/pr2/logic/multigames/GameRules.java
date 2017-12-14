@@ -6,39 +6,45 @@ import tp.pr2.logic.Position;
 import java.util.Random;
 
 /**
- * Sets a general scheme for making the rules for a 2048-like game
+ * Sets a general scheme for making the rules for a 2048-like game.
  */
 
 public interface GameRules 
 {
 	
 	/**
-	 *	Adds a new cell with random value at the given Position in the given Board
+	 *	Adds a new cell with random value at the given Position in the given Board.
 	 **/
 	void addNewCellAt(Board board, Position pos, Random rand);
 	
 	/**
-	 * Returns whether the cells can be merged based on the current rules
+	 * Returns whether the cells can be merged based on the current rules.
 	 */
 	boolean canMerge(Cell self, Cell other);
+	/*As a side note, this implementation could have been defaulted, but we considered
+	* it unnecessary, given it would only be useful with analogous rules to 2048. That
+	* is, it does not work for suffficiently different rules.
+	* 
+	* (See FibonacciRules implementation)
+	*/
 	
 	/**
-	 * Merges two cells and returns the score value of said merge
+	 * Merges two cells and returns the score value of said merge.
 	 */
 	int merge(Cell self, Cell other);
 	
 	/**
-	 * Returns the best value of the Board, checking whether it is a winning value
+	 * Returns the best value of the Board, checking whether it is a winning value.
 	 */
 	int getWinValue(Board board);
 	
 	/**
-	 * Returns whether the game has been won
+	 * Returns whether the game has been won.
 	 */
 	boolean win(Board board);
 	
 	/**
-	 * Returns whether the game has been lost
+	 * Returns whether the game has been lost.
 	 */
 	default boolean lose(Board board)
 	{
@@ -89,7 +95,7 @@ public interface GameRules
 	}
 	
 	/**
-	 * Creates and returns a Board of the given size
+	 * Creates and returns a Board of the given size.
 	 */
 	default Board createBoard(int size)
 	{
@@ -100,7 +106,7 @@ public interface GameRules
 	
 	/**
 	 * Chooses an empty position of Board and and adds a new cell invoking 
-	 * the method addNewCellAt
+	 * the method addNewCellAt.
 	 */
 	default void addNewCell(Board board, Random rand)
 	{

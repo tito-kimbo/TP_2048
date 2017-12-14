@@ -7,10 +7,16 @@ import tp.pr2.logic.Cell;
 import tp.pr2.logic.Position;
 import tp.pr2.util.MyMathsUtil;
 
+/**
+ * Sets the standard rules for the Fibonacci 2048-like game.
+ */
 public class RulesFib implements GameRules
 {
 	private static final int winnerValue = 144;
 	
+	/**
+	 * Creates a 1 or 2 at the given position with 90%, 10% probability respectively
+	 */
 	public void addNewCellAt(Board board, Position pos, Random rand)
 	{
 		//Creates 1 with 90% probability and 2 with 10%
@@ -27,6 +33,10 @@ public class RulesFib implements GameRules
 		board.setEmptyCells(board.getEmptyCells()-1);
 	}
 	
+	/**
+	 * Returns whether the given cells can be merged. This is, if they are consecutive in
+	 * the Fibonacci sequence.
+	 */
 	public boolean canMerge(Cell self, Cell other)
 	{
 		int selfVal, otherVal, selfNextFib, otherNextFib;
@@ -40,6 +50,10 @@ public class RulesFib implements GameRules
 			   (otherVal == selfNextFib ||	(selfVal == otherNextFib)));
 	}
 	
+	/**
+	 * If possible, merges 2 cells and returns the score (The sum of the scores of the two
+	 * given cells).
+	 */
 	public int merge(Cell self, Cell other)
 	{
 		//Careful -> 1 and 1 should merge to 2
@@ -56,6 +70,9 @@ public class RulesFib implements GameRules
 		return val;
 	}
 	
+	/**
+	 * Returns the highest value on the board.
+	 */
 	public int getWinValue(Board board)
 	{
 		//HIGHEST
@@ -80,6 +97,9 @@ public class RulesFib implements GameRules
 		return max;
 	}
 	
+	/**
+	 * Returns whether the best value of the board is 144.
+	 */
 	public boolean win(Board board)
 	{
 		boolean b;

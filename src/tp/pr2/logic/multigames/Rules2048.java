@@ -7,15 +7,17 @@ import tp.pr2.logic.Cell;
 import tp.pr2.logic.Position;
 
 /**
- * Sets the standard rules for the regular 2048 game
+ * Sets the standard rules for the regular 2048 game.
  */
 public class Rules2048 implements GameRules
 {
 	private static final int winnerValue = 2048;
 	
+	/**
+	 * Creates a 2 or 4 at the given position with 90%, 10% probability respectively
+	 */
 	public void addNewCellAt(Board board, Position pos, Random rand)
 	{
-		//GENERATES RANDOMLY 2 or 4 WITH 90%,10% RESPECTIVELY
 		int val = rand.nextInt(10);
 		if(val == 0)
 		{
@@ -29,11 +31,17 @@ public class Rules2048 implements GameRules
 		board.setEmptyCells(board.getEmptyCells()-1);
 	}
 	
+	/**
+	 * Returns whether the given cells can be merged. This is, if they are equal.
+	 */
 	public boolean canMerge(Cell self, Cell other)
 	{
 		return (!self.isEmpty() && self.getVal() == other.getVal());
 	}
 	
+	/**
+	 * If possible, merges 2 cells and returns the score (two times the value of the cells).
+	 */
 	public int merge(Cell self, Cell other)
 	{
 		//We will suppose the cells are neighbors
@@ -51,6 +59,9 @@ public class Rules2048 implements GameRules
 		return val;
 	}
 	
+	/**
+	 * Returns the highest value on the board.
+	 */
 	public int getWinValue(Board board)
 	{
 		//HIGHEST
@@ -75,6 +86,9 @@ public class Rules2048 implements GameRules
 		return max;
 	}
 	
+	/**
+	 * Returns whether the best value of the board is 2048.
+	 */
 	public boolean win(Board board)
 	{
 		boolean b;
