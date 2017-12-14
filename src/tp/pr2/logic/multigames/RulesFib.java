@@ -36,8 +36,8 @@ public class RulesFib implements GameRules
 		selfNextFib = MyMathsUtil.nextFib(selfVal);
 		otherNextFib = MyMathsUtil.nextFib(otherVal);
 		
-		return (!self.isEmpty()) && (selfVal == otherVal && selfVal == 1) || 
-				(otherVal == selfNextFib ||	(selfVal == otherNextFib));
+		return (!self.isEmpty()) && ((selfVal == otherVal && selfVal == 1) || 
+			   (otherVal == selfNextFib ||	(selfVal == otherNextFib)));
 	}
 	
 	public int merge(Cell self, Cell other)

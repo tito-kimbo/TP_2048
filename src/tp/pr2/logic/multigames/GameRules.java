@@ -5,6 +5,10 @@ import tp.pr2.logic.Board;
 import tp.pr2.logic.Position;
 import java.util.Random;
 
+/**
+ * Sets a general scheme for making the rules for a 2048-like game
+ */
+
 public interface GameRules 
 {
 	
@@ -56,11 +60,13 @@ public interface GameRules
 			while(stuck && i < size)
 			{
 				j = 0;
+				currentCell.setRow(i);
 				rightNeighbor.setRow(i);
 				downNeighbor.setRow(i+1);
 				
 				while(stuck && j < size)
 				{
+					currentCell.setCol(j);
 					rightNeighbor.setCol(j+1);
 					downNeighbor.setCol(j);
 					
