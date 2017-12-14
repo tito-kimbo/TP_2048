@@ -61,8 +61,8 @@ public interface GameRules
 				
 				while(stuck && j < size)
 				{
-					rightNeighbor.setRow(j+1);
-					downNeighbor.setRow(j);
+					rightNeighbor.setCol(j+1);
+					downNeighbor.setCol(j);
 					
 					//Checks whether each cell can merge with its right or down neighbor
 					stuck = !(  (j+1 < size && canMerge(board.getCell(currentCell), board.getCell(rightNeighbor)) )
