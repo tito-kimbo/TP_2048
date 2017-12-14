@@ -14,13 +14,17 @@ public interface GameRules
 	void addNewCellAt(Board board, Position pos, Random rand);
 	
 	/**
+	 * Returns whether the cells can be merged based on the current rules
+	 */
+	boolean canMerge(Cell self, Cell other);
+	
+	/**
 	 * Merges two cells and returns the score value of said merge
 	 */
 	int merge(Cell self, Cell other);
 	
 	/**
 	 * Returns the best value of the Board, checking whether it is a winning value
-	 * (?????????????????????????????????????????????????????????????????????????)
 	 */
 	int getWinValue(Board board);
 	
@@ -34,8 +38,48 @@ public interface GameRules
 	 */
 	default boolean lose(Board board)
 	{
-		//IMPLEMENT -> is stuck
-		return board.isStuck(); //??????????????????? - MIGHT NEED REIMPLEMENTATION
+		int emptyCells, i, j, size;
+		Position currentCell, rightNeighbor, downNeighbor;
+		boolean stuck;
+		
+		emptyCells = board.getEmptyCells();
+		i = 0;
+		j = 0;
+		stuck = true;
+		size = board.getBoardSize();
+		currentCell = new Position();
+		rightNeighbor = new Position();
+		downNeighbor = new Position();
+		
+		if(emptyCells == 0)
+		{
+			while(stuck && i < size)
+			{
+				j = 0;
+				rightNeighbor.setRow(i);
+				downNeighbor.setRow(i+1);
+				
+				while(stuck && j < size)
+				{
+					rightNeighbor.setRow(j+1);
+					downNeighbor.setRow(j);
+					
+					//Checks whether each cell can merge with its right or down neighbor
+					stuck = !(  (j+1 < size && canMerge(board.getCell(currentCell), board.getCell(rightNeighbor)) )
+							||  (i+1 < size && canMerge(board.getCell(currentCell), board.getCell(downNeighbor)) ) );
+					
+					j++;
+				}
+				
+				i++;
+			}
+		}
+		else
+		{
+			stuck = false;
+		}
+		
+		return stuck;
 	}
 	
 	/**

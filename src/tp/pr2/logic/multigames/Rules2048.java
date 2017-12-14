@@ -29,12 +29,17 @@ public class Rules2048 implements GameRules
 		board.setEmptyCells(board.getEmptyCells()-1);
 	}
 	
+	public boolean canMerge(Cell self, Cell other)
+	{
+		return (!self.isEmpty() && self.getVal() == other.getVal());
+	}
+	
 	public int merge(Cell self, Cell other)
 	{
 		//We will suppose the cells are neighbors
 		int val = 0;
 		
-		if(!self.isEmpty() && self.getVal() == other.getVal())
+		if(canMerge(self, other))
 		{
 			val = 2*self.getVal();
 			//NOW WE MERGE

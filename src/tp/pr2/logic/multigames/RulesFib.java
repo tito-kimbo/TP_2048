@@ -27,25 +27,27 @@ public class RulesFib implements GameRules
 		board.setEmptyCells(board.getEmptyCells()-1);
 	}
 	
+	public boolean canMerge(Cell self, Cell other)
+	{
+		int selfVal, otherVal, selfNextFib, otherNextFib;
+		
+		selfVal = self.getVal();
+	    otherVal = other.getVal();
+		selfNextFib = MyMathsUtil.nextFib(selfVal);
+		otherNextFib = MyMathsUtil.nextFib(otherVal);
+		
+		return (!self.isEmpty()) && (selfVal == otherVal && selfVal == 1) || 
+				(otherVal == selfNextFib ||	(selfVal == otherNextFib));
+	}
+	
 	public int merge(Cell self, Cell other)
 	{
 		//Careful -> 1 and 1 should merge to 2
 		//else simply check with MyMathUtils
-		int val = 0, selfVal = self.getVal(), otherVal = other.getVal();
-		int selfNextFib, otherNextFib;
+		int val = 0;
 		
-		selfNextFib = MyMathsUtil.nextFib(selfVal);
-		otherNextFib = MyMathsUtil.nextFib(otherVal);
-		
-		//CHECK FORMAT
-		if(
-		        (!self.isEmpty()) && 
-			(selfVal == otherVal && selfVal == 1) || 
-			(otherVal == selfNextFib ||
-			(selfVal == otherNextFib)) 
-		  )
+		if(canMerge(self, other))
 		{
-	        
 			val = self.getVal() + other.getVal(); //CORRECTO?
 			self.setVal(val);
 			other.setVal(0);

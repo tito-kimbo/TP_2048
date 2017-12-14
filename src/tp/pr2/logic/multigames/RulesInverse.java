@@ -26,11 +26,16 @@ public class RulesInverse implements GameRules
 		board.setEmptyCells(board.getEmptyCells()-1);
 	}
 	
+	public boolean canMerge(Cell self, Cell other)
+	{
+		return (!self.isEmpty() && self.getVal() == other.getVal());
+	}
+	
 	public int merge(Cell self, Cell other)
 	{
 		int val = 0;
 
-		if(!self.isEmpty() && self.getVal() == other.getVal())
+		if(canMerge(self, other))
 		{
 			val = 4*(2048/self.getVal());
 
