@@ -95,7 +95,7 @@ public class PlayCommand extends Command
 						seed = Long.parseLong(line);
 					}
 					else {
-						System.out.println("Please introduce a single positive integer");
+						System.out.println("Please introduce a single integer");
 					}			
 			}
 			else 
