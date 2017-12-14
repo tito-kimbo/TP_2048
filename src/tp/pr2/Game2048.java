@@ -45,7 +45,7 @@ public class Game2048
 		
 		if(args.length <= 3) 
 		{
-			if(size == 0) { size = DEFAULT_SIZE; }
+			if(size <= 0) { size = DEFAULT_SIZE; }
 			if(initCells <= 0) { initCells = DEFAULT_INIT_CELLS; }
 			
 			Controller controller = new Controller(rules, size, initCells, seed);			  		
