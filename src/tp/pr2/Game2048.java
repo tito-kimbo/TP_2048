@@ -19,25 +19,29 @@ public class Game2048
 	*/
     public static void main(String[] args)
 	{
-		int size = DEFAULT_SIZE, initCells  = DEFAULT_INIT_CELLS;
+		String sizeStr = "", initCellsStr = "", seedStr = "";
+		int size = DEFAULT_SIZE, initCells = DEFAULT_INIT_CELLS;
 		long seed = DEFAULT_SEED;
 
 		switch(args.length) {
 		case 0: {} break;
 		case 1: 
 		{			
-			size = Integer.parseInt(args[0]);
+			sizeStr = args[0];
 		} break;
+
 		case 2: {
-			size = Integer.parseInt(args[0]);
-			initCells = Integer.parseInt(args[1]);
+			sizeStr = args[0];
+			initCellsStr = args[1];
 		} break;
+
 		case 3: {
-			size = Integer.parseInt(args[0]);
-			initCells = Integer.parseInt(args[1]);
-			seed = Long.parseLong(args[2]);
+			sizeStr = args[0];
+			initCellsStr = args[1];
+			seedStr = args[2];
 		} break;
 		default:
+
 		{
 			System.out.println("Too many arguments");
 		}
@@ -45,8 +49,42 @@ public class Game2048
 		
 		if(args.length <= 3) 
 		{
-			if(size <= 0) { size = DEFAULT_SIZE; }
-			if(initCells <= 0) { initCells = DEFAULT_INIT_CELLS; }
+			if(sizeStr.length() > 0)
+			{
+				if(sizeStr.matches("[0123456789]+")) { size = Integer.parseInt(sizeStr); }
+				else {size = 0;}
+
+				if(size == 0)
+				{
+				System.out.println("Not a valid size, using default value " + DEFAULT_SIZE);
+				size = DEFAULT_SIZE;
+				}
+			}
+
+			
+
+			if(initCellsStr.length() > 0)
+			{
+				if(initCellsStr.matches("[0123456789]+")) { initCells = Integer.parseInt(initCellsStr); }
+				else {initCells = 0;}
+
+				if(initCells == 0)
+				{
+				System.out.println("Not a valid number, using default value " + DEFAULT_INIT_CELLS);
+				initCells = DEFAULT_INIT_CELLS;
+				}
+			}
+
+			
+
+			if(seedStr.length() > 0)
+			{
+				if(seedStr.matches("-?[0123456789]+")) { seed = Long.parseLong(seedStr); }
+				else {
+					System.out.println("Not a valid seed, using default value " + DEFAULT_SEED);
+					seed = DEFAULT_SEED;
+				}
+			}
 			
 			Controller controller = new Controller(rules, size, initCells, seed);			  		
 			controller.run();

@@ -97,22 +97,15 @@ public class PlayCommand extends Command
 
 			System.out.print(askForSeed);
 			line = in.nextLine();
-			if(!line.equals("")) 
+			if(!line.equals("") && line.matches("-?[0123456789]+")) 
 			{
-				if(line.matches("-*[0123456789]+")) 
-				{
-						seed = Long.parseLong(line);
-				}
-				else 
-				{
-						System.out.println("Please introduce a single integer");
-				}			
+				seed = Long.parseLong(line);
 			}
-			else 
-			{
+			else {
+				System.out.println("Not a valid seed");
 				seed = controller.getSeed();
 				System.out.println("Using the default seed for the PRNG: " + seed);
-			}
+			}			
 		
 			controller.setGame(type.toRules(), size, cells, seed);
 			controller.setNoPrintGameState(true);
