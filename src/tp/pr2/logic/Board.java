@@ -3,6 +3,7 @@ package tp.pr2.logic;
 import tp.pr2.logic.Position;
 import tp.pr2.logic.Cell;
 import tp.pr2.logic.util.MyStringUtils;
+import tp.pr2.logic.multigames.GameRules;
 
 /**
 *	Represents a Board of Cells and has the main movement methods.
@@ -30,6 +31,129 @@ public class Board
 				_board[i][j] = new Cell();
 			}
 		}
+	}
+
+	/**
+	*	Moves every possible Cell to the right, saving the results in a given MoveResults.
+	*/
+	
+	public void move_right(MoveResults m, GameRules rules)
+	{
+		int aux1, points;
+		Position auxPos1, auxPos2;
+		boolean merged;
+		
+		for(int i = 0; i < _boardSize; i++)
+		{
+			aux1 = _boardSize-1;
+			merged = false;		
+			
+			for(int j = _boardSize-1; j >= 0; j--)
+			{
+				auxPos1 = new Position(i, j);
+				//Moves the cell in position (i,j) to the cell in position (i, aux1)
+				//Note that either j == aux1 or (i, aux1) is empty, so that two nonempty cells will never be swapped
+				
+				if( !(isEmptyCell(auxPos1)) )
+				{
+					if(aux1 != j)
+					{
+						auxPos2 = new Position(i, aux1);
+						setCell(auxPos2, getCell(auxPos1).getVal());
+					        setCell(auxPos1, 0);
+						
+					        m.setMoved(true);
+					}
+
+					//If the cell in (i, aux1) has already been merged, do not merge again
+					
+					if(!merged && aux1 < _boardSize-1)
+					{
+						auxPos1 = new Position(i, aux1+1);
+						auxPos2 = new Position(i, aux1);
+
+						points = getCell(auxPos1).doMerge(getCell(auxPos2), rules);
+						merged = (points > 0);
+						
+						if(merged)
+						{
+							m.setPoints(m.getPoints() + points);
+							m.setMoved(true);
+							
+							_emptyCells++;
+							aux1++;
+						}
+					}
+					else
+					{
+						merged = false;
+					}
+					aux1--;
+				}
+			}
+		}
+	
+	}
+	
+	/**
+	*	Moves every possible Cell to the right, saving the results in a given MoveResults.
+	*/
+	public void move_left(MoveResults m, GameRules rules)
+	{
+		reflect();
+		move_right(m, rules);
+		reflect();
+	}
+	
+	/**
+	*	Moves every possible Cell upwards, saving the results in a given MoveResult.
+	*/
+	public void move_up(MoveResults m, GameRules rules)
+	{
+		transpose();
+		move_left(m, rules);
+		transpose();
+	}
+	
+	/**
+	*	Moves every possible Cell downwards, saving the results in a given MoveResult.
+	*/
+	public void move_down(MoveResults m, GameRules rules)
+	{
+		transpose();
+		move_right(m, rules);
+		transpose();
+	}
+	
+	/**
+	*	Moves the Board in the given Direction.
+	*/
+	public MoveResults executeMove(Direction dir, GameRules rules)
+	{
+		MoveResults m = new MoveResults();
+		
+		switch(dir)
+		{
+			case RIGHT:
+			{
+				move_right(m, rules);
+			}break;
+			case LEFT:
+			{
+				move_left(m, rules);
+			}break;
+			case UP:
+			{
+				move_up(m, rules);
+			}break;
+			case DOWN:
+			{
+				move_down(m, rules);
+			}break;
+		}
+		
+		
+		return m;
 	}
 	
 	/**

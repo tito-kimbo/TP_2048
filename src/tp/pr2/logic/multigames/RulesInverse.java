@@ -41,19 +41,17 @@ public class RulesInverse implements GameRules
 	}
 	
 	/**
-	 * If possible, merges 2 cells and returns the score (see formula in implementation).
+	 * Merges 2 cells and returns the score (see formula in implementation).
 	 */
 	public int merge(Cell self, Cell other)
 	{
 		int val = 0;
 
-		if(canMerge(self, other))
-		{
-			val = 4*(2048/self.getVal());
-
-			self.setVal(self.getVal()/2);
-			other.setVal(0);
-		}
+		val = 4*(2048/self.getVal());
+		
+		self.setVal(self.getVal()/2);
+		other.setVal(0);
+		
 		
 		return val;
 	}

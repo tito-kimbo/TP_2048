@@ -51,7 +51,7 @@ public class RulesFib implements GameRules
 	}
 	
 	/**
-	 * If possible, merges 2 cells and returns the score (The sum of the scores of the two
+	 * Merges 2 cells and returns the score (The sum of the scores of the two
 	 * given cells).
 	 */
 	public int merge(Cell self, Cell other)
@@ -59,13 +59,10 @@ public class RulesFib implements GameRules
 		//Careful -> 1 and 1 should merge to 2
 		//else simply check with MyMathUtils
 		int val = 0;
+		val = self.getVal() + other.getVal(); //CORRECTO?
+		self.setVal(val);
+		other.setVal(0);
 		
-		if(canMerge(self, other))
-		{
-			val = self.getVal() + other.getVal(); //CORRECTO?
-			self.setVal(val);
-			other.setVal(0);
-		}
 		
 		return val;
 	}

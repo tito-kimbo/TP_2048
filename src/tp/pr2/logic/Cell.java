@@ -1,7 +1,6 @@
 package tp.pr2.logic;
 
-import tp.pr2.logic.Cell;
-
+import tp.pr2.logic.multigames.GameRules;
 /**
  *	Represents a cell of the board, with a Position and a value.
  */
@@ -52,26 +51,17 @@ public class Cell
 	}
 	
 	/**
-	 *	Returns false if the neighbouring Cell is empty or its value is different from the one of the
-	 *	current Cell. Else it merges the two cells in the current one (the neighbour becomes empty)
-	 *	and returns true.
+	 *	Returns the score resulting of the merge of this cell with the neighbor cell under the
+	 *      current rules.
 	 */
-	public boolean doMerge(Cell neighbour) 
+	public int doMerge(Cell neighbor, GameRules rules) 
 	{
-		boolean done;
-		
-		if(neighbour.isEmpty() || neighbour.getVal() != value)
+		int val = 0;
+		if(rules.canMerge(this, neighbor))
 		{
-			done = false;
-		}			
-		else
-		{
-			value = 2*value;
-			neighbour.setVal(0);
-			done = true;
+			val = rules.merge(this, neighbor);
 		}
-		
-		return done;
+		return val;
 	}
 	
 	/**

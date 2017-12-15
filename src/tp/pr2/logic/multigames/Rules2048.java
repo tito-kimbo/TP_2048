@@ -40,20 +40,17 @@ public class Rules2048 implements GameRules
 	}
 	
 	/**
-	 * If possible, merges 2 cells and returns the score (two times the value of the cells).
+	 * Merges 2 cells and returns the score (two times the value of the cells).
 	 */
 	public int merge(Cell self, Cell other)
 	{
-		//We will suppose the cells are neighbors
+		//We will suppose the cells are neighbors and can be merged
 		int val = 0;
-		
-		if(canMerge(self, other))
-		{
-			val = 2*self.getVal();
-			//NOW WE MERGE
-			self.setVal(2*self.getVal());
-			other.setVal(0);
-		}
+
+	       	val = 2*self.getVal();
+	       	//NOW WE MERGE
+	       	self.setVal(2*self.getVal());
+	       	other.setVal(0);
 		
 		
 		return val;

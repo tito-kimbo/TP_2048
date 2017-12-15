@@ -5,6 +5,7 @@ import tp.pr2.logic.MoveResults;
 import tp.pr2.logic.GameState;
 import tp.pr2.logic.GameStateStack;
 import tp.pr2.logic.Cell;
+import tp.pr2.logic.Direction;
 import java.util.Random;
 
 /**
@@ -45,10 +46,12 @@ public class Game
 	}
 
 	/**
-	*	Updates the relevant information after a successful move.
+	*	Executes a move in the given direction, updating the relevant information.
 	*/
-	public void updateAfterMove(MoveResults results, GameState lastState)
+	public void move(Direction dir)
 	{
+	        GameState currentState = this.getState();
+		MoveResults results = _board.executeMove(dir, _currentRules);
 		
 		//If there was a move, updates the data, saves the previous state and clears
 		//the undone stack (you can't redo after moving)
@@ -60,7 +63,7 @@ public class Game
 			_currentRules.addNewCell(_board, _myRandom);
 
 			_winValue = _currentRules.getWinValue(_board);
-			_mainStack.push(lastState);
+			_mainStack.push(currentState);
 			_undoneStack = new GameStateStack();
 		}
 	}
