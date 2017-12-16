@@ -30,6 +30,7 @@ public class RulesInverse implements GameRules
 		}		
 		board.setCell(pos,  val);
 		board.setEmptyCells(board.getEmptyCells()-1);
+		board.updateMaxMinValue(val);
 	}
 	
 	/**
@@ -61,27 +62,7 @@ public class RulesInverse implements GameRules
 	 */
 	public int getWinValue(Board board)
 	{
-		//LOWEST (ABOVE 0)
-		
-		int min = 2048, aux = 2048;
-		Position pos = new Position();
-		
-		for(int i = 0; i < board.getBoardSize(); i++)
-		{
-			pos.setRow(i);
-			for(int j = 0; j < board.getBoardSize(); j++)
-			{
-				pos.setCol(j);
-				aux = board.getCell(pos).getVal();
-				
-				if(aux > 0 && aux < min)
-				{
-					min = aux;
-				}
-			}
-		}
-		
-		return min;
+		return board.getMinValue();
 	}
 	
 	/**

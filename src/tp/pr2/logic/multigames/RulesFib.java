@@ -31,6 +31,7 @@ public class RulesFib implements GameRules
 		}		
 		board.setCell(pos,  val);
 		board.setEmptyCells(board.getEmptyCells()-1);
+		board.updateMaxMinValue(val);
 	}
 	
 	/**
@@ -72,26 +73,7 @@ public class RulesFib implements GameRules
 	 */
 	public int getWinValue(Board board)
 	{
-		//HIGHEST
-		int max = 1, aux = 1;
-		Position pos = new Position();
-		
-		for(int i = 0; i < board.getBoardSize(); i++)
-		{
-			pos.setRow(i);
-			for(int j = 0; j < board.getBoardSize(); j++)
-			{
-				aux = board.getCell(pos).getVal();
-				pos.setCol(j);
-				
-				if(aux > max)
-				{
-					max = aux;
-				}
-			}
-		}
-		
-		return max;
+		return board.getMaxValue();
 	}
 	
 	/**

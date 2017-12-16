@@ -50,7 +50,7 @@ public class Game
 	*/
 	public void move(Direction dir)
 	{
-	        GameState currentState = this.getState();
+	    GameState currentState = this.getState();
 		MoveResults results = _board.executeMove(dir, _currentRules);
 		
 		//If there was a move, updates the data, saves the previous state and clears
@@ -58,10 +58,8 @@ public class Game
 		if(results.getMoved()) 
 		{
 			_score += results.getPoints();
-						
-			//newCell();
+			
 			_currentRules.addNewCell(_board, _myRandom);
-
 			_winValue = _currentRules.getWinValue(_board);
 			_mainStack.push(currentState);
 			_undoneStack = new GameStateStack();

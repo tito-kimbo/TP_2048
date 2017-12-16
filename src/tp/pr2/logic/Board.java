@@ -13,7 +13,8 @@ public class Board
 {
 	private Cell[][] _board; 
 	private int _boardSize; 
-	private int _emptyCells;		
+	private int _emptyCells;	
+	private int minValue, maxValue;
 	
 	/**
 	* Creates a new Board of the given size, initializing all of its Cells to empty Cells.
@@ -23,6 +24,8 @@ public class Board
 		_boardSize = size;
 		_board = new Cell[_boardSize][_boardSize];
 		_emptyCells = _boardSize*_boardSize;
+		minValue = Integer.MAX_VALUE;
+		maxValue = Integer.MIN_VALUE;
 
 		for(int i = 0; i < _boardSize; i++)
 		{
@@ -78,7 +81,10 @@ public class Board
 						if(merged)
 						{
 							m.setPoints(m.getPoints() + points);
+							m.setMaxToken(getCell(auxPos1).getVal());
 							m.setMoved(true);
+							
+							updateMaxMinValue(m.getMaxToken());
 							
 							_emptyCells++;
 							aux1++;
@@ -206,6 +212,22 @@ public class Board
 	{
 		return _boardSize;
 	}
+	
+	/**
+	 * Returns the maximum value of the Board.
+	 */
+	public int getMaxValue()
+	{
+		return maxValue;
+	}
+	
+	/**
+	 * Returns the minimum value of the Board.
+	 */
+	public int getMinValue()
+	{
+		return minValue;
+	}
 
 	/**
 	 * Returns a representation of the board as a matrix of integers.
@@ -217,6 +239,23 @@ public class Board
 			for(int j = 0; j < _boardSize; j++)
 				state[i][j] = _board[i][j].getVal();
 		return state;
+	}
+	
+	/**
+	 * Given a value, checks whether it is larger than the current maximum or smaller
+	 * than the current minimum and updates them accordingly.
+	 */
+	public void updateMaxMinValue(int val)
+	{
+		if(val > maxValue)
+		{
+			maxValue = val;
+		}
+		
+		if(val < minValue)
+		{
+			minValue = val;
+		}
 	}
 
 	/**
