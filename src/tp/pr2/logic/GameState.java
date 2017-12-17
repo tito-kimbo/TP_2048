@@ -52,7 +52,7 @@ public class GameState
 	}
 
 	/**
-	 * Stores que game score.
+	 * Stores the game score.
 	 */
 	public void setScore(int s)
 	{

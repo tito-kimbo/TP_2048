@@ -5,7 +5,7 @@ import java.util.Random;
 import tp.pr2.logic.Board;
 import tp.pr2.logic.Cell;
 import tp.pr2.logic.Position;
-import tp.pr2.util.MyMathsUtil;
+import tp.pr2.logic.util.MyMathsUtil;
 
 /**
  * Sets the standard rules for the Fibonacci 2048-like game.
@@ -60,7 +60,7 @@ public class RulesFib implements GameRules
 		//Careful -> 1 and 1 should merge to 2
 		//else simply check with MyMathUtils
 		int val = 0;
-		val = self.getVal() + other.getVal(); //CORRECTO?
+		val = self.getVal() + other.getVal();
 		self.setVal(val);
 		other.setVal(0);
 		

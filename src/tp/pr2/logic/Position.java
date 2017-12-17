@@ -92,9 +92,9 @@ public class Position
     }
 
 	/**
-	*	Returns the neighbouring Position if it exists, else returns the current Position.
+	*	Returns the neighboring Position if it exists, else returns the current Position.
 	*/
-    public Position neighbour(Direction dir, int size) 
+    public Position neighbor(Direction dir, int size) 
 	{
 		Position newPos = new Position(row, column);
 		
