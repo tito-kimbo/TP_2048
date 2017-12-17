@@ -47,7 +47,7 @@ public class MoveCommand extends Command
 	 * Parses the "move" command.
 	 */
 	public Command parse(String[] commandWords, Controller controller)
-	{
+	{ 
 		Command ret = null;
 	        Direction dir = null;
 		

@@ -7,14 +7,14 @@ import tp.pr2.logic.GameType;
 import tp.pr2.logic.multigames.Game;
 
 /**
- * Contains the information of the command play.
+ * Contains the information and implementation of the command play.
  */
 public class PlayCommand extends Command
 {
 
 	private static final int DEFAULT_SIZE = 4, DEFAULT_CELLS = 2;
 
-	private static final String playHelp = "Play <game>: Change play mode to one of the following: original, fibonacci and inverse.", commandInfo = "play";
+	private static final String playHelp = "Play <game>: Change play mode to one of the following: original, fib and inverse.", commandInfo = "play";
 	private static final String askForSize = "Please enter the size of the board: ";
 	private static final String askForCells = "Please enter the number of initial cells: ";
 	private static final String askForSeed = "Please enter the initial seed: ";
@@ -97,12 +97,15 @@ public class PlayCommand extends Command
 
 			System.out.print(askForSeed);
 			line = in.nextLine();
-			if(!line.equals("") && line.matches("-?[0123456789]+")) 
+			if(line.matches("-?[0123456789]+")) 
 			{
 				seed = Long.parseLong(line);
 			}
 			else {
-				System.out.println("Not a valid seed");
+				if(!line.equals(""))
+				{
+					System.out.println("Not a valid seed");
+				}
 				seed = controller.getSeed();
 				System.out.println("Using the default seed for the PRNG: " + seed);
 			}			

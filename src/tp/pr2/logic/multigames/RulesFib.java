@@ -5,7 +5,7 @@ import java.util.Random;
 import tp.pr2.logic.Board;
 import tp.pr2.logic.Cell;
 import tp.pr2.logic.Position;
-import tp.pr2.util.MyMathsUtil;
+import tp.pr2.logic.util.MyMathsUtil;
 
 /**
  * Sets the standard rules for the Fibonacci 2048-like game.

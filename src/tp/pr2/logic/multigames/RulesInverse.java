@@ -48,7 +48,7 @@ public class RulesInverse implements GameRules
 	{
 		int val = 0;
 
-		val = 4*(2048/self.getVal());
+		val = 2*(2048/self.getVal());
 		
 		self.setVal(self.getVal()/2);
 		other.setVal(0);
