@@ -12,7 +12,7 @@ import tp.pr2.util.MyMathsUtil;
  */
 public class RulesFib implements GameRules
 {
-	private static final int winnerValue = 144;
+	private static final int WINVALUE = 144;
 	
 	/**
 	 * Creates a 1 or 2 at the given position with 90%, 10% probability respectively
@@ -83,7 +83,7 @@ public class RulesFib implements GameRules
 	{
 		boolean b;
 		
-		if(getWinValue(board) == winnerValue)
+		if(getWinValue(board) == WINVALUE)
 		{
 			b = true;
 		}

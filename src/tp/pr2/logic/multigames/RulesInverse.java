@@ -11,7 +11,7 @@ import tp.pr2.logic.Position;
  */
 public class RulesInverse implements GameRules
 {
-	private static final int winnerValue = 2;
+	private static final int WINVALUE = 2;
 	
 	/**
 	 * Creates a 2048 or 1024 at the given position with 90%, 10% probability respectively.
@@ -72,7 +72,7 @@ public class RulesInverse implements GameRules
 	{
 		boolean b;
 		
-		if(getWinValue(board) == winnerValue)
+		if(getWinValue(board) == WINVALUE)
 		{
 			b = true;
 		}
