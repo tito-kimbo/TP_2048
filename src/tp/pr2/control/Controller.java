@@ -44,13 +44,7 @@ public class Controller
 	{
 		print = b;
 	}
-	
-	public void setExit(boolean b)
-	{
-		exit = b;
-	}
-	
-	
+   	
 	/**
 	*	Main loop of the program. Reads input, writes output and checks if the game is over.
 	**/
@@ -121,6 +115,9 @@ public class Controller
 		return this.in;
 	}
 
+	/**
+	 * Changes the current game to the specified type.
+	 */
 	public void setGame(GameRules rules, int size, int initCells, long seed) 
 	{
 		game = new Game(rules, size, initCells, seed);
