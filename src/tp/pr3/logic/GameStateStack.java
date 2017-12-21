@@ -1,6 +1,7 @@
 package tp.pr3.logic;
 
 import tp.pr3.logic.GameState;
+import tp.pr3.exceptions.CustomEmptyStackException;
 
 /**
  * Stores a list of GameStates with a finite capacity.
@@ -30,13 +31,18 @@ public class GameStateStack
 	/**
 	 * Returns the last saved state, unless the stack is empty.
 	 */
-	public GameState pop()
+	public GameState pop() throws CustomEmptyStackException
 	{
 		GameState last = null;
-		if(size > 0) {
+		if(size > 0)
+		{
 			last = stack[lastIndex];
 			lastIndex = (CAPACITY+lastIndex-1)%CAPACITY;
 			size--;
+		}
+		else
+		{
+			throw new CustomEmptyStackException();
 		}
 		return last;
 	}

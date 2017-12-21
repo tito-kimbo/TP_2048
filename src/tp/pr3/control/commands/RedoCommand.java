@@ -25,14 +25,7 @@ public class RedoCommand extends NoParamsCommand
 	 */
 	public void execute(Game game, Controller controller)
 	{
-		if(game.redo()) {
-			System.out.println("Redoing move...");
-			controller.setNoPrintGameState(true);
-		}
-		else {
-			System.out.println("Nothing to redo");
-			controller.setNoPrintGameState(false);
-		}
+		game.redo();
 	}
 
 }

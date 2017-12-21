@@ -8,6 +8,7 @@ import tp.pr3.logic.GameStateStack;
 import tp.pr3.logic.MoveResults;
 
 import java.util.Random;
+import tp.pr3.exceptions.CustomEmptyStackException;
 
 /**
 *	Stores the current state of the game and contains useful methods for its management.
@@ -90,35 +91,37 @@ public class Game
 	/**
 	 * Loads the previous saved state and saves the current one (for redo).
 	 */
-	public boolean undo()
+	public void undo() throws CustomEmptyStackException
 	{
 		GameState state;
-		boolean result;
-		if(!_mainStack.isEmpty()) {
+		try
+		{
 			state = _mainStack.pop();
 			_undoneStack.push(this.getState());
-			this.setState(state);
-			result = true;
+			this.setState(state);	
 		}
-		else result = false;
-		return result;
+		catch(CustomEmptyStackException e)
+		{
+			throw new CustomEmptyStackException("Undo is not available!");
+		}
 	}
 
 	/**
 	 * Loads the next saved state and stores the current one (for undo).
 	 */
-	public boolean redo()
+	public void redo() throws CustomEmptyStackException
 	{
 		GameState state;
-		boolean result;
-		if(!_undoneStack.isEmpty()) {
+		try
+		{
 			state = _undoneStack.pop();
 			_mainStack.push(this.getState());
 			this.setState(state);
-			result = true;
 		}
-		else result = false;
-		return result;
+		catch(CustomEmptyStackException e)
+		{
+			throw new CustomEmptyStackException("Nothing to redo!");
+		}
 	}
 
 	/**

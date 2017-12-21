@@ -26,15 +26,9 @@ public class UndoCommand extends NoParamsCommand
 	 */
 	public void execute(Game game, Controller controller)
 	{
-		if(game.undo()) {
-			System.out.println("Undoing move...");
-			controller.setNoPrintGameState(true);
-		}
-		else {
-			System.out.println("Undo is not available");
-			controller.setNoPrintGameState(false);
-		}
+		game.undo();
 		
+		//DO WE NEED TO THROW THE EXCEPTION??????!!!
 	}
 
 }

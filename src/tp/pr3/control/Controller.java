@@ -8,6 +8,7 @@ import tp.pr3.logic.multigames.GameRules;
 import tp.pr3.logic.util.*;
 
 
+import tp.pr3.exceptions.CustomEmptyStackException;
 /**
 *	Interface between the user and the game. Interprets the user input.
 **/
@@ -73,7 +74,14 @@ public class Controller
 				}
 				else 
 				{
-					cmd.execute(game, this);
+					try
+					{
+						cmd.execute(game, this);
+					}
+					catch(CustomEmptyStackException e)
+					{
+						System.out.println(e.getMessage());
+					}
 				}
 				
 				if(print) System.out.println(game);
