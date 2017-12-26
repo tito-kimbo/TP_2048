@@ -6,6 +6,8 @@ import tp.pr3.control.Controller;
 import tp.pr3.control.commands.Command;
 import tp.pr3.logic.GameType;
 import tp.pr3.logic.multigames.Game;
+import java.lang.NumberFormatException;
+import tp.pr3.exceptions.TooManyArgumentsException;
 
 /**
  * Contains the information and implementation of the command play.
@@ -55,13 +57,14 @@ public class PlayCommand extends Command
 				
 				if(!line.equals(""))
 				{
-					if(line.matches("[0123456789]+")) 
+					try
 					{
 						size = Integer.parseInt(line);
 					}
-					else 
-					{
+					catch (NumberFormatException e) {
 						System.out.println("Please introduce a single positive integer");
+						//THIS DOES NOT CHECK THAT THE NUMBER IS POSITIVE
+						//NO ERROR MESSAGE IS DISPLAYED IN THAT CASE
 					}
 
 				}
@@ -77,13 +80,13 @@ public class PlayCommand extends Command
 				System.out.print(askForCells);
 				line = in.nextLine();
 				
-				if(!line.equals("")) 
+				if(!line.equals(""))
 				{
-					if(line.matches("[0123456789]+")) 
+				        try
 					{
 						cells = Integer.parseInt(line);
 					}
-					else 
+					catch (NumberFormatException e)
 					{
 						System.out.println("Please introduce a single positive integer");
 					}
@@ -98,15 +101,13 @@ public class PlayCommand extends Command
 
 			System.out.print(askForSeed);
 			line = in.nextLine();
-			if(line.matches("-?[0123456789]+")) 
+			try
 			{
 				seed = Long.parseLong(line);
 			}
-			else {
-				if(!line.equals(""))
-				{
-					System.out.println("Not a valid seed");
-				}
+			catch (NumberFormatException e) 
+			{
+				System.out.println("Not a valid seed");
 				seed = controller.getSeed();
 				System.out.println("Using the default seed for the PRNG: " + seed);
 			}			
@@ -124,21 +125,29 @@ public class PlayCommand extends Command
 	/**
 	 * Parses the play command, taking into account.
 	 */
-	public Command parse(String [] commandWords, Controller controller) 
+	public Command parse(String [] commandWords, Controller controller) throws TooManyArgumentsException
 	{
 
 		Command com = null;
 		GameType gameType = null;
-		if(commandWords.length == 2 && commandWords[0].equals("play")) 
+		if(commandWords[0].equals("play")) 
 		{
-			com = this;
-
-			for (GameType t : GameType.values()) 
+			if(commandWords.length > 2)
 			{
-				if(commandWords[1].equals(t.toString())) gameType = t;
+				throw new TooManyArgumentsException("This command only accepts one parameter!");
+			}
+			else if(commandWords.length == 2)
+			{
+				//ADD EXCEPTION FOR NOT ENOUGH ARGUMENTS???
+				com = this;
+				
+				for (GameType t : GameType.values()) 
+					{
+						if(commandWords[1].equals(t.toString())) gameType = t;
+					}
 			}
 		}
-
+		
 		type = gameType;
 		return com;
 	}

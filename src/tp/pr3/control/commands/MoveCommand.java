@@ -3,6 +3,7 @@ package tp.pr3.control.commands;
 import tp.pr3.control.Controller;
 import tp.pr3.logic.Direction;
 import tp.pr3.logic.multigames.Game;
+import tp.pr3.exceptions.TooManyArgumentsException;
 
 /**
  * Contains the information and implementation of the command Move.
@@ -46,22 +47,30 @@ public class MoveCommand extends Command
 	/**
 	 * Parses the "move" command.
 	 */
-	public Command parse(String[] commandWords, Controller controller)
+	public Command parse(String[] commandWords, Controller controller) throws TooManyArgumentsException
 	{ 
 		Command ret = null;
 	        Direction dir = null;
 		
-		if(commandWords.length == 2 && commandWords[0].equals("move")) 
+		if(commandWords[0].equals("move")) 
 		{
-			ret = this;
-			for(Direction d : Direction.values())
+			if(commandWords.length > 2)
 			{
-				if(d.toString().equals(commandWords[1]))
-					dir = d;
+				throw new TooManyArgumentsException("This command only accepts one parameter!");
 			}
-		
-			this.direction = dir;
+			else if(commandWords.length == 2)
+			{
+				//ADD EXCEPTION FOR NOT ENOUGH ARGUMENTS???
+				ret = this;
+				for(Direction d : Direction.values())
+					{
+						if(d.toString().equals(commandWords[1]))
+							dir = d;
+					}
+				
+			}
 		}
+		this.direction = dir;
 		return ret;
 	}
 	

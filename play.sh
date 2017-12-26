@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 cd bin
 
 args="6 5 12345678"

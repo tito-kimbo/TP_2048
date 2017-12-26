@@ -6,9 +6,9 @@ import tp.pr3.control.commands.*;
 import tp.pr3.logic.multigames.Game;
 import tp.pr3.logic.multigames.GameRules;
 import tp.pr3.logic.util.*;
-
-
 import tp.pr3.exceptions.CustomEmptyStackException;
+import tp.pr3.exceptions.TooManyArgumentsException;
+
 /**
 *	Interface between the user and the game. Interprets the user input.
 **/
@@ -67,23 +67,28 @@ public class Controller
 			{	
 				System.out.print("Command > ");
 				cmdWords = in.nextLine().toLowerCase().split("\\s+");
-				cmd = CommandParser.parseCommand(cmdWords, this);
-				if(cmd == null) 
+				try
 				{
-					System.out.println("Not a valid command!");
-				}
-				else 
-				{
-					try
+					cmd = CommandParser.parseCommand(cmdWords, this);
+					if(cmd == null) 
+					{
+						System.out.println("Not a valid command!");
+					}
+					else 
 					{
 						cmd.execute(game, this);
 					}
-					catch(CustomEmptyStackException e)
-					{
-						System.out.println(e.getMessage());
-					}
 				}
-				
+				catch(TooManyArgumentsException e)
+				{
+					print = false;
+					System.out.println(e.getMessage());
+				}			       
+				catch(CustomEmptyStackException e)
+				{
+					System.out.println(e.getMessage());
+				}
+
 				if(print) System.out.println(game);
 			}
 			

@@ -1,2 +1,2 @@
-javac -d bin src/tp/pr2/*.java src/tp/pr2/control/*.java src/tp/pr2/control/commands/*.java src/tp/pr2/logic/*.java src/tp/pr2/logic/util/*.java src/tp/pr2/logic/multigames/*.java
-set /p= Press "ENTER" to continue...
+find src -name '*.java' > sources.txt
+javac -d bin @sources.txt
