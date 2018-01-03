@@ -40,7 +40,7 @@ public class PlayCommand extends Command
 	/**
 	 * Changes the current game based on the user-given parameters.
 	 */
-	public void execute(Game game, Controller controller) 
+	public boolean execute(Game game, Controller controller) 
 	{
 		if(type != null) 
 		{
@@ -120,12 +120,14 @@ public class PlayCommand extends Command
 			System.out.println("Not a valid game type!");
 			controller.setNoPrintGameState(false);
 		}
+		
+		return true;
 	}
 
 	/**
 	 * Parses the play command, taking into account.
 	 */
-	public Command parse(String [] commandWords, Controller controller) throws TooManyArgumentsException
+	public Command parse(String [] commandWords, Scanner in) throws TooManyArgumentsException
 	{
 
 		Command com = null;

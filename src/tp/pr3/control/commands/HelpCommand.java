@@ -25,7 +25,7 @@ public class HelpCommand extends NoParamsCommand
 	/**
 	 * Prints the name and help text of the available commands.
 	 */
-	public void execute(Game game, Controller controller)
+	public boolean execute(Game game, Controller controller)
 	{
 		for(Command cmd : CommandParser.getAvailableCommands()) 
 		{
@@ -33,6 +33,6 @@ public class HelpCommand extends NoParamsCommand
 		}
 		
 		//Do not print board after executing this command.
-		controller.setNoPrintGameState(false);
+		return false;
 	}
 }

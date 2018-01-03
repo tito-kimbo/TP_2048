@@ -12,7 +12,7 @@ import tp.pr3.logic.util.MyMathsUtil;
  */
 public class RulesFib implements GameRules
 {
-	private static final int WINVALUE = 144;
+	private static final int WIN_VALUE = 144;
 	
 	/**
 	 * Creates a 1 or 2 at the given position with 90%, 10% probability respectively
@@ -83,7 +83,7 @@ public class RulesFib implements GameRules
 	{
 		boolean b;
 		
-		if(getWinValue(board) == WINVALUE)
+		if(getWinValue(board) == WIN_VALUE)
 		{
 			b = true;
 		}

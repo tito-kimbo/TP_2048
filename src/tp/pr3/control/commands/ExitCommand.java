@@ -1,5 +1,7 @@
 package tp.pr3.control.commands;
 
+import java.util.Scanner;
+
 import tp.pr3.control.Controller;
 import tp.pr3.logic.multigames.Game;
 
@@ -24,9 +26,10 @@ public class ExitCommand extends NoParamsCommand
 	/**
 	 * Exits the game.
 	 */
-	public void execute(Game game, Controller controller)
+	public boolean execute(Game game, Controller controller)
 	{
 		controller.exit();
-		controller.setNoPrintGameState(false);
+
+		return false;
 	}
 }

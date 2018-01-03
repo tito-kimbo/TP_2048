@@ -11,7 +11,7 @@ import tp.pr3.logic.Position;
  */
 public class Rules2048 implements GameRules
 {
-	private static final int WINVALUE = 2048;
+	private static final int WIN_VALUE = 2048;
 	
 	/**
 	 * Creates a 2 or 4 at the given position with 90%, 10% probability respectively
@@ -72,7 +72,7 @@ public class Rules2048 implements GameRules
 	{
 		boolean b;
 		
-		if(getWinValue(board) == WINVALUE)
+		if(getWinValue(board) == WIN_VALUE)
 		{
 			b = true;
 		}

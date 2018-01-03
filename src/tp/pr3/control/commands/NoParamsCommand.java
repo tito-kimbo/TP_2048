@@ -1,5 +1,7 @@
 package tp.pr3.control.commands;
 
+import java.util.Scanner;
+
 import tp.pr3.control.Controller;
 import tp.pr3.exceptions.TooManyArgumentsException;
 
@@ -21,7 +23,7 @@ public abstract class NoParamsCommand extends Command
 	/**
 	 * Parses a command, taking into account that it has no parameters.
 	 */
-	public Command parse(String[] commandWords, Controller controller) throws TooManyArgumentsException
+	public Command parse(String[] commandWords, Scanner in) throws TooManyArgumentsException
 	{
 		Command c = null;
 		

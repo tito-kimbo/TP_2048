@@ -69,14 +69,14 @@ public class Controller
 				cmdWords = in.nextLine().toLowerCase().split("\\s+");
 				try
 				{
-					cmd = CommandParser.parseCommand(cmdWords, this);
+					cmd = CommandParser.parseCommand(cmdWords, in);
 					if(cmd == null) 
 					{
 						System.out.println("Not a valid command!");
 					}
 					else 
 					{
-						cmd.execute(game, this);
+						setNoPrintGameState(cmd.execute(game, this));
 					}
 				}
 				catch(TooManyArgumentsException e)

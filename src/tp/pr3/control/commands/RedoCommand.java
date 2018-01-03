@@ -23,9 +23,11 @@ public class RedoCommand extends NoParamsCommand
 	/**
 	 * Redoes the last undone move, given it exists.
 	 */
-	public void execute(Game game, Controller controller)
+	public boolean execute(Game game, Controller controller)
 	{
 		game.redo();
+		
+		return true;
 	}
 
 }

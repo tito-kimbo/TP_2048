@@ -1,6 +1,8 @@
 package tp.pr3.control.commands;
 
- import tp.pr3.control.Controller;
+import java.util.Scanner;
+
+import tp.pr3.control.Controller;
 import tp.pr3.logic.multigames.Game;
 
  /**
@@ -24,14 +26,15 @@ public abstract class Command
 	}
 	
 	/**
-	 * Executes the corresponding command.
+	 * Executes the corresponding command, returning a boolean that indicates whether the
+	 * game should be printed.
 	 */
-	public abstract void execute(Game game, Controller controller);
+	public abstract boolean execute(Game game, Controller controller);
 	
 	/**
 	 * Parses the corresponding command.
 	 */
-	public abstract Command parse(String[] commandWords, Controller controller);
+	public abstract Command parse(String[] commandWords, Scanner in);
 	
 	/**
 	 * Returns a String with the help information.

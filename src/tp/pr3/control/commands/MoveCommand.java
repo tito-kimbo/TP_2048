@@ -1,5 +1,7 @@
 package tp.pr3.control.commands;
 
+import java.util.Scanner;
+
 import tp.pr3.control.Controller;
 import tp.pr3.logic.Direction;
 import tp.pr3.logic.multigames.Game;
@@ -29,7 +31,7 @@ public class MoveCommand extends Command
 	/**
 	 * Executes the "move" commands, given the parameters are correct.
 	 */
-	public void execute(Game game, Controller controller)
+	public boolean execute(Game game, Controller controller)
 	{	       	
 		if(direction != null) 
 		{
@@ -41,13 +43,14 @@ public class MoveCommand extends Command
 		        controller.setNoPrintGameState(false);
 			System.out.println("Not a valid direction!");
 		}
-				
+		
+		return true;				
 	}
 	
 	/**
 	 * Parses the "move" command.
 	 */
-	public Command parse(String[] commandWords, Controller controller) throws TooManyArgumentsException
+	public Command parse(String[] commandWords, Scanner in) throws TooManyArgumentsException
 	{ 
 		Command ret = null;
 	        Direction dir = null;

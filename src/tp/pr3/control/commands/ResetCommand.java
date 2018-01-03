@@ -23,9 +23,11 @@ public class ResetCommand extends NoParamsCommand
 	/**
 	 * Resets the game to its initial values.
 	 */
-	public void execute(Game game, Controller controller)
+	public boolean execute(Game game, Controller controller)
 	{
 		game.reset();
-		controller.setNoPrintGameState(true);
+
+
+		return true;
 	}
 }

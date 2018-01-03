@@ -24,11 +24,12 @@ public class UndoCommand extends NoParamsCommand
 	/**
 	 * Undoes the last move, given it exists.
 	 */
-	public void execute(Game game, Controller controller)
+	public boolean execute(Game game, Controller controller)
 	{
 		game.undo();
 		
 		//DO WE NEED TO THROW THE EXCEPTION??????!!!
+		return true;
 	}
 
 }
