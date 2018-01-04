@@ -4,7 +4,7 @@ import java.util.EmptyStackException;
 
 public class CustomEmptyStackException extends EmptyStackException
 {
-	private String message = null;
+	private static String message = null;
 	
 	public CustomEmptyStackException()
 	{

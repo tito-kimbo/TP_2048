@@ -67,10 +67,10 @@ public class MyStringUtils
 	public static boolean canWriteLocal(File file) 
 	{
 		// works OK on Linux but not on Windows (apparently!)
-		if (!file.canWrite()) 
+		/*if (!file.canWrite()) 
 		{
 			return false;
-		}
+		}*/
 		
 		// works on Windows
 		try 

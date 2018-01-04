@@ -2,7 +2,6 @@ package tp.pr3.logic.util;
 
 import java.util.Scanner;
 
-import tp.pr3.control.Controller;
 import tp.pr3.control.commands.*;
 
 /**
@@ -14,7 +13,12 @@ public class CommandParser {
 	/**
 	* List of available commands.
 	*/
-	private static Command[] availableCommands = { new HelpCommand(), new ResetCommand(), new ExitCommand(), new MoveCommand(), new UndoCommand(), new RedoCommand(), new PlayCommand()};
+	private static Command[] availableCommands = 
+		{ 	
+			new HelpCommand(), new ResetCommand(),new ExitCommand(), new MoveCommand(),
+			new UndoCommand(), new RedoCommand(), new LoadCommand(), new PlayCommand(), 
+			new SaveCommand()
+		};
 	
 	/**
 	* Searches the available commands and returns an instance of the matching Command.

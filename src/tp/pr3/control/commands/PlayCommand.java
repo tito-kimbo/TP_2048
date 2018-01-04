@@ -17,10 +17,11 @@ public class PlayCommand extends Command
 
 	private static final int DEFAULT_SIZE = 4, DEFAULT_CELLS = 2;
 
-	private static final String playHelp = "Play <game>: Change play mode to one of the following: original, fib and inverse.", commandInfo = "play";
-	private static final String askForSize = "Please enter the size of the board: ";
-	private static final String askForCells = "Please enter the number of initial cells: ";
-	private static final String askForSeed = "Please enter the initial seed: ";
+	private static final String PLAY_HELP = "Play <game>: Change play mode to one of the following: original, fib and inverse.";
+	private static final String COMMAND_INFO = "play";
+	private static final String ASK_FOR_SIZE = "Please enter the size of the board: ";
+	private static final String ASK_FOR_CELLS = "Please enter the number of initial cells: ";
+	private static final String ASK_FOR_SEED = "Please enter the initial seed: ";
 	
 	private GameType type = null;
 
@@ -33,7 +34,7 @@ public class PlayCommand extends Command
 	 */
 	public PlayCommand()
 	{
-		super(commandInfo, playHelp);
+		super(COMMAND_INFO, PLAY_HELP);
 		type = null;
 	}
 	
@@ -52,7 +53,7 @@ public class PlayCommand extends Command
 			
 			while(size <= 0)
 			{
-				System.out.print(askForSize);
+				System.out.print(ASK_FOR_SIZE);
 				line = in.nextLine();
 				
 				if(!line.equals(""))
@@ -77,7 +78,7 @@ public class PlayCommand extends Command
 			
 			while(cells <= 0)
 			{
-				System.out.print(askForCells);
+				System.out.print(ASK_FOR_CELLS);
 				line = in.nextLine();
 				
 				if(!line.equals(""))
@@ -99,7 +100,7 @@ public class PlayCommand extends Command
 				}
 			}
 
-			System.out.print(askForSeed);
+			System.out.print(ASK_FOR_SEED);
 			line = in.nextLine();
 			try
 			{

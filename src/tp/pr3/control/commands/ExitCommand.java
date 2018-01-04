@@ -1,7 +1,5 @@
 package tp.pr3.control.commands;
 
-import java.util.Scanner;
-
 import tp.pr3.control.Controller;
 import tp.pr3.logic.multigames.Game;
 
@@ -11,8 +9,8 @@ import tp.pr3.logic.multigames.Game;
  */
 public class ExitCommand extends NoParamsCommand
 {
-	private static final String exitHelp = "Exit: Terminate the program";
-	private static final String commandInfo = "exit";
+	private static final String EXIT_HELP = "Exit: Terminate the program.";
+	private static final String COMMAND_INFO = "exit";
 	
 	/**
 	 * Calls the constructor of the superclass to create a command without parameters
@@ -20,7 +18,7 @@ public class ExitCommand extends NoParamsCommand
 	 */
 	public ExitCommand()
 	{
-		super(commandInfo, exitHelp);
+		super(COMMAND_INFO, EXIT_HELP);
 	}
 
 	/**

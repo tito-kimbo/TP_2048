@@ -8,8 +8,8 @@ import tp.pr3.logic.multigames.Game;
  */
 public class RedoCommand extends NoParamsCommand
 {
-	private static final String redoHelp = "Redo: Redoes the last undone move";
-	private static final String commandInfo = "redo";
+	private static final String REDO_HELP = "Redo: Redoes the last undone move";
+	private static final String COMMAND_INFO = "redo";
 	
 	/**
 	 * Calls the constructor of the superclass to create a command without parameters
@@ -17,7 +17,7 @@ public class RedoCommand extends NoParamsCommand
 	 */
 	public RedoCommand()
 	{
-		super(commandInfo, redoHelp);
+		super(COMMAND_INFO, REDO_HELP);
 	}
 	
 	/**

@@ -2,7 +2,6 @@ package tp.pr3.control.commands;
 
 import java.util.Scanner;
 
-import tp.pr3.control.Controller;
 import tp.pr3.exceptions.TooManyArgumentsException;
 
 /**

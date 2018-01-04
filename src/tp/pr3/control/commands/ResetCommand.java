@@ -8,8 +8,8 @@ import tp.pr3.logic.multigames.Game;
  */
 public class ResetCommand extends NoParamsCommand
 {
-	private static final String resetHelp = "Reset: Start a new game";
-	private static final String commandInfo = "reset";
+	private static final String RESET_HELP = "Reset: Start a new game";
+	private static final String COMMAND_INFO = "reset";
 	
 	/**
 	 * Calls the constructor of the superclass to create a command without parameters
@@ -17,7 +17,7 @@ public class ResetCommand extends NoParamsCommand
 	 */
 	public ResetCommand()
 	{
-		super(commandInfo, resetHelp);
+		super(COMMAND_INFO, RESET_HELP);
 	}
 	
 	/**

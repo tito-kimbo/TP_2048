@@ -10,8 +10,8 @@ import tp.pr3.logic.util.CommandParser;
 
 public class HelpCommand extends NoParamsCommand
 {
-	private static final String helpHelp = "Help: Print this help message.";
-	private static final String commandInfo = "help";
+	private static final String HELP_HELP = "Help: Print this help message.";
+	private static final String COMMAND_INFO = "help";
 	
 	/**
 	 * Calls the constructor of the superclass to create a command without parameters
@@ -19,7 +19,7 @@ public class HelpCommand extends NoParamsCommand
 	 */
 	public HelpCommand()
 	{
-		super(commandInfo, helpHelp);
+		super(COMMAND_INFO, HELP_HELP);
 	}
 
 	/**

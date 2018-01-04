@@ -9,8 +9,8 @@ import tp.pr3.logic.multigames.Game;
  */
 public class UndoCommand extends NoParamsCommand
 {
-	private static final String undoHelp = "Undo: Undoes the last move, up to 20 moves";
-	private static final String commandInfo = "undo";
+	private static final String UNDO_HELP = "Undo: Undoes the last move, up to 20 moves";
+	private static final String COMMAND_INFO = "undo";
 	
 	/**
 	 * Calls the constructor of the superclass to create a command without parameters
@@ -18,7 +18,7 @@ public class UndoCommand extends NoParamsCommand
 	 */
 	public UndoCommand()
 	{
-		super(commandInfo, undoHelp);
+		super(COMMAND_INFO, UNDO_HELP);
 	}
 	
 	/**

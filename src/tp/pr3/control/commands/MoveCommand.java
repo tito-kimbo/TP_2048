@@ -53,7 +53,7 @@ public class MoveCommand extends Command
 	public Command parse(String[] commandWords, Scanner in) throws TooManyArgumentsException
 	{ 
 		Command ret = null;
-	        Direction dir = null;
+	    Direction dir = null;
 		
 		if(commandWords[0].equals("move")) 
 		{
