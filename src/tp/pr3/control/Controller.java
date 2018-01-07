@@ -8,6 +8,8 @@ import tp.pr3.logic.multigames.GameRules;
 import tp.pr3.logic.util.*;
 import tp.pr3.exceptions.CustomEmptyStackException;
 import tp.pr3.exceptions.TooManyArgumentsException;
+import tp.pr3.exceptions.CustomInvalidFilenameException;
+import tp.pr3.exceptions.FileNotFoundException;
 
 /**
 *	Interface between the user and the game. Interprets the user input.
@@ -81,13 +83,21 @@ public class Controller
 				}
 				catch(TooManyArgumentsException e)
 				{
-					print = false;
 					System.out.println(e.getMessage());
 				}			       
 				catch(CustomEmptyStackException e)
 				{
 					System.out.println(e.getMessage());
 				}
+				catch(CustomInvalidFilenameException e)
+				{
+					System.out.println("Not a valid filename.");
+				}
+				catch(FileNotFoundException e)
+				{
+					System.out.println("The file does not exist or can't be opened.");
+				}
+				
 
 				if(print) System.out.println(game);
 			}
