@@ -1,0 +1,6 @@
+package tp.pr3.control.commands;
+
+public class LoadCommand extends Command {
+	private static final String loadHelp = "Load <filename>: Load the game stored in the file <filename>";
+	private static final String commandInfo = "load";
+}

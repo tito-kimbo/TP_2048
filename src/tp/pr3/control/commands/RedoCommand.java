@@ -1,6 +1,6 @@
 package tp.pr3.control.commands;
 
-import tp.pr3.control.Controller;
+import java.util.Scanner;
 import tp.pr3.logic.multigames.Game;
 
 /**
@@ -23,7 +23,7 @@ public class RedoCommand extends NoParamsCommand
 	/**
 	 * Redoes the last undone move, given it exists.
 	 */
-	public boolean execute(Game game, Controller controller)
+	public boolean execute(Game game, Scanner in)
 	{
 		game.redo();
 		

@@ -1,6 +1,6 @@
 package tp.pr3.control.commands;
 
-import tp.pr3.control.Controller;
+import java.util.Scanner;
 import tp.pr3.logic.multigames.Game;
 import tp.pr3.logic.util.CommandParser;
 
@@ -25,7 +25,7 @@ public class HelpCommand extends NoParamsCommand
 	/**
 	 * Prints the name and help text of the available commands.
 	 */
-	public boolean execute(Game game, Controller controller)
+	public boolean execute(Game game, Scanner in)
 	{
 		for(Command cmd : CommandParser.getAvailableCommands()) 
 		{

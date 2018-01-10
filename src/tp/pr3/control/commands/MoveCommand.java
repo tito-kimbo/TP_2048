@@ -5,7 +5,7 @@ import java.util.Scanner;
 import tp.pr3.control.Controller;
 import tp.pr3.logic.Direction;
 import tp.pr3.logic.multigames.Game;
-import tp.pr3.exceptions.TooManyArgumentsException;
+import tp.pr3.exceptions.InvalidNumberOfArgumentsException;
 
 /**
  * Contains the information and implementation of the command Move.
@@ -31,26 +31,27 @@ public class MoveCommand extends Command
 	/**
 	 * Executes the "move" commands, given the parameters are correct.
 	 */
-	public boolean execute(Game game, Controller controller)
-	{	       	
+	public boolean execute(Game game, Scanner in)
+	{
+		boolean printGame;
 		if(direction != null) 
 		{
 			game.move(direction);
-			controller.setNoPrintGameState(true);
+			printGame = true;
 		}
 		else
 		{
-		        controller.setNoPrintGameState(false);
+		        printGame = false;
 			System.out.println("Not a valid direction!");
 		}
 		
-		return true;				
+		return printGame;				
 	}
 	
 	/**
 	 * Parses the "move" command.
 	 */
-	public Command parse(String[] commandWords, Scanner in) throws TooManyArgumentsException
+	public Command parse(String[] commandWords, Scanner in) throws InvalidNumberOfArgumentsException
 	{ 
 		Command ret = null;
 	    Direction dir = null;
@@ -59,9 +60,13 @@ public class MoveCommand extends Command
 		{
 			if(commandWords.length > 2)
 			{
-				throw new TooManyArgumentsException("This command only accepts one parameter!");
+				throw new InvalidNumberOfArgumentsException("This command only accepts one parameter!");
 			}
-			else if(commandWords.length == 2)
+			else if(commandWords.length < 2)
+			{
+				throw new InvalidNumberOfArgumentsException("No direction specified!");
+			}
+			else
 			{
 				//ADD EXCEPTION FOR NOT ENOUGH ARGUMENTS???
 				ret = this;

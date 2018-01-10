@@ -1,3 +1,4 @@
+
 package tp.pr3.control.commands;
 
 import java.util.Scanner;
@@ -7,7 +8,7 @@ import tp.pr3.control.commands.Command;
 import tp.pr3.logic.GameType;
 import tp.pr3.logic.multigames.Game;
 import java.lang.NumberFormatException;
-import tp.pr3.exceptions.TooManyArgumentsException;
+import tp.pr3.exceptions.InvalidNumberOfArgumentsException;
 
 /**
  * Contains the information and implementation of the command play.
@@ -16,7 +17,8 @@ public class PlayCommand extends Command
 {
 
 	private static final int DEFAULT_SIZE = 4, DEFAULT_CELLS = 2;
-
+	private static final long DEFAULT_SEED = 123946871;
+	
 	private static final String PLAY_HELP = "Play <game>: Change play mode to one of the following: original, fib and inverse.";
 	private static final String COMMAND_INFO = "play";
 	private static final String ASK_FOR_SIZE = "Please enter the size of the board: ";
@@ -41,11 +43,12 @@ public class PlayCommand extends Command
 	/**
 	 * Changes the current game based on the user-given parameters.
 	 */
-	public boolean execute(Game game, Controller controller) 
+	public boolean execute(Game game, Scanner in) 
 	{
+		boolean printGame;
+		
 		if(type != null) 
 		{
-			Scanner in = controller.getScanner();
 			String line = ""; //For safety
 			
 			size = 0;
@@ -109,26 +112,26 @@ public class PlayCommand extends Command
 			catch (NumberFormatException e) 
 			{
 				System.out.println("Not a valid seed");
-				seed = controller.getSeed();
+				seed = DEFAULT_SEED;
 				System.out.println("Using the default seed for the PRNG: " + seed);
 			}			
 		
-			controller.setGame(type.toRules(), size, cells, seed);
-			controller.setNoPrintGameState(true);
+			game.reset(type.toRules(), size, cells, seed);
+			printGame = true;
 		}
 		else 
 		{
 			System.out.println("Not a valid game type!");
-			controller.setNoPrintGameState(false);
+		        printGame = false;
 		}
 		
-		return true;
+		return printGame;
 	}
 
 	/**
 	 * Parses the play command, taking into account.
 	 */
-	public Command parse(String [] commandWords, Scanner in) throws TooManyArgumentsException
+	public Command parse(String [] commandWords, Scanner in) throws InvalidNumberOfArgumentsException
 	{
 
 		Command com = null;
@@ -137,11 +140,14 @@ public class PlayCommand extends Command
 		{
 			if(commandWords.length > 2)
 			{
-				throw new TooManyArgumentsException("This command only accepts one parameter!");
+				throw new InvalidNumberOfArgumentsException("This command only accepts one parameter!");
 			}
-			else if(commandWords.length == 2)
+			else if(commandWords.length < 2)
+	       		{
+				throw new InvalidNumberOfArgumentsException("No game specified!");
+			}
+			else
 			{
-				//ADD EXCEPTION FOR NOT ENOUGH ARGUMENTS???
 				com = this;
 				
 				for (GameType t : GameType.values()) 
