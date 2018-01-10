@@ -9,6 +9,7 @@ import tp.pr3.logic.GameType;
 import tp.pr3.logic.multigames.Game;
 import java.lang.NumberFormatException;
 import tp.pr3.exceptions.InvalidNumberOfArgumentsException;
+import java.lang.IllegalArgumentException;
 
 /**
  * Contains the information and implementation of the command play.
@@ -45,93 +46,82 @@ public class PlayCommand extends Command
 	 */
 	public boolean execute(Game game, Scanner in) 
 	{
-		boolean printGame;
+		String line = ""; //For safety
 		
-		if(type != null) 
-		{
-			String line = ""; //For safety
-			
-			size = 0;
-			cells = 0;
-			
-			while(size <= 0)
-			{
-				System.out.print(ASK_FOR_SIZE);
-				line = in.nextLine();
-				
-				if(!line.equals(""))
-				{
-					try
-					{
-						size = Integer.parseInt(line);
-					}
-					catch (NumberFormatException e) {
-						System.out.println("Please introduce a single positive integer");
-						//THIS DOES NOT CHECK THAT THE NUMBER IS POSITIVE
-						//NO ERROR MESSAGE IS DISPLAYED IN THAT CASE
-					}
-
-				}
-				else
-				{
-					size = DEFAULT_SIZE;
-					System.out.println("Using the default size of the board: " + DEFAULT_SIZE);
-				}
-			}
-			
-			while(cells <= 0)
-			{
-				System.out.print(ASK_FOR_CELLS);
-				line = in.nextLine();
-				
-				if(!line.equals(""))
-				{
-				        try
-					{
-						cells = Integer.parseInt(line);
-					}
-					catch (NumberFormatException e)
-					{
-						System.out.println("Please introduce a single positive integer");
-					}
-			
-				}
-				else 
-				{
-					cells = DEFAULT_CELLS;
-					System.out.println("Using the default number of initial cells: " + DEFAULT_CELLS);
-				}
-			}
-
-			System.out.print(ASK_FOR_SEED);
+		size = 0;
+		cells = 0;
+		
+		while(size <= 0)
+	       	{
+			System.out.print(ASK_FOR_SIZE);
 			line = in.nextLine();
-			try
+			
+			if(!line.equals(""))
 			{
-				seed = Long.parseLong(line);
+				try
+			       	{
+					size = Integer.parseInt(line);
+					if(size < 0) throw new NumberFormatException();
+				}
+				catch (NumberFormatException e)
+			       	{
+					System.out.println("Please introduce a single positive integer");
+				}
+				
 			}
-			catch (NumberFormatException e) 
+			else
 			{
-				System.out.println("Not a valid seed");
-				seed = DEFAULT_SEED;
-				System.out.println("Using the default seed for the PRNG: " + seed);
-			}			
-		
-			game.reset(type.toRules(), size, cells, seed);
-			printGame = true;
+				size = DEFAULT_SIZE;
+				System.out.println("Using the default size of the board: " + DEFAULT_SIZE);
+			}
 		}
-		else 
+			
+		while(cells <= 0)
 		{
-			System.out.println("Not a valid game type!");
-		        printGame = false;
+			System.out.print(ASK_FOR_CELLS);
+			line = in.nextLine();
+			
+			if(!line.equals(""))
+			{
+				try
+				{
+					cells = Integer.parseInt(line);
+					if(cells < 0) throw new NumberFormatException();
+				}
+				catch (NumberFormatException e)
+				{
+					System.out.println("Please introduce a single positive integer");
+				}
+				
+			}
+			else 
+			{
+				cells = DEFAULT_CELLS;
+				System.out.println("Using the default number of initial cells: " + DEFAULT_CELLS);
+			}
 		}
+
+		System.out.print(ASK_FOR_SEED);
+		line = in.nextLine();
+		try
+		{
+			seed = Long.parseLong(line);
+		}
+		catch (NumberFormatException e) 
+		{
+			System.out.println("Not a valid seed");
+			seed = DEFAULT_SEED;
+			System.out.println("Using the default seed for the PRNG: " + seed);
+		}			
 		
-		return printGame;
+		game.reset(type.toRules(), size, cells, seed);		
+		return true;
 	}
 
 	/**
 	 * Parses the play command, taking into account.
 	 */
-	public Command parse(String [] commandWords, Scanner in) throws InvalidNumberOfArgumentsException
+	public Command parse(String [] commandWords, Scanner in) throws InvalidNumberOfArgumentsException, IllegalArgumentException
 	{
 
 		Command com = null;
@@ -149,11 +139,11 @@ public class PlayCommand extends Command
 			else
 			{
 				com = this;
-				
-				for (GameType t : GameType.values()) 
-					{
-						if(commandWords[1].equals(t.toString())) gameType = t;
-					}
+				gameType = GameType.fromString(commandWords[1]);
+				if(gameType == null)
+				{
+					throw new IllegalArgumentException("Not a valid game type!");
+				}
 			}
 		}
 		

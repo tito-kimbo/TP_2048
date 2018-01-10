@@ -55,14 +55,7 @@ public class Controller
 				try
 				{
 					cmd = CommandParser.parseCommand(cmdWords, in);
-					if(cmd == null) 
-					{
-						System.out.println("Not a valid command!");
-					}
-					else 
-					{
-						if(cmd.execute(game, in)) System.out.println(game);
-					}
+					if(cmd.execute(game, in)) System.out.println(game);
 				}
 				catch(Exception e)
 				{

@@ -5,32 +5,31 @@ package tp.pr3.logic;
 */
 public enum Direction 
 {
-	UP, DOWN, LEFT, RIGHT;
-	
+	UP("up"), DOWN("down"), LEFT("left"), RIGHT("right");
+
+	private final String text;
+
+	Direction(String text) {
+		this.text = text;
+	}
+
+	/**
+	 * Returns a String representation of the direction.
+	 */
 	public String toString()
 	{
-		String s = "";
-		
-		switch(this)
-			{
-			case UP:
-				{
-					s = "up";
-				}break;
-			case DOWN:
-				{
-					s = "down";
-				}break;
-			case LEFT:
-				{
-					s = "left";
-				}break;
-			case RIGHT:
-				{
-					s = "right";
-				}break;
-			}
-		
-		return s;
+		return this.text;
+	}
+
+	/**
+	 * Returns the Direction corresponding to the given text.
+	 */
+	public static Direction fromString(String text)
+	{
+		Direction result = null;
+		for(Direction d : Direction.values())
+			if(d.text.equalsIgnoreCase(text))
+				result = d;
+		return result;
 	}
 };

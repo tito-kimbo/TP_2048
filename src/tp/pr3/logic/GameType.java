@@ -7,34 +7,34 @@ import tp.pr3.logic.multigames.*;
  */
 public enum GameType
 {
-	ORIG, FIB, INV;
+	ORIG("original", new Rules2048()), FIB("fib", new RulesFib()), INV("inverse", new RulesInverse());
+
+	private final String text;
+	private final GameRules rules;
+	
+	GameType(String text, GameRules rules) {
+		this.text = text;
+		this.rules = rules;
+	}
 
 	/**
 	 * Returns a string representation of the type.
 	 */
 	public String toString()
 	{
-		String s = "";
-		
-		switch(this)
-		{
-			case ORIG:
-			{
-				s = "original";
-			} break;
-			
-			case FIB:
-			{
-				s = "fib";
-			} break;
+		return this.text;
+	}
 
-			case INV:
-			{
-				s = "inverse";
-			} break;
-		}
-		
-		return s;
+	/**
+	 * Returns the type corresponding to the given string.
+	 */
+	public static GameType fromString(String text)
+	{
+		GameType result = null;
+		for(GameType t : GameType.values())
+			if(t.text.equalsIgnoreCase(text))
+				result = t;
+		return result;
 	}
 
 	/**
@@ -42,27 +42,7 @@ public enum GameType
 	 */
 	public GameRules toRules() 
 	{
-		GameRules rules = null;
-		
-		switch(this)
-		{
-			case ORIG:
-			{
-				rules = new Rules2048();
-			} break;
-			
-			case FIB:
-			{
-				rules = new RulesFib();
-			} break;
-
-			case INV:
-			{
-				rules = new RulesInverse();
-			} break;
-		}
-		
-		return rules;
+		return this.rules;
 	}
 	
 };
