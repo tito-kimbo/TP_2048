@@ -31,8 +31,7 @@ public class HelpCommand extends NoParamsCommand
 		{
 			System.out.println(cmd.helpText());
 		}
-		
-		//Do not print board after executing this command.
+	        
 		return false;
 	}
 }

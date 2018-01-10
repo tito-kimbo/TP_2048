@@ -9,7 +9,8 @@ public enum Direction
 
 	private final String text;
 
-	Direction(String text) {
+	Direction(String text)
+	{
 		this.text = text;
 	}
 

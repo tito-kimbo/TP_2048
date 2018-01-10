@@ -169,14 +169,16 @@ public class Game
 	/**
 	 * Returns the Board.
 	 */
-	public Board getBoard() {
+	public Board getBoard()
+	{
 		return _board;
 	}
 
 	/**
 	 * Returns the current GameRules.
 	 */
-	public GameRules getRules() {
+	public GameRules getRules()
+	{
 		return _currentRules;
 	}
 

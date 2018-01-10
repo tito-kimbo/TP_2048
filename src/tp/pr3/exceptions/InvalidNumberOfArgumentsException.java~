@@ -1,9 +1,0 @@
-package tp.pr3.exceptions;
-
-public class InvalidNumberOfArguments extends RuntimeException
-{
-	public InvalidNumberOfArguments(String text)
-	{
-		super(text);
-	}
-}

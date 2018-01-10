@@ -19,7 +19,7 @@ public class Game2048
 	/**
 	*	Creates the Controller with the given (or default) parameters and executes the 2048 game loop.
 	*/
-    public static void main(String[] args)
+	public static void main(String[] args)
 	{
 		int size = DEFAULT_SIZE, initCells = DEFAULT_INIT_CELLS;
 		long seed = DEFAULT_SEED;
@@ -28,7 +28,7 @@ public class Game2048
 		{
 			switch(args.length)
 			{
-				case 0: {} break;
+				case 0: break;
 				case 1: 
 				{			
 					size = Integer.parseInt(args[0]);

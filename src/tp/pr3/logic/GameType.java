@@ -12,7 +12,8 @@ public enum GameType
 	private final String text;
 	private final GameRules rules;
 	
-	GameType(String text, GameRules rules) {
+	GameType(String text, GameRules rules)
+	{
 		this.text = text;
 		this.rules = rules;
 	}
