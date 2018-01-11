@@ -38,7 +38,7 @@ public class RulesFib implements GameRules
 	 * Returns whether the given cells can be merged. This is, if they are consecutive in
 	 * the Fibonacci sequence.
 	 */
-	public boolean canMerge(Cell self, Cell other)
+	public boolean canMergeNeighbor(Cell self, Cell other)
 	{
 		int selfVal, otherVal, selfNextFib, otherNextFib;
 		

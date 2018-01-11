@@ -21,13 +21,11 @@ public interface GameRules
 	/**
 	 * Returns whether the cells can be merged based on the current rules.
 	 */
-	boolean canMerge(Cell self, Cell other);
-	/*As a side note, this implementation could have been defaulted, but we considered
-	* it unnecessary, given it would only be useful with analogous rules to 2048. That
-	* is, it does not work for suffficiently different rules.
-	* 
-	* (See FibonacciRules implementation)
-	*/
+	default boolean canMergeNeighbor(Cell self, Cell other) {
+		//Default implementation for Rules2048 and RulesInverse
+		return !self.isEmpty() && self.getVal() == other.getVal();
+	}
+
 	
 	/**
 	 * Merges two cells and returns the score value of said merge.
@@ -49,50 +47,7 @@ public interface GameRules
 	 */
 	default boolean lose(Board board)
 	{
-		int emptyCells, i, j, size;
-		Position currentCell, rightNeighbor, downNeighbor;
-		boolean stuck;
-		
-		emptyCells = board.getEmptyCells();
-		i = 0;
-		j = 0;
-		stuck = true;
-		size = board.getBoardSize();
-		currentCell = new Position();
-		rightNeighbor = new Position();
-		downNeighbor = new Position();
-		
-		if(emptyCells == 0)
-		{
-			while(stuck && i < size)
-			{
-				j = 0;
-				currentCell.setRow(i);
-				rightNeighbor.setRow(i);
-				downNeighbor.setRow(i+1);
-				
-				while(stuck && j < size)
-				{
-					currentCell.setCol(j);
-					rightNeighbor.setCol(j+1);
-					downNeighbor.setCol(j);
-					
-					//Checks whether each cell can merge with its right or down neighbor
-					stuck = !(  (j+1 < size && canMerge(board.getCell(currentCell), board.getCell(rightNeighbor)) )
-							||  (i+1 < size && canMerge(board.getCell(currentCell), board.getCell(downNeighbor)) ) );
-					
-					j++;
-				}
-				
-				i++;
-			}
-		}
-		else
-		{
-			stuck = false;
-		}
-		
-		return stuck;
+		return (board.getEmptyCells() == 0 && !board.canMerge(this));
 	}
 	
 	/**

@@ -308,6 +308,54 @@ public class Board
 	}
 	
 	/**
+	*	Returns if there are possible moves in the Board under the given rules.
+	*/
+	public boolean canMerge(GameRules rules) {
+		int i, j;
+		Position currentCell, rightNeighbor, downNeighbor;
+		boolean stuck;
+		
+		i = 0;
+		j = 0;
+		stuck = true;
+		currentCell = new Position();
+		rightNeighbor = new Position();
+		downNeighbor = new Position();
+		
+		if(_emptyCells == 0)
+		{
+			while(stuck && i < _boardSize)
+			{
+				j = 0;
+				currentCell.setRow(i);
+				rightNeighbor.setRow(i);
+				downNeighbor.setRow(i+1);
+				
+				while(stuck && j < _boardSize)
+				{
+					currentCell.setCol(j);
+					rightNeighbor.setCol(j+1);
+					downNeighbor.setCol(j);
+					
+					//Checks whether each cell can merge with its right or down neighbor
+					stuck = !(  (j+1 < _boardSize && rules.canMergeNeighbor(getCell(currentCell), getCell(rightNeighbor)) )
+							||  (i+1 < _boardSize && rules.canMergeNeighbor(getCell(currentCell), getCell(downNeighbor)) ) );
+					
+					j++;
+				}
+				
+				i++;
+			}
+		}
+		else
+		{
+			stuck = false;
+		}
+		
+		return !stuck;
+	}
+
+	/**
 	*	Reflects the Board. Sends every Cell in the Position (i,j) to (i, SIZE-1-j).
 	*/
 	public void reflect()

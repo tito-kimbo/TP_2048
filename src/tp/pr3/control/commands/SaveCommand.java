@@ -21,7 +21,7 @@ public class SaveCommand extends Command
 		super(COMMAND_INFO, SAVE_HELP);
 	}
 	
-	public boolean execute(Game game, Scanner scan)
+	public boolean execute(Game game, Scanner in)
 	{
 		BufferedWriter out = null;
 		
@@ -37,7 +37,9 @@ public class SaveCommand extends Command
 			out.close(); //IOException?
 		}
 		catch(Exception e)
-		{}
+		{
+			throw new CustomInvalidFilenameException();
+		}
 		
 		return true;
 	}
@@ -51,9 +53,13 @@ public class SaveCommand extends Command
 		{
 			if(commandWords.length > 2)
 			{
-				throw new InvalidNumberOfArgumentsException("Filename can't contain spaces!");
+				throw new InvalidNumberOfArgumentsException("File path can't contain spaces!");
 			}
-			else if(commandWords.length == 2)
+			else if(commandWords.length < 2)
+			{
+				throw new InvalidNumberOfArgumentsException("No file specified!");
+			}
+			else
 			{		
 				if(!MyStringUtils.validFileName(commandWords[1]))
 				{

@@ -34,14 +34,6 @@ public class RulesInverse implements GameRules
 	}
 	
 	/**
-	 * Returns whether the given cells can be merged. This is, if they are equal.
-	 */
-	public boolean canMerge(Cell self, Cell other)
-	{
-		return (!self.isEmpty() && self.getVal() == other.getVal());
-	}
-	
-	/**
 	 * Merges 2 cells and returns the score (see formula in implementation).
 	 */
 	public int merge(Cell self, Cell other)

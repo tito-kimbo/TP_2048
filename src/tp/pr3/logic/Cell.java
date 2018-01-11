@@ -57,7 +57,7 @@ public class Cell
 	public int doMerge(Cell neighbor, GameRules rules) 
 	{
 		int val = 0;
-		if(rules.canMerge(this, neighbor))
+		if(rules.canMergeNeighbor(this, neighbor))
 		{
 			val = rules.merge(this, neighbor);
 		}

@@ -33,14 +33,6 @@ public class Rules2048 implements GameRules
 	}
 	
 	/**
-	 * Returns whether the given cells can be merged. This is, if they are equal.
-	 */
-	public boolean canMerge(Cell self, Cell other)
-	{
-		return (!self.isEmpty() && self.getVal() == other.getVal());
-	}
-	
-	/**
 	 * Merges 2 cells and returns the score (two times the value of the cells).
 	 */
 	public int merge(Cell self, Cell other)
