@@ -6,6 +6,7 @@ import tp.pr3.control.commands.*;
 import tp.pr3.logic.multigames.Game;
 import tp.pr3.logic.multigames.GameType;
 import tp.pr3.logic.util.*;
+import tp.pr3.exceptions.GameOverException;
 
 /**
 *	Interface between the user and the game. Interprets the user input.
@@ -32,7 +33,7 @@ public class Controller
 	public void run()
 	{
 		Command cmd = null;
-		String[] cmdWords;
+		String[] cmdWords = new String[1];
 		boolean exit = false;
 
 		System.out.println(game);
@@ -50,6 +51,7 @@ public class Controller
 			catch(GameOverException e)
 			{
 				exit = true;
+				System.out.print(game);
 				System.out.println(e);
 			}
 			catch(Exception e)
@@ -65,7 +67,7 @@ public class Controller
 			{
 				System.out.println("The file does not exist or can't be opened.");
 			}
-			*/      
+			*/     
 				
 		} while(!exit);
 	}

@@ -50,7 +50,6 @@ public class LoadCommand extends Command
 		Command ret = null;
 		File file = null;
 		
-		System.out.println(commandWords[0]);
 		if(commandWords[0].equals("load"))
 		{
 			if(commandWords.length > 2)

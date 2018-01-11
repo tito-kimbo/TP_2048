@@ -2,6 +2,7 @@ package tp.pr3.control.commands;
 
 import java.util.Scanner;
 import tp.pr3.logic.multigames.Game;
+import tp.pr3.exceptions.GameOverException;
 
 /**
  * Contains the information and implementation of the exit command.
@@ -24,8 +25,9 @@ public class ExitCommand extends NoParamsCommand
 	/**
 	 * Exits the game.
 	 */
-	public boolean execute(Game game, Scanner in)
+	public boolean execute(Game game, Scanner in) throws GameOverException
 	{
-		return false;
+		throw new GameOverException(false, game.getScore(), game.getWinValue());
+		
 	}
 }
