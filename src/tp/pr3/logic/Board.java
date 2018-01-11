@@ -1,6 +1,7 @@
 package tp.pr3.logic;
 
 import java.io.BufferedWriter;
+import java.io.BufferedReader;
 
 import tp.pr3.logic.Cell;
 import tp.pr3.logic.Position;
@@ -209,6 +210,50 @@ public class Board
 		}
 		catch(Exception e)
 		{}
+	}
+	
+	public void load(BufferedReader in)
+	{
+		String s;
+		String[] aux;
+		
+		try
+		{
+			s = in.readLine();
+			aux = s.split("\\s+");
+			_boardSize = aux.length;
+			_board = new Cell[_boardSize][_boardSize];
+			_emptyCells = _boardSize*_boardSize;
+			
+			minValue = Integer.MAX_VALUE;
+			maxValue = Integer.MIN_VALUE;
+			
+			for(int i = 0; i < _boardSize; i++)
+			{
+				_board[0][i] = new Cell(Integer.parseInt(aux[i]));
+				if(_board[0][i].getVal() != 0)
+				{
+					_emptyCells--;
+				}
+			}
+			
+			for(int i = 1; i < _boardSize; i++)
+			{
+				s = in.readLine();
+				aux = s.split("\\s+");
+				for(int j = 0; j < _boardSize; j++)
+				{
+					_board[i][j] = new Cell(Integer.parseInt(aux[j]));
+					if(_board[i][j].getVal() != 0)
+					{
+						_emptyCells--;
+					}
+				}
+			}
+			
+		}
+		catch(Exception e){}
+		
 	}
 	
 	/**

@@ -39,7 +39,7 @@ public class SaveCommand extends Command
 		catch(Exception e)
 		{}
 		
-		return true;
+		return false;
 	}
 	
 	
