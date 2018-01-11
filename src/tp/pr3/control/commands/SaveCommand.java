@@ -36,9 +36,9 @@ public class SaveCommand extends Command
 			
 			out.close(); //IOException?
 		}
-		catch(Exception e)
+		catch(IOException e)
 		{
-			throw new CustomInvalidFilenameException();
+			System.out.println(e.getMessage());
 		}
 		
 		return false;
