@@ -1,5 +1,7 @@
 package tp.pr3.logic;
 
+import java.io.BufferedWriter;
+
 import tp.pr3.logic.Cell;
 import tp.pr3.logic.Position;
 import tp.pr3.logic.multigames.GameRules;
@@ -190,7 +192,27 @@ public class Board
 	}
 
 	/**
-	*	Returns the Cell at a given Poisition.
+	*  Stores the state of the board with the adequate format.
+	 */
+	public void store(BufferedWriter out) //PENDING REVISION
+	{
+		try
+		{
+			for(int i = 0; i < _boardSize; i++)
+			{
+				for(int j = 0; j < _boardSize-1; j++)
+				{
+					out.write(_board[i][j] + " ");
+				}
+				out.write(_board[i][_boardSize-1] + "\n");
+			}	
+		}
+		catch(Exception e)
+		{}
+	}
+	
+	/**
+	*	Returns the Cell at a given Position.
 	*/
 	public Cell getCell(Position pos) 
 	{

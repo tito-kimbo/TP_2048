@@ -1,8 +1,8 @@
 package tp.pr3;
 
 import tp.pr3.control.Controller;
-import tp.pr3.logic.multigames.Rules2048;
 import tp.pr3.exceptions.InvalidNumberOfArgumentsException;
+import tp.pr3.logic.multigames.GameType;
 import java.lang.NumberFormatException;
 
 /**
@@ -11,7 +11,7 @@ import java.lang.NumberFormatException;
 public class Game2048 
 {
 
-	private static final Rules2048 RULES = new Rules2048();
+	private static final GameType TYPE = GameType.ORIG;
 	private static final int DEFAULT_SIZE = 4;
 	private static final int DEFAULT_INIT_CELLS = 2;
 	private static final long DEFAULT_SEED = 123946871;
@@ -62,7 +62,7 @@ public class Game2048
 		
 		if(args.length <= 3) 
 		{
-			Controller controller = new Controller(RULES, size, initCells, seed);			  		
+			Controller controller = new Controller(TYPE, size, initCells, seed);			  		
 			controller.run();
 		}
     }

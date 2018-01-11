@@ -1,15 +1,17 @@
 package tp.pr3.logic.multigames;
 
+import java.util.Random;
+import java.io.BufferedWriter;
+
 import tp.pr3.logic.Board;
 import tp.pr3.logic.Cell;
 import tp.pr3.logic.Direction;
 import tp.pr3.logic.GameState;
 import tp.pr3.logic.GameStateStack;
 import tp.pr3.logic.MoveResults;
-
-import java.util.Random;
 import tp.pr3.exceptions.CustomEmptyStackException;
 import tp.pr3.exceptions.GameOverException;
+
 
 /**
 *	Stores the current state of the game and contains useful methods for its management.
@@ -31,15 +33,15 @@ public class Game
 	private GameStateStack _undoneStack;
 	//Stores up to 20 "posterior" states (after executing the undo command)
 	
-	private GameRules _currentRules;
+	private GameType type;
 	//Sets the rules for the current game
 
 	/**
 	*	Constructor called from Controller. Instantiates the board.
 	*/
-	public Game(GameRules rules, int size, int initCells, long seed)
+	public Game(GameType gameType, int size, int initCells, long seed)
 	{
-		reset(rules, size, initCells, seed);
+		reset(gameType.getRules(), size, initCells, seed);
 	}
 
 	/**
@@ -48,7 +50,7 @@ public class Game
 	public void move(Direction dir) throws GameOverException
 	{
 	    GameState currentState = this.getState();
-		MoveResults results = _board.executeMove(dir, _currentRules);
+		MoveResults results = _board.executeMove(dir, type.getRules());
 		
 		//If there was a move, updates the data, saves the previous state and clears
 		//the undone stack (you can't redo after moving)
@@ -56,8 +58,8 @@ public class Game
 		{
 			_score += results.getPoints();
 			
-			_currentRules.addNewCell(_board, _myRandom);
-			_winValue = _currentRules.getWinValue(_board);
+			type.getRules().addNewCell(_board, _myRandom);
+			_winValue = type.getRules().getWinValue(_board);
 			_mainStack.push(currentState);
 			_undoneStack = new GameStateStack();
 		}
@@ -80,15 +82,15 @@ public class Game
 		
 		_myRandom = new Random(seed);
 
-		_currentRules = rules;
+		type = GameType.SetType(rules);
 		
 		_mainStack = new GameStateStack();
 		_undoneStack = new GameStateStack();
 
-		_board = _currentRules.createBoard(_size);
-		_currentRules.initBoard(_board, _initCells, _myRandom);
+		_board = type.getRules().createBoard(_size);
+		type.getRules().initBoard(_board, _initCells, _myRandom);
 
-		_winValue = _currentRules.getWinValue(_board);
+		_winValue = type.getRules().getWinValue(_board);
 	}
 
 	/**
@@ -102,10 +104,10 @@ public class Game
 		_mainStack = new GameStateStack();
 		_undoneStack = new GameStateStack();
 
-		_board = _currentRules.createBoard(_size);
-		_currentRules.initBoard(_board, _initCells, _myRandom);
+		_board = type.getRules().createBoard(_size);
+		type.getRules().initBoard(_board, _initCells, _myRandom);
 
-		_winValue = _currentRules.getWinValue(_board);
+		_winValue = type.getRules().getWinValue(_board);
 	}
 
 	/**
@@ -124,6 +126,21 @@ public class Game
 		{
 			throw new CustomEmptyStackException("Undo is not available!");
 		}
+	}
+	
+	/**
+	 * Stores the state of the game in a buffer with the adequate format.
+	 */
+	public void store(BufferedWriter out)
+	{
+		try
+		{
+			out.write("This file stores a saved " + type + " game\n");	
+			_board.store(out);
+			out.write(_score + " " + _winValue + " " + type.externalise() + "\n");
+		}
+		catch(Exception e)
+		{}
 	}
 
 	/**
@@ -190,7 +207,7 @@ public class Game
 	 */
 	public GameRules getRules()
 	{
-		return _currentRules;
+		return type.getRules();
 	}
 
 	/**
@@ -208,7 +225,7 @@ public class Game
 	*/
 	public boolean isStuck() 
 	{
-		return _currentRules.lose(_board);
+		return type.getRules().lose(_board);
 	}
 
 	/**
@@ -216,7 +233,7 @@ public class Game
 	 */
 	public boolean win() 
 	{
-		return _currentRules.win(_board);
+		return type.getRules().win(_board);
 	}
 
 	/**
@@ -224,7 +241,7 @@ public class Game
 	 */
 	public int merge(Cell c1, Cell c2) 
 	{
-		return _currentRules.merge(c1, c2);
+		return type.getRules().merge(c1, c2);
 	}
 	
 	/**

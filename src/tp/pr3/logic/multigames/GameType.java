@@ -49,6 +49,26 @@ public enum GameType
 		return correspondingRules;
 	}
 	
+	public static GameType SetType(GameRules rules)
+	{
+		GameType t;
+		
+		if(rules instanceof RulesFib)
+		{
+			t = FIB;
+		}
+		else if (rules instanceof RulesInverse)
+		{
+			t = INV;
+		}
+		else
+		{
+			t = ORIG;
+		}
+		
+		return t;
+	}
+	
 	// used in Game in store method
 	public String externalise () 
 	{
