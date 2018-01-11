@@ -1,7 +1,6 @@
 package tp.pr3.control.commands;
 
 import java.util.Scanner;
-import java.lang.System;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.File;
