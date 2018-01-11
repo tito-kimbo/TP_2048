@@ -4,26 +4,25 @@ import java.util.Scanner;
 
 import tp.pr3.control.commands.*;
 import tp.pr3.logic.multigames.Game;
-import tp.pr3.logic.multigames.GameRules;
+import tp.pr3.logic.multigames.GameType;
 import tp.pr3.logic.util.*;
-import tp.pr3.exceptions.*;
 
 /**
 *	Interface between the user and the game. Interprets the user input.
 **/
 public class Controller 
 {;      
-       	private Game game;
+    private Game game;
 	private Scanner in;
 	
 	/**
 	*	Constructor called from Game2048. Creates a Random object with the specified seed and initializes the Game oject.
 	**/
-	public Controller(GameRules rules, int size, int initCells, long seed)
+	public Controller(GameType type, int size, int initCells, long seed)
 	{
 		in = new Scanner(System.in);
 	      	
-		game = new Game(rules, size, initCells, seed);
+		game = new Game(type, size, initCells, seed);
 		
 	}
    	

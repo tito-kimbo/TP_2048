@@ -6,7 +6,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.File;
 
-import tp.pr3.control.Controller;
 import tp.pr3.exceptions.CustomInvalidFilenameException;
 import tp.pr3.exceptions.InvalidNumberOfArgumentsException;
 import tp.pr3.exceptions.FileNotFoundException;
@@ -41,11 +40,7 @@ public class LoadCommand extends Command
 		}
 		catch(Exception e)
 		{}
-		finally
-		{
-			
-		}
-		
+
 		return true;
 	}
 	

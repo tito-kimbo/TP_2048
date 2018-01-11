@@ -1,5 +1,7 @@
 package tp.pr3.control.commands;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.util.Scanner;
 
 import tp.pr3.exceptions.InvalidNumberOfArgumentsException;
@@ -12,14 +14,30 @@ public class SaveCommand extends Command
 	private static final String COMMAND_INFO = "save";
 	private static final String SAVE_HELP = "Save <filename>: Saves the current state of the game"
 			+ "in the given file if it is possible.";
+	private String filename;
 	
 	public SaveCommand()
 	{
 		super(COMMAND_INFO, SAVE_HELP);
 	}
 	
-	public boolean execute(Game game, Scanner in)
+	public boolean execute(Game game, Scanner scan)
 	{
+		BufferedWriter out = null;
+		
+		//OBS: This try{}catch{} is used to avoid compilation error (due to unhandled exceptions). However, on execution
+		//the exception will never be thrown since it is ensured by the parse method
+		try
+		{
+			out = new BufferedWriter(new FileWriter(filename)); 
+			
+			
+			game.store(out);
+			
+			out.close(); //IOException?
+		}
+		catch(Exception e)
+		{}
 		
 		return true;
 	}
@@ -43,6 +61,7 @@ public class SaveCommand extends Command
 				}
 				else
 				{
+					filename = commandWords[1];
 					ret = this;		
 				}
 			}
