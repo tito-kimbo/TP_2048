@@ -6,11 +6,7 @@ import tp.pr3.control.commands.*;
 import tp.pr3.logic.multigames.Game;
 import tp.pr3.logic.multigames.GameRules;
 import tp.pr3.logic.util.*;
-import tp.pr3.exceptions.CustomEmptyStackException;
-import tp.pr3.exceptions.InvalidNumberOfArgumentsException;
-import java.nio.file.InvalidPathException;
-import java.io.FileNotFoundException;
-import java.lang.IllegalArgumentException;
+import tp.pr3.exceptions.*;
 
 /**
 *	Interface between the user and the game. Interprets the user input.
@@ -62,7 +58,7 @@ public class Controller
 					System.out.println(e.getMessage());	
 				}
 				/*
-				catch(InvalidPathException e)
+				catch(CustomInvalidFilenameException e)
 				{
 					System.out.println("Not a valid filename.");
 				}

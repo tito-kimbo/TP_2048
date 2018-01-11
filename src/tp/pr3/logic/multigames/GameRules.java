@@ -111,12 +111,13 @@ public interface GameRules
 	 */
 	default void addNewCell(Board board, Random rand)
 	{
+		//ESSENTIALLY DOES THE WORK OF THE CURRENT BOARD CODE
 		Position pos = new Position();
 		int counter, i, j, size; 
 
 		if(board.getEmptyCells() > 0)
 		{	
-			counter = rand.nextInt(board.getEmptyCells())+1;
+			counter = rand.nextInt(board.getEmptyCells())+1;;
 			
 			i = 0;
 			size = board.getBoardSize();
@@ -130,7 +131,10 @@ public interface GameRules
 					
 					if(board.isEmptyCell(pos)) 
 					{
-						counter--;		
+						if(counter > 0)	//IS THIS CHECK REALLY NECESSARY (PROB NOT)
+						{
+							counter--;		
+						}				
 					}
 					
 					j++;

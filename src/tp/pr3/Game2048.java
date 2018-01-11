@@ -2,7 +2,7 @@ package tp.pr3;
 
 import tp.pr3.control.Controller;
 import tp.pr3.logic.multigames.Rules2048;
-import tp.pr3.exceptions.InvalidNumberOfArgumentsException;
+import tp.pr3.exceptions.TooManyArgumentsException;
 import java.lang.NumberFormatException;
 
 /**
@@ -19,7 +19,7 @@ public class Game2048
 	/**
 	*	Creates the Controller with the given (or default) parameters and executes the 2048 game loop.
 	*/
-	public static void main(String[] args)
+    public static void main(String[] args)
 	{
 		int size = DEFAULT_SIZE, initCells = DEFAULT_INIT_CELLS;
 		long seed = DEFAULT_SEED;
@@ -28,7 +28,7 @@ public class Game2048
 		{
 			switch(args.length)
 			{
-				case 0: break;
+				case 0: {} break;
 				case 1: 
 				{			
 					size = Integer.parseInt(args[0]);
@@ -46,7 +46,7 @@ public class Game2048
 				} break;
 				default:
 				{
-					throw new InvalidNumberOfArgumentsException("Too many arguments.");
+					throw new TooManyArgumentsException("Too many arguments.");
 				}
 			}
 		}
@@ -55,7 +55,7 @@ public class Game2048
 			System.out.println("Invalid parameter format. Using default values.");
 		}
 		
-		catch(InvalidNumberOfArgumentsException e) 
+		catch(TooManyArgumentsException e) 
 		{
 			System.out.println(e.getMessage());
 		}
