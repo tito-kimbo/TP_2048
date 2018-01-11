@@ -38,13 +38,7 @@ public class Game
 	*/
 	public Game(GameRules rules, int size, int initCells, long seed)
 	{
-		_size = size;
-		_initCells = initCells;
-		_seed = seed;
-		_myRandom = new Random(seed);
-		_currentRules = rules;
-		
-		reset();
+		reset(rules, size, initCells, seed);
 	}
 
 	/**
@@ -71,12 +65,35 @@ public class Game
 	
 	
 	/**
+	 *      Resets the game with the given parameters.
+	 */
+	public void reset(GameRules rules, int size, int initCells, long seed)
+	{
+
+		_score = 0;
+		_size = size;
+		_initCells = initCells;
+		_seed = seed;
+		
+		_myRandom = new Random(seed);
+
+		_currentRules = rules;
+		
+		_mainStack = new GameStateStack();
+		_undoneStack = new GameStateStack();
+
+		_board = _currentRules.createBoard(_size);
+		_currentRules.initBoard(_board, _initCells, _myRandom);
+
+		_winValue = _currentRules.getWinValue(_board);
+	}
+
+	/**
 	*	Resets the game to its initial state.
 	*/
 	public void reset()
 	{
-
-		_score = 0;
+	        _score = 0;
 		_myRandom.setSeed(_seed);
 		
 		_mainStack = new GameStateStack();
@@ -152,14 +169,16 @@ public class Game
 	/**
 	 * Returns the Board.
 	 */
-	public Board getBoard() {
+	public Board getBoard()
+	{
 		return _board;
 	}
 
 	/**
 	 * Returns the current GameRules.
 	 */
-	public GameRules getRules() {
+	public GameRules getRules()
+	{
 		return _currentRules;
 	}
 

@@ -8,7 +8,7 @@ import java.io.File;
 
 import tp.pr3.control.Controller;
 import tp.pr3.exceptions.CustomInvalidFilenameException;
-import tp.pr3.exceptions.TooManyArgumentsException;
+import tp.pr3.exceptions.InvalidNumberOfArgumentsException;
 import tp.pr3.exceptions.FileNotFoundException;
 import tp.pr3.logic.multigames.Game;
 import tp.pr3.logic.util.MyStringUtils;
@@ -25,7 +25,7 @@ public class LoadCommand extends Command
 		super(COMMAND_INFO, LOAD_HELP);
 	}
 
-	public boolean execute(Game game, Controller controller)
+	public boolean execute(Game game, Scanner scan)
 	{
 		BufferedReader in = null;
 		
@@ -50,7 +50,7 @@ public class LoadCommand extends Command
 	}
 	
 	public Command parse(String[] commandWords, Scanner in) 
-			throws TooManyArgumentsException, CustomInvalidFilenameException, FileNotFoundException
+			throws InvalidNumberOfArgumentsException, CustomInvalidFilenameException, FileNotFoundException
 	{
 		Command ret = null;
 		File file = null;
@@ -60,7 +60,7 @@ public class LoadCommand extends Command
 		{
 			if(commandWords.length > 2)
 			{
-				throw new TooManyArgumentsException("Filename can't contain spaces!");
+				throw new InvalidNumberOfArgumentsException("Filename can't contain spaces!");
 			}
 			else if(commandWords.length == 2)
 			{		

@@ -5,7 +5,8 @@ import java.util.Scanner;
 import tp.pr3.control.Controller;
 import tp.pr3.logic.Direction;
 import tp.pr3.logic.multigames.Game;
-import tp.pr3.exceptions.TooManyArgumentsException;
+import tp.pr3.exceptions.InvalidNumberOfArgumentsException;
+import java.lang.IllegalArgumentException;
 
 /**
  * Contains the information and implementation of the command Move.
@@ -31,45 +32,38 @@ public class MoveCommand extends Command
 	/**
 	 * Executes the "move" commands, given the parameters are correct.
 	 */
-	public boolean execute(Game game, Controller controller)
-	{	       	
-		if(direction != null) 
-		{
-			game.move(direction);
-			controller.setNoPrintGameState(true);
-		}
-		else
-		{
-		        controller.setNoPrintGameState(false);
-			System.out.println("Not a valid direction!");
-		}
-		
-		return true;				
+	public boolean execute(Game game, Scanner in)
+	{
+		game.move(direction);
+		return true;
 	}
 	
 	/**
 	 * Parses the "move" command.
 	 */
-	public Command parse(String[] commandWords, Scanner in) throws TooManyArgumentsException
+	public Command parse(String[] commandWords, Scanner in) throws InvalidNumberOfArgumentsException, IllegalArgumentException
 	{ 
 		Command ret = null;
-	    Direction dir = null;
+		Direction dir = null;
 		
 		if(commandWords[0].equals("move")) 
 		{
 			if(commandWords.length > 2)
 			{
-				throw new TooManyArgumentsException("This command only accepts one parameter!");
+				throw new InvalidNumberOfArgumentsException("This command only accepts one parameter!");
 			}
-			else if(commandWords.length == 2)
+			else if(commandWords.length < 2)
 			{
-				//ADD EXCEPTION FOR NOT ENOUGH ARGUMENTS???
+				throw new InvalidNumberOfArgumentsException("No direction specified!");
+			}
+			else
+			{
 				ret = this;
-				for(Direction d : Direction.values())
-					{
-						if(d.toString().equals(commandWords[1]))
-							dir = d;
-					}
+			        dir = Direction.fromString(commandWords[1]);
+				if(dir == null)
+				{
+					throw new IllegalArgumentException("Not a valid direction!");
+				}
 				
 			}
 		}

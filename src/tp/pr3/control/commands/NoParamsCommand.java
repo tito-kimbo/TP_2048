@@ -2,7 +2,7 @@ package tp.pr3.control.commands;
 
 import java.util.Scanner;
 
-import tp.pr3.exceptions.TooManyArgumentsException;
+import tp.pr3.exceptions.InvalidNumberOfArgumentsException;
 
 /**
  * Contains a scheme to implement commands without parameters.
@@ -22,7 +22,7 @@ public abstract class NoParamsCommand extends Command
 	/**
 	 * Parses a command, taking into account that it has no parameters.
 	 */
-	public Command parse(String[] commandWords, Scanner in) throws TooManyArgumentsException
+	public Command parse(String[] commandWords, Scanner in) throws InvalidNumberOfArgumentsException
 	{
 		Command c = null;
 		
@@ -34,7 +34,7 @@ public abstract class NoParamsCommand extends Command
 				}
 			else
 			{
-				throw new TooManyArgumentsException("This command does not accept parameters!");
+				throw new InvalidNumberOfArgumentsException("This command does not accept parameters!");
 			}
 		}
 	       return c;

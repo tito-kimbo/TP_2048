@@ -1,6 +1,6 @@
 package tp.pr3.control.commands;
 
-import tp.pr3.control.Controller;
+import java.util.Scanner;
 import tp.pr3.logic.multigames.Game;
 
 /**
@@ -23,11 +23,9 @@ public class ResetCommand extends NoParamsCommand
 	/**
 	 * Resets the game to its initial values.
 	 */
-	public boolean execute(Game game, Controller controller)
+	public boolean execute(Game game, Scanner in)
 	{
 		game.reset();
-
-
 		return true;
 	}
 }

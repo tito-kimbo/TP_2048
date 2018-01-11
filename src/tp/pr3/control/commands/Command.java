@@ -29,7 +29,7 @@ public abstract class Command
 	 * Executes the corresponding command, returning a boolean that indicates whether the
 	 * game should be printed.
 	 */
-	public abstract boolean execute(Game game, Controller controller);
+	public abstract boolean execute(Game game, Scanner in);
 	
 	/**
 	 * Parses the corresponding command.

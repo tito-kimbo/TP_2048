@@ -6,22 +6,14 @@ import tp.pr3.control.commands.*;
 import tp.pr3.logic.multigames.Game;
 import tp.pr3.logic.multigames.GameRules;
 import tp.pr3.logic.util.*;
-import tp.pr3.exceptions.CustomEmptyStackException;
-import tp.pr3.exceptions.TooManyArgumentsException;
-import tp.pr3.exceptions.CustomInvalidFilenameException;
-import tp.pr3.exceptions.FileNotFoundException;
+import tp.pr3.exceptions.*;
 
 /**
 *	Interface between the user and the game. Interprets the user input.
 **/
 public class Controller 
-{;	
-	private long seed;
-
-	private boolean print;
-	private boolean exit = false;
-	
-	private Game game;
+{;      
+       	private Game game;
 	private Scanner in;
 	
 	/**
@@ -29,22 +21,10 @@ public class Controller
 	**/
 	public Controller(GameRules rules, int size, int initCells, long seed)
 	{
-		
-		print = true;
-		exit = false;
-		this.seed = seed;
 		in = new Scanner(System.in);
-	      		
+	      	
 		game = new Game(rules, size, initCells, seed);
 		
-	}
-	
-	/**
-	 * Indicates the program that the board should not be printed on the current iteration.
-	 */
-	public void setNoPrintGameState(boolean b)
-	{
-		print = b;
 	}
    	
 	/**
@@ -62,7 +42,6 @@ public class Controller
 		do
 		{
 			//Do not print the game by default, in case an incorrect command is introduced.
-			print = false; 
 			stuck = game.isStuck();
 			
 			if(!stuck)	
@@ -72,23 +51,13 @@ public class Controller
 				try
 				{
 					cmd = CommandParser.parseCommand(cmdWords, in);
-					if(cmd == null) 
-					{
-						System.out.println("Not a valid command!");
-					}
-					else 
-					{
-						setNoPrintGameState(cmd.execute(game, this));
-					}
+					if(cmd.execute(game, in)) System.out.println(game);
 				}
-				catch(TooManyArgumentsException e)
+				catch(Exception e)
 				{
-					System.out.println(e.getMessage());
-				}			       
-				catch(CustomEmptyStackException e)
-				{
-					System.out.println(e.getMessage());
+					System.out.println(e.getMessage());	
 				}
+				/*
 				catch(CustomInvalidFilenameException e)
 				{
 					System.out.println("Not a valid filename.");
@@ -97,54 +66,14 @@ public class Controller
 				{
 					System.out.println("The file does not exist or can't be opened.");
 				}
-				
-
-				if(print) System.out.println(game);
+				*/
+			        
 			}
 			
-		} while(!game.win() && !stuck && !exit);
+		} while(!game.win() && !stuck && !(cmd instanceof ExitCommand));
 		//The game loop keeps going until the objective (2048) is reached,
 		//the game is stuck, or the command exit is introduced
 
 		System.out.println("Game Over");
-	}
-
-	/**
-	 * Changes the exit value to true. The main loop will stop after this iteration.
-	 */
-	public void exit() 
-	{
-		//This function is only called by ExitCommand.execute(), which is
-		//in turn called from the main loop of this class. The loop checks
-		//exit just after calling execute(), stopping the game.
-		exit = true;
-	}
-
-	/**
-	 * Returns the PRNG seed introduced at the start of the game.
-	 */
-	public long getSeed() 
-	{
-		return seed;
-	}
-
-	/**
-	 * Provides access to the scanner.
-	 */
-	public Scanner getScanner() 
-	{
-		//Needed by PlayCommand to read input
-		return this.in;
-	}
-
-	/**
-	 * Changes the current game to the specified type.
-	 */
-	public void setGame(GameRules rules, int size, int initCells, long seed) 
-	{
-		game = new Game(rules, size, initCells, seed);
-		this.seed = seed;
-
-		game.reset();
 	}
 };

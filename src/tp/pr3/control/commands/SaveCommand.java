@@ -2,8 +2,7 @@ package tp.pr3.control.commands;
 
 import java.util.Scanner;
 
-import tp.pr3.control.Controller;
-import tp.pr3.exceptions.TooManyArgumentsException;
+import tp.pr3.exceptions.InvalidNumberOfArgumentsException;
 import tp.pr3.exceptions.CustomInvalidFilenameException;
 import tp.pr3.logic.multigames.Game;
 import tp.pr3.logic.util.MyStringUtils;
@@ -19,14 +18,14 @@ public class SaveCommand extends Command
 		super(COMMAND_INFO, SAVE_HELP);
 	}
 	
-	public boolean execute(Game game, Controller controller)
+	public boolean execute(Game game, Scanner in)
 	{
 		
 		return true;
 	}
 	
 	
-	public Command parse(String[] commandWords, Scanner in) throws TooManyArgumentsException, CustomInvalidFilenameException
+	public Command parse(String[] commandWords, Scanner in) throws InvalidNumberOfArgumentsException, CustomInvalidFilenameException
 	{
 		Command ret = null;
 		
@@ -34,7 +33,7 @@ public class SaveCommand extends Command
 		{
 			if(commandWords.length > 2)
 			{
-				throw new TooManyArgumentsException("Filename can't contain spaces!");
+				throw new InvalidNumberOfArgumentsException("Filename can't contain spaces!");
 			}
 			else if(commandWords.length == 2)
 			{		

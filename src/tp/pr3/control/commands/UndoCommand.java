@@ -1,7 +1,7 @@
 package tp.pr3.control.commands;
 
 
-import tp.pr3.control.Controller;
+import java.util.Scanner;
 import tp.pr3.logic.multigames.Game;
 
 /**
@@ -24,10 +24,9 @@ public class UndoCommand extends NoParamsCommand
 	/**
 	 * Undoes the last move, given it exists.
 	 */
-	public boolean execute(Game game, Controller controller)
+	public boolean execute(Game game, Scanner in)
 	{
 		game.undo();
-		
 		//DO WE NEED TO THROW THE EXCEPTION??????!!!
 		return true;
 	}
