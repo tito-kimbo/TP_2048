@@ -9,6 +9,7 @@ import tp.pr3.logic.MoveResults;
 
 import java.util.Random;
 import tp.pr3.exceptions.CustomEmptyStackException;
+import tp.pr3.exceptions.GameOverException;
 
 /**
 *	Stores the current state of the game and contains useful methods for its management.
@@ -44,7 +45,7 @@ public class Game
 	/**
 	*	Executes a move in the given direction, updating the relevant information.
 	*/
-	public void move(Direction dir)
+	public void move(Direction dir) throws GameOverException
 	{
 	    GameState currentState = this.getState();
 		MoveResults results = _board.executeMove(dir, _currentRules);
@@ -60,6 +61,8 @@ public class Game
 			_mainStack.push(currentState);
 			_undoneStack = new GameStateStack();
 		}
+		if(win()) throw new GameOverException(true, _score, _winValue);
+		if(isStuck()) throw new GameOverException(false, _score, _winValue);
 	}
 
 	
@@ -93,7 +96,7 @@ public class Game
 	*/
 	public void reset()
 	{
-	        _score = 0;
+	    _score = 0;
 		_myRandom.setSeed(_seed);
 		
 		_mainStack = new GameStateStack();
@@ -149,6 +152,14 @@ public class Game
 		return _score;
 	}
 
+	/**
+	*	Returns the current best value.
+	*/
+	public int getWinValue() 
+	{
+		return _winValue;
+	}
+	
 	/**
 	 * Returns the PRNG.
 	 */
