@@ -37,6 +37,6 @@ public abstract class NoParamsCommand extends Command
 				throw new InvalidNumberOfArgumentsException("This command does not accept parameters!");
 			}
 		}
-	       return c;
+	    return c;
 	}
 }

@@ -18,7 +18,7 @@ public class CommandParser
 	*/
 	private static Command[] availableCommands = 
 		{ 	
-			new HelpCommand(), new ResetCommand(),new ExitCommand(), new MoveCommand(),
+			new HelpCommand(), new ResetCommand(), new ExitCommand(), new MoveCommand(),
 			new UndoCommand(), new RedoCommand(), new PlayCommand(), new LoadCommand(), 
 			new SaveCommand()
 		};
@@ -37,7 +37,6 @@ public class CommandParser
 		}
 
 		if(result == null) throw new IllegalArgumentException("Not a valid command!");
-		
 		return result;
 	}
 

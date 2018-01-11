@@ -6,6 +6,7 @@ import tp.pr3.control.commands.*;
 import tp.pr3.logic.multigames.Game;
 import tp.pr3.logic.multigames.GameType;
 import tp.pr3.logic.util.*;
+import tp.pr3.exceptions.GameOverException;
 
 /**
 *	Interface between the user and the game. Interprets the user input.
@@ -32,47 +33,42 @@ public class Controller
 	public void run()
 	{
 		Command cmd = null;
-		String[] cmdWords;
-		boolean stuck;
-		
+		String[] cmdWords = new String[1];
+		boolean exit = false;
+
 		System.out.println(game);
 		System.out.println("Type help for a list of commands");
 
 		do
 		{
-			//Do not print the game by default, in case an incorrect command is introduced.
-			stuck = game.isStuck();
-			
-			if(!stuck)	
-			{	
-				System.out.print("Command > ");
-				cmdWords = in.nextLine().toLowerCase().split("\\s+");
-				try
-				{
-					cmd = CommandParser.parseCommand(cmdWords, in);
-					if(cmd.execute(game, in)) System.out.println(game);
-				}
-				catch(Exception e)
-				{
-					System.out.println(e.getMessage());	
-				}
-				/*
-				catch(CustomInvalidFilenameException e)
-				{
-					System.out.println("Not a valid filename.");
-				}
-				catch(FileNotFoundException e)
-				{
-					System.out.println("The file does not exist or can't be opened.");
-				}
-				*/
-			        
+			System.out.print("Command > ");
+			cmdWords = in.nextLine().toLowerCase().split("\\s+");
+			try
+			{
+				cmd = CommandParser.parseCommand(cmdWords, in);
+				if(cmd.execute(game, in)) System.out.println(game);
 			}
-			
-		} while(!game.win() && !stuck && !(cmd instanceof ExitCommand));
-		//The game loop keeps going until the objective (2048) is reached,
-		//the game is stuck, or the command exit is introduced
-
-		System.out.println("Game Over");
+			catch(GameOverException e)
+			{
+				exit = true;
+				System.out.print(game);
+				System.out.println(e);
+			}
+			catch(Exception e)
+			{
+				System.out.println(e.getMessage());	
+			}
+			/*
+			catch(CustomInvalidFilenameException e)
+			{
+				System.out.println("Not a valid filename.");
+			}
+			catch(FileNotFoundException e)
+			{
+				System.out.println("The file does not exist or can't be opened.");
+			}
+			*/     
+				
+		} while(!exit);
 	}
 };

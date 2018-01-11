@@ -17,20 +17,18 @@ public enum GameType
 		correspondingRules = rules;
 	}
 	
-	// precondition : param string contains only lower−case characters
-	// used in PlayCommand and Game, in parse method and load method, respectively
-	public static GameType parse(String param) 
+	/**
+	 * Returns the type corresponding to the given string.
+	 */
+	public static GameType fromString(String text)
 	{
-		for (GameType gameType : GameType.values()) 
-		{
-			if (gameType.parameterName.equals(param))
-			{
-				return gameType;	
-			}
-		}
-		
-		return null;
+		GameType result = null;
+		for(GameType t : GameType.values())
+			if(t.parameterName.equalsIgnoreCase(text))
+				result = t;
+		return result;
 	}
+
 	// used in PlayCommand to build help message, and in parse method exception msg
 	public static String externaliseAll () 
 	{

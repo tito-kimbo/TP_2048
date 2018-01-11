@@ -11,6 +11,7 @@ import tp.pr3.logic.GameState;
 import tp.pr3.logic.GameStateStack;
 import tp.pr3.logic.MoveResults;
 import tp.pr3.exceptions.CustomEmptyStackException;
+import tp.pr3.exceptions.GameOverException;
 
 
 /**
@@ -41,13 +42,13 @@ public class Game
 	*/
 	public Game(GameType gameType, int size, int initCells, long seed)
 	{
-		reset(gameType.getRules(), size, initCells, seed);
+		reset(gameType, size, initCells, seed);
 	}
 
 	/**
 	*	Executes a move in the given direction, updating the relevant information.
 	*/
-	public void move(Direction dir)
+	public void move(Direction dir) throws GameOverException
 	{
 	    GameState currentState = this.getState();
 		MoveResults results = _board.executeMove(dir, type.getRules());
@@ -63,6 +64,8 @@ public class Game
 			_mainStack.push(currentState);
 			_undoneStack = new GameStateStack();
 		}
+		if(win()) throw new GameOverException(true, _score, _winValue);
+		if(isStuck()) throw new GameOverException(false, _score, _winValue);
 	}
 
 	
@@ -70,7 +73,7 @@ public class Game
 	/**
 	 *      Resets the game with the given parameters.
 	 */
-	public void reset(GameRules rules, int size, int initCells, long seed)
+	public void reset(GameType type, int size, int initCells, long seed)
 	{
 
 		_score = 0;
@@ -80,7 +83,7 @@ public class Game
 		
 		_myRandom = new Random(seed);
 
-		type = GameType.SetType(rules);
+		this.type = type;
 		
 		_mainStack = new GameStateStack();
 		_undoneStack = new GameStateStack();
@@ -96,7 +99,7 @@ public class Game
 	*/
 	public void reset()
 	{
-	        _score = 0;
+	    _score = 0;
 		_myRandom.setSeed(_seed);
 		
 		_mainStack = new GameStateStack();
@@ -193,6 +196,14 @@ public class Game
 		return _score;
 	}
 
+	/**
+	*	Returns the current best value.
+	*/
+	public int getWinValue() 
+	{
+		return _winValue;
+	}
+	
 	/**
 	 * Returns the PRNG.
 	 */

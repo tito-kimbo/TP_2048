@@ -1,2 +1,1 @@
-find src -name '*.java' > sources.txt
-javac -d bin @sources.txt
+javac -d bin src\tp\pr3\*.java src\tp\pr3\exceptions\*.java src\tp\pr3\control\*.java src\tp\pr3\control\commands\*.java src\tp\pr3\logic\*.java src\tp\pr3\logic\util\*.java src\tp\pr3\logic\multigames\*.java

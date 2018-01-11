@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import tp.pr3.control.Controller;
 import tp.pr3.control.commands.Command;
-import tp.pr3.logic.GameType;
+import tp.pr3.logic.multigames.GameType;
 import tp.pr3.logic.multigames.Game;
 import java.lang.NumberFormatException;
 import tp.pr3.exceptions.InvalidNumberOfArgumentsException;
@@ -113,7 +113,7 @@ public class PlayCommand extends Command
 			System.out.println("Using the default seed for the PRNG: " + seed);
 		}			
 		
-		game.reset(type.toRules(), size, cells, seed);		
+		game.reset(type, size, cells, seed);		
 		return true;
 	}
 
