@@ -2,7 +2,6 @@ package tp.pr3.control.commands;
 
 import java.util.Scanner;
 
-import tp.pr3.control.Controller;
 import tp.pr3.control.commands.Command;
 import tp.pr3.logic.multigames.GameType;
 import tp.pr3.logic.multigames.Game;

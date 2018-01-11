@@ -2,6 +2,7 @@ package tp.pr3.logic.multigames;
 
 import java.util.Random;
 import java.io.BufferedWriter;
+import java.io.BufferedReader;
 
 import tp.pr3.logic.Board;
 import tp.pr3.logic.Cell;
@@ -138,6 +139,32 @@ public class Game
 			out.write("This file stores a saved " + type + " game\n");	
 			_board.store(out);
 			out.write(_score + " " + _winValue + " " + type.externalise() + "\n");
+		}
+		catch(Exception e)
+		{}
+	}
+	
+	/*
+	 * Reads the data related to the current game
+	 */
+	public void loadGame(BufferedReader in)
+	{
+		String aux;
+		String[] auxArray;
+		
+		try
+		{
+			//We skip the first line
+			in.readLine();
+			_board.load(in);
+			
+			aux = in.readLine();
+			//Parse the line and get the relevant data
+			auxArray = aux.split("\\s+");
+			_score = Integer.parseInt(auxArray[0]);
+			_winValue = Integer.parseInt(auxArray[1]);
+			_board.updateMaxMinValue(_winValue);
+			type = GameType.SetType(auxArray[2]);
 		}
 		catch(Exception e)
 		{}

@@ -1,0 +1,6 @@
+This file stores a saved 2048, original version game
+0 0 0 0
+0 2 0 2
+0 0 2 8
+0 4 4 16
+60 16 original

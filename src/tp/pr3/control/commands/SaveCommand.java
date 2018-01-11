@@ -41,7 +41,7 @@ public class SaveCommand extends Command
 			throw new CustomInvalidFilenameException();
 		}
 		
-		return true;
+		return false;
 	}
 	
 	
