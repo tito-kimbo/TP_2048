@@ -41,7 +41,7 @@ public class Game
 	*/
 	public Game(GameType gameType, int size, int initCells, long seed)
 	{
-		reset(gameType.getRules(), size, initCells, seed);
+		reset(gameType, size, initCells, seed);
 	}
 
 	/**
@@ -72,7 +72,7 @@ public class Game
 	/**
 	 *      Resets the game with the given parameters.
 	 */
-	public void reset(GameRules rules, int size, int initCells, long seed)
+	public void reset(GameType type, int size, int initCells, long seed)
 	{
 
 		_score = 0;
@@ -82,7 +82,7 @@ public class Game
 		
 		_myRandom = new Random(seed);
 
-		type = GameType.SetType(rules);
+		this.type = type;
 		
 		_mainStack = new GameStateStack();
 		_undoneStack = new GameStateStack();
