@@ -2,6 +2,8 @@ package tp.pr3.exceptions;
 
 public class CustomInvalidFilenameException extends RuntimeException
 {
+	//Generated serialVersionUID
+	private static final long serialVersionUID = -1910408327810463809L;
 	private static String message = null;
 	
 	public CustomInvalidFilenameException()
@@ -14,7 +16,7 @@ public class CustomInvalidFilenameException extends RuntimeException
 		message = text;
 	}
 	
-	public String getMessage()
+	public String toString()
 	{
 		return message;
 	}

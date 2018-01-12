@@ -1,12 +1,13 @@
 package tp.pr3.logic;
 
+import java.io.IOException;
 import java.io.BufferedWriter;
 import java.io.BufferedReader;
 
 import tp.pr3.logic.Cell;
 import tp.pr3.logic.Position;
-import tp.pr3.logic.multigames.GameRules;
 import tp.pr3.logic.util.MyStringUtils;
+import tp.pr3.logic.multigames.GameRules;
 
 /**
 *	Represents a Board of Cells and has the main movement methods.
@@ -195,7 +196,7 @@ public class Board
 	/**
 	*  Stores the state of the board with the adequate format.
 	 */
-	public void store(BufferedWriter out) //PENDING REVISION
+	public void store(BufferedWriter out) throws IOException
 	{
 		try
 		{
@@ -208,11 +209,13 @@ public class Board
 				out.write(_board[i][_boardSize-1] + "\n");
 			}	
 		}
-		catch(Exception e)
-		{}
+		catch(IOException e)
+		{
+			throw e;
+		}
 	}
 	
-	public void load(BufferedReader in)
+	public void load(BufferedReader in) throws IOException
 	{
 		String s;
 		String[] aux;
@@ -252,7 +255,10 @@ public class Board
 			}
 			
 		}
-		catch(Exception e){}
+		catch(IOException e)
+		{
+			throw e;
+		}
 		
 	}
 	

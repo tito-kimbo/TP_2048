@@ -3,9 +3,11 @@ package tp.pr3.control.commands;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.util.Scanner;
+import java.io.IOException;
 
 import tp.pr3.exceptions.InvalidNumberOfArgumentsException;
 import tp.pr3.exceptions.CustomInvalidFilenameException;
+import tp.pr3.exceptions.CustomIOException;
 import tp.pr3.logic.multigames.Game;
 import tp.pr3.logic.util.MyStringUtils;
 
@@ -21,24 +23,17 @@ public class SaveCommand extends Command
 		super(COMMAND_INFO, SAVE_HELP);
 	}
 	
-	public boolean execute(Game game, Scanner in)
-	{
-		BufferedWriter out = null;
-		
+	public boolean execute(Game game, Scanner in) throws CustomIOException
+	{		
 		//OBS: This try{}catch{} is used to avoid compilation error (due to unhandled exceptions). However, on execution
 		//the exception will never be thrown since it is ensured by the parse method
-		try
+		try(BufferedWriter out = new BufferedWriter(new FileWriter(filename)))
 		{
-			out = new BufferedWriter(new FileWriter(filename)); 
-			
-			
 			game.store(out);
-			
-			out.close(); //IOException?
 		}
 		catch(IOException e)
 		{
-			System.out.println(e.getMessage());
+			throw new CustomIOException("There was a problem writing the file.");
 		}
 		
 		return false;

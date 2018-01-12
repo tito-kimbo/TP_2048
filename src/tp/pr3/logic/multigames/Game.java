@@ -1,6 +1,7 @@
 package tp.pr3.logic.multigames;
 
 import java.util.Random;
+import java.io.IOException;
 import java.io.BufferedWriter;
 import java.io.BufferedReader;
 
@@ -55,7 +56,7 @@ public class Game
 		
 		//If there was a move, updates the data, saves the previous state and clears
 		//the undone stack (you can't redo after moving)
-		if(results.getMoved()) 
+		if( results.getMoved()) 
 		{
 			_score += results.getPoints();
 			
@@ -132,7 +133,7 @@ public class Game
 	/**
 	 * Stores the state of the game in a buffer with the adequate format.
 	 */
-	public void store(BufferedWriter out)
+	public void store(BufferedWriter out) throws IOException
 	{
 		try
 		{
@@ -140,14 +141,16 @@ public class Game
 			_board.store(out);
 			out.write(_score + " " + _winValue + " " + type.externalise() + "\n");
 		}
-		catch(Exception e)
-		{}
+		catch(IOException e)
+		{
+			throw e;
+		}
 	}
 	
 	/*
 	 * Reads the data related to the current game
 	 */
-	public void loadGame(BufferedReader in)
+	public void loadGame(BufferedReader in) throws IOException
 	{
 		String aux;
 		String[] auxArray;
@@ -164,10 +167,12 @@ public class Game
 			_score = Integer.parseInt(auxArray[0]);
 			_winValue = Integer.parseInt(auxArray[1]);
 			_board.updateMaxMinValue(_winValue);
-			type = GameType.SetType(auxArray[2]);
+			type = GameType.setType(auxArray[2]);
 		}
-		catch(Exception e)
-		{}
+		catch(IOException e)
+		{
+			throw e;
+		}
 	}
 
 	/**

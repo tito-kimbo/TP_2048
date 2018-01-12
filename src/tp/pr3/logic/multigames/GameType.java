@@ -47,7 +47,7 @@ public enum GameType
 		return correspondingRules;
 	}
 	
-	public static GameType SetType(GameRules rules)
+	public static GameType setType(GameRules rules)
 	{
 		GameType t;
 		
@@ -67,7 +67,7 @@ public enum GameType
 		return t;
 	}
 	
-	public static GameType SetType(String rules)
+	public static GameType setType(String rules)
 	{
 		GameType t;
 		

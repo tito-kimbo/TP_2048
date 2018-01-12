@@ -4,6 +4,8 @@ import java.util.EmptyStackException;
 
 public class CustomEmptyStackException extends EmptyStackException
 {
+	//Generated serialVersionUID
+	private static final long serialVersionUID = 1314089754841809739L;
 	private static String message = null;
 	
 	public CustomEmptyStackException()
@@ -17,7 +19,7 @@ public class CustomEmptyStackException extends EmptyStackException
 		message = text;
 	}
 	
-	public String getMessage()
+	public String toString()
 	{
 		return message;
 	}

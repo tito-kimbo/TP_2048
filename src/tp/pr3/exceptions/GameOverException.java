@@ -2,7 +2,8 @@ package tp.pr3.exceptions;
 
 public class GameOverException extends RuntimeException
 {
-
+	//Generated serialVersionUID
+	private static final long serialVersionUID = 7329608758198834211L;
 	private boolean win;
 	private int score, highest;
 
