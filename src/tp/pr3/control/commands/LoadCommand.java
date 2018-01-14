@@ -17,7 +17,7 @@ public class LoadCommand extends Command
 {
 	private static final String COMMAND_INFO = "load";
 	private static final String LOAD_HELP = "load <filename>: Loads a previously saved game from an existing"
-			+ "file.";
+			+ " file.";
 	private String filename;
 	
 	public LoadCommand()

@@ -17,7 +17,7 @@ public class SaveCommand extends Command
 {
 	private static final String COMMAND_INFO = "save";
 	private static final String SAVE_HELP = "Save <filename>: Saves the current state of the game"
-			+ "in the given file if it is possible.";
+			+ " in the given file if it is possible.";
 	private String filename;
 	
 	public SaveCommand()
