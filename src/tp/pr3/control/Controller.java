@@ -51,14 +51,15 @@ public class Controller
 			catch(GameOverException e)
 			{
 				exit = true;
-				
-				
-				System.out.print(game);
-				System.out.println(e);
+				if(!e.exit())
+				{
+					System.out.print(game);
+					System.out.println(e.getMessage());
+				}
 			}
-			catch(Exception e)
+			catch(RuntimeException e)
 			{
-				System.out.println(e);	
+				System.out.println(e.getMessage());	
 			}
 			/*
 			catch(CustomInvalidFilenameException e)

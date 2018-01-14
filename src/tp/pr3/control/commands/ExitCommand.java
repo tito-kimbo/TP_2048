@@ -27,7 +27,7 @@ public class ExitCommand extends NoParamsCommand
 	 */
 	public boolean execute(Game game, Scanner in) throws GameOverException
 	{
-		throw new GameOverException(false, game.getScore(), game.getWinValue());
+		throw new GameOverException();
 		
 	}
 }

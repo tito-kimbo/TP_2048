@@ -33,6 +33,10 @@ public class LoadCommand extends Command
 		{
 			game.loadGame(in);
 		}
+		catch(CustomIOException e)
+		{
+			throw e;
+		}
 		catch(IOException e)
 		{
 			throw new CustomIOException("There was a problem reading the file.");
@@ -51,9 +55,13 @@ public class LoadCommand extends Command
 		{
 			if(commandWords.length > 2)
 			{
-				throw new InvalidNumberOfArgumentsException("Filename can't contain spaces!");
+				throw new InvalidNumberOfArgumentsException("File path can't contain spaces!");
 			}
-			else if(commandWords.length == 2)
+			else if(commandWords.length < 2)
+			{
+				throw new InvalidNumberOfArgumentsException("No file specified!");
+			}
+			else
 			{		
 				if(!MyStringUtils.validFileName(commandWords[1]))
 				{

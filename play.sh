@@ -1,10 +1,10 @@
 #!/bin/bash
 cd bin
 
-args="6 5 12345678"
+args="3 5 12345678"
 
-echo play fib > test.txt
-echo 7 >> test.txt
+echo play orig > test.txt
+echo 3 >> test.txt
 echo 8 >> test.txt
 echo "" >> test.txt
 
@@ -18,4 +18,4 @@ done
 
 echo exit >> test.txt
 
-cat test.txt | java tp.pr2.Game2048 $args
+cat test.txt | java tp.pr3.Game2048 $args

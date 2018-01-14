@@ -13,6 +13,7 @@ import tp.pr3.logic.GameStateStack;
 import tp.pr3.logic.MoveResults;
 import tp.pr3.exceptions.CustomEmptyStackException;
 import tp.pr3.exceptions.GameOverException;
+import tp.pr3.exceptions.CustomIOException;
 
 
 /**
@@ -150,15 +151,38 @@ public class Game
 	/*
 	 * Reads the data related to the current game
 	 */
-	public void loadGame(BufferedReader in) throws IOException
+	public void loadGame(BufferedReader in) throws IOException, CustomIOException
 	{
 		String aux;
 		String[] auxArray;
 		
+		GameType [] types = GameType.values();
+		String strTypes = "";
+		int i = types.length;
+		
+		//Build a regular expression that matches any game type description
+		for(int j = 0; j < i; ++j) strTypes = strTypes + "(";
+		
+	        for(GameType t : types)
+		{
+			strTypes = strTypes + t.toString();
+		        strTypes = strTypes + ")";
+			if(i < types.length) strTypes = strTypes + ")";
+			if(i > 1) strTypes = strTypes + "|(";
+			--i;
+		}
+		
 		try
 		{
-			//We skip the first line
-			in.readLine();
+		        //Check first line
+			aux = in.readLine();
+			
+			if(!aux.matches("This file stores a saved " + strTypes + " game"))
+			{
+				throw new CustomIOException("Error: invalid file format");
+			}
+
+			
 			_board.load(in);
 			
 			aux = in.readLine();

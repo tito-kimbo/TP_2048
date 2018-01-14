@@ -2,6 +2,7 @@ package tp.pr3.control.commands;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.io.File;
 import java.util.Scanner;
 import java.io.IOException;
 
@@ -43,6 +44,9 @@ public class SaveCommand extends Command
 	public Command parse(String[] commandWords, Scanner in) throws InvalidNumberOfArgumentsException, CustomInvalidFilenameException
 	{
 		Command ret = null;
+		File file;
+		bool confirmed = false;
+		String line;
 		
 		if(commandWords[0].equals("save"))
 		{
@@ -55,15 +59,34 @@ public class SaveCommand extends Command
 				throw new InvalidNumberOfArgumentsException("No file specified!");
 			}
 			else
-			{		
-				if(!MyStringUtils.validFileName(commandWords[1]))
+			{
+				while(!confirmed)
 				{
-					throw new CustomInvalidFilenameException();
-				}
-				else
-				{
-					filename = commandWords[1];
-					ret = this;		
+					if(!MyStringUtils.validFileName(commandWords[1]))
+					{
+						throw new CustomInvalidFilenameException();
+					}
+					else
+					{
+						file = new File(commandWords[1]);
+						if(file.exists)
+						{
+							System.out.print("That file already exists. Do you want to overwrite it? (Y/N) : ");
+							line = in.nextLine();
+							if(line.equals("Y"))
+							{
+								confirmed = true;
+								filename = commandWords[1];
+								ret = this;
+							}
+							else if(line.equals("N"))
+							{
+								
+							}
+						}
+						filename = commandWords[1];
+						ret = this;		
+					}
 				}
 			}
 		}
