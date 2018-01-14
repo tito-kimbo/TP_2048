@@ -107,7 +107,7 @@ public class PlayCommand extends Command
 		}
 		catch (NumberFormatException e) 
 		{
-			System.out.println("Not a valid seed");
+			if(!line.equals("")) System.out.println("Not a valid seed");
 			seed = DEFAULT_SEED;
 			System.out.println("Using the default seed for the PRNG: " + seed);
 		}			
@@ -137,7 +137,7 @@ public class PlayCommand extends Command
 			else
 			{
 				com = this;
-				gameType = GameType.fromString(commandWords[1]);
+				gameType = GameType.setType(commandWords[1]);
 				if(gameType == null)
 				{
 					throw new IllegalArgumentException("Not a valid game type!");

@@ -163,7 +163,7 @@ public class Game
 		//Build a regular expression that matches any game type description
 		for(int j = 0; j < i; ++j) strTypes = strTypes + "(";
 		
-	        for(GameType t : types)
+		for(GameType t : types)
 		{
 			strTypes = strTypes + t.toString();
 		        strTypes = strTypes + ")";
@@ -259,11 +259,11 @@ public class Game
 	}
 
 	/**
-	 * Returns the current GameRules.
+	 * Returns the current GameType.
 	 */
-	public GameRules getRules()
+	public GameType getType()
 	{
-		return type.getRules();
+		return type;
 	}
 
 	/**
