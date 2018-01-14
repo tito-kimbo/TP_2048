@@ -60,18 +60,11 @@ public class Controller
 			catch(RuntimeException e)
 			{
 				System.out.println(e.getMessage());	
-			}
-			/*
-			catch(CustomInvalidFilenameException e)
-			{
-				System.out.println("Not a valid filename.");
-			}
-			catch(FileNotFoundException e)
-			{
-				System.out.println("The file does not exist or can't be opened.");
-			}
-			*/     
+			}   
 				
 		} while(!exit);
+		
+		System.out.println("Goodbye!");
 	}
+
 };

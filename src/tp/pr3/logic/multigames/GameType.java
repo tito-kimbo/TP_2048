@@ -6,6 +6,7 @@ public enum GameType
 	FIB("2048, Fibonacci version", "fib", new RulesFib()),
 	INV("2048, inverse version", "inverse", new RulesInverse());
 	
+	
 	private String userFriendlyName;
 	private String parameterName;
 	private GameRules correspondingRules;
@@ -20,9 +21,9 @@ public enum GameType
 	/**
 	 * Returns the type corresponding to the given string.
 	 */
-	public static GameType fromString(String text)
+	public static GameType setType(String text)
 	{
-		GameType result = null;
+		GameType result = ORIG;
 		for(GameType t : GameType.values())
 			if(t.parameterName.equalsIgnoreCase(text))
 				result = t;
@@ -46,47 +47,7 @@ public enum GameType
 	{
 		return correspondingRules;
 	}
-	
-	public static GameType setType(GameRules rules)
-	{
-		GameType t;
-		
-		if(rules instanceof RulesFib)
-		{
-			t = FIB;
-		}
-		else if (rules instanceof RulesInverse)
-		{
-			t = INV;
-		}
-		else
-		{
-			t = ORIG;
-		}
-		
-		return t;
-	}
-	
-	public static GameType setType(String rules)
-	{
-		GameType t;
-		
-		if(rules.equals("fib"))
-		{
-			t = FIB;
-		}
-		else if (rules.equals("inverse"))
-		{
-			t = INV;
-		}
-		else
-		{
-			t = ORIG;
-		}
-		
-		return t;
-	}
-	
+
 	// used in Game in store method
 	public String externalise () 
 	{

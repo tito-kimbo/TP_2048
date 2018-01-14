@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.File;
 import java.util.Scanner;
 import java.io.IOException;
+import java.util.Arrays;
 
 import tp.pr3.exceptions.InvalidNumberOfArgumentsException;
 import tp.pr3.exceptions.CustomInvalidFilenameException;
@@ -31,6 +32,7 @@ public class SaveCommand extends Command
 		try(BufferedWriter out = new BufferedWriter(new FileWriter(filename)))
 		{
 			game.store(out);
+			System.out.println("Game successfully saved to file. Use load command to reload it.");
 		}
 		catch(IOException e)
 		{
@@ -45,50 +47,65 @@ public class SaveCommand extends Command
 	{
 		Command ret = null;
 		File file;
-		bool confirmed = false;
+		boolean confirmed = false;
 		String line;
-		
+		String[] filename = {};
+
 		if(commandWords[0].equals("save"))
 		{
-			if(commandWords.length > 2)
+			if(commandWords.length > 1)
 			{
-				throw new InvalidNumberOfArgumentsException("File path can't contain spaces!");
+				filename = Arrays.copyOfRange(commandWords, 1, commandWords.length);
 			}
-			else if(commandWords.length < 2)
+
+			while(!confirmed)
 			{
-				throw new InvalidNumberOfArgumentsException("No file specified!");
-			}
-			else
-			{
-				while(!confirmed)
+				if(filename.length > 1)
 				{
-					if(!MyStringUtils.validFileName(commandWords[1]))
+					throw new InvalidNumberOfArgumentsException("File path can't contain spaces!");
+				}
+				else if(filename.length < 1)
+				{
+					throw new InvalidNumberOfArgumentsException("No file specified!");
+				}
+				else
+				{
+					if(!MyStringUtils.validFileName(filename[0]))
 					{
 						throw new CustomInvalidFilenameException();
 					}
 					else
 					{
-						file = new File(commandWords[1]);
-						if(file.exists)
+						file = new File(filename[0]);
+						
+						if(file.exists())
 						{
+							
 							System.out.print("That file already exists. Do you want to overwrite it? (Y/N) : ");
-							line = in.nextLine();
-							if(line.equals("Y"))
+							line = in.nextLine().toLowerCase();
+							if(line.equals("y"))
 							{
 								confirmed = true;
-								filename = commandWords[1];
-								ret = this;
 							}
-							else if(line.equals("N"))
+							else if(line.equals("n"))
 							{
-								
+								System.out.print("Please introduce another file: ");
+								filename = in.nextLine().toLowerCase().split("\\s+");
+							}
+							else
+							{
+								System.out.println("Please introduce 'Y' or 'N'");
 							}
 						}
-						filename = commandWords[1];
-						ret = this;		
+						else
+						{
+							confirmed = true;
+						}
 					}
 				}
 			}
+			this.filename = filename[0];
+			ret = this;
 		}
 		
 		return ret;

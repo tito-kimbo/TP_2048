@@ -32,6 +32,7 @@ public class LoadCommand extends Command
 		try(BufferedReader in = new BufferedReader(new FileReader(filename)))
 		{
 			game.loadGame(in);
+			System.out.println("Game successfully loaded from file: " + game.getType());
 		}
 		catch(CustomIOException e)
 		{
