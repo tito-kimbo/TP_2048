@@ -157,6 +157,7 @@ public class Game
 		String[] auxArray;
 		
 		GameType [] types = GameType.values();
+		GameType auxType;
 		String strTypes = "";
 		int i = types.length;
 		
@@ -179,7 +180,7 @@ public class Game
 			
 			if(!aux.matches("This file stores a saved " + strTypes + " game"))
 			{
-				throw new CustomIOException("Error: invalid file format");
+				throw new CustomIOException("Invalid file format");
 			}
 
 			
@@ -191,7 +192,16 @@ public class Game
 			_score = Integer.parseInt(auxArray[0]);
 			_winValue = Integer.parseInt(auxArray[1]);
 			_board.updateMaxMinValue(_winValue);
-			type = GameType.setType(auxArray[2]);
+			auxType = GameType.setType(auxArray[2]);
+			
+			if(auxType == null)
+			{
+				throw new CustomIOException("Invalid file format");
+			}
+			else
+			{
+				type = auxType;
+			}
 		}
 		catch(IOException e)
 		{

@@ -23,7 +23,7 @@ public enum GameType
 	 */
 	public static GameType setType(String text)
 	{
-		GameType result = ORIG;
+		GameType result = null;
 		for(GameType t : GameType.values())
 			if(t.parameterName.equalsIgnoreCase(text))
 				result = t;
